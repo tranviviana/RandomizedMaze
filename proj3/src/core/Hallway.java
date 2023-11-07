@@ -3,6 +3,9 @@ package core;
 import java.util.List;
 
 public class Hallway implements worldComponents {
+    public Hallway() {
+
+    }
     @Override
     public boolean placeable(int x, int y) {
         return false;
