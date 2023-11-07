@@ -1,4 +1,20 @@
 package core;
 
-public class Room {
+import java.util.List;
+
+public class Room implements worldComponents {
+    @Override
+    public boolean placeable(int x, int y) {
+        return false;
+    }
+
+    @Override
+    public boolean canCreateMore() {
+        return false;
+    }
+
+    @Override
+    public List<Integer> dimensions() {
+        return null;
+    }
 }
