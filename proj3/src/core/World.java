@@ -11,6 +11,7 @@ public class World {
     private Random randomSeed;
     private static int HEIGHT;
     private static int WIDTH;
+    private TETile[][] projWorld;
 
 
     /**
@@ -18,24 +19,25 @@ public class World {
      *
      * @param seed
      */
-    public World(long seed) {
+    public World (long seed) {
         TERenderer ter = new TERenderer();
         randomSeed = new Random(seed);
-        HEIGHT = randomSeed.nextInt();
-        WIDTH = randomSeed.nextInt();
+        HEIGHT = randomSeed.nextInt(0, 1000);
+        WIDTH = randomSeed.nextInt(0, 1000);
         ter.initialize(WIDTH, HEIGHT);
 
-        TETile[][] projWorld = new TETile[WIDTH][HEIGHT];
+        projWorld = new TETile[WIDTH][HEIGHT];
 
         for (int x = 0; x <= HEIGHT; x++) {
             for (int y = 0; y <= WIDTH; y++) {
                 projWorld[x][y] = Tileset.NOTHING;
             }
-
         }
-
-
     }
+    private TETile[][] worldState() {
+        return projWorld;
+    }
+
 }
 
 
@@ -48,4 +50,4 @@ public class World {
 //        ter.renderFrame(world);
 //    }
 //
-//}
+
