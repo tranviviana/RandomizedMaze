@@ -20,12 +20,11 @@ public class World {
      * @param seed
      */
     public World (long seed) {
-        TERenderer ter = new TERenderer();
+        //TERenderer ter = new TERenderer();
         randomSeed = new Random(seed);
         HEIGHT = randomSeed.nextInt(0, 1000);
         WIDTH = randomSeed.nextInt(0, 1000);
-        ter.initialize(WIDTH, HEIGHT);
-
+        //ter.initialize(WIDTH, HEIGHT);
         projWorld = new TETile[WIDTH][HEIGHT];
 
         for (int x = 0; x < WIDTH; x++) {
