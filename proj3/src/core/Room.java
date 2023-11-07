@@ -1,4 +1,4 @@
 package core;
 
-public class Room {
+public class Room implements worldComponents {
 }
