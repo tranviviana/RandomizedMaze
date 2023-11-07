@@ -10,7 +10,7 @@ public class Room implements worldComponents{
     private int WIDTH;
     private int xLocation;
     private int yLocation;
-    private TETile[][] projWorld;
+    private World projWorld;
 
     /**
      *
@@ -19,7 +19,7 @@ public class Room implements worldComponents{
      * @param x
      * @param y
      */
-    public Room (Random worldSeed, TETile[][] projWorld, int x, int y) {
+    public Room (Random worldSeed, World projWorld, int x, int y) {
         HEIGHT = worldSeed.nextInt();
         WIDTH = worldSeed.nextInt();
         xLocation = x;
