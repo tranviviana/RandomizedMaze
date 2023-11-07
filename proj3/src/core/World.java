@@ -28,8 +28,8 @@ public class World {
 
         projWorld = new TETile[WIDTH][HEIGHT];
 
-        for (int x = 0; x <= WIDTH; x++) {
-            for (int y = 0; y <= HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            for (int y = 0; y < HEIGHT; y++) {
                 projWorld[x][y] = Tileset.NOTHING;
             }
         }
