@@ -20,8 +20,8 @@ public class Room implements worldComponents{
      * @param y
      */
     public Room (Random worldSeed, World projWorld, int x, int y) {
-        HEIGHT = worldSeed.nextInt();
         WIDTH = worldSeed.nextInt();
+        HEIGHT = worldSeed.nextInt();
         xLocation = x;
         yLocation = y;
         this.projWorld = projWorld;
@@ -30,10 +30,17 @@ public class Room implements worldComponents{
     }
     @Override
     public boolean placeable() {
-        if (xLocation + HEIGHT > )
+        // Check if its within boundaries - minus on because of the walls
+        if (xLocation + WIDTH > projWorld.worldWidth() - 1 || xLocation < 1)  {
+            return false;
+        }
+        if (yLocation + HEIGHT > projWorld.worldHEIGHT() - 1 || yLocation < 1) {
+            return false;
+        }
+        // Check if can create room
         for (int x = xLocation; x <= WIDTH; x++) {
             for (int y = yLocation; y <= HEIGHT; y++) {
-                if (projWorld[x][y] != Tileset.NOTHING) {
+                if (projWorld.getTile(x, y) != Tileset.NOTHING) {
                     return false;
                 }
             }
