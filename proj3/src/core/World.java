@@ -46,6 +46,9 @@ public class World {
     public int worldHEIGHT() {
         return HEIGHT;
     }
+    public TETile getTile(int x, int y) {
+        return projWorld[x][y];
+    }
 
 
 //    public static void main(String[] args) {
