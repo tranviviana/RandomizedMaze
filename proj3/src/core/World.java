@@ -9,8 +9,8 @@ import java.util.*;
 public class World {
 
     private Random randomSeed;
-    private static int HEIGHT;
-    private static int WIDTH;
+    private int HEIGHT;
+    private int WIDTH;
     private TETile[][] projWorld;
 
 
@@ -20,12 +20,11 @@ public class World {
      * @param seed
      */
     public World (long seed) {
-        TERenderer ter = new TERenderer();
+        //TERenderer ter = new TERenderer();
         randomSeed = new Random(seed);
         HEIGHT = randomSeed.nextInt(0, 1000);
         WIDTH = randomSeed.nextInt(0, 1000);
-        ter.initialize(WIDTH, HEIGHT);
-
+        //ter.initialize(WIDTH, HEIGHT);
         projWorld = new TETile[WIDTH][HEIGHT];
 
         for (int x = 0; x < WIDTH; x++) {
@@ -41,8 +40,11 @@ public class World {
     public TETile[][] worldState() {
         return projWorld;
     }
-    public Collection<Integer> dimensions() {
-        return List.of(WIDTH, HEIGHT);
+    public int worldWidth() {
+        return WIDTH;
+    }
+    public int worldHEIGHT() {
+        return HEIGHT;
     }
 
 
