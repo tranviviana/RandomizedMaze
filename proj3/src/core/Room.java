@@ -59,9 +59,15 @@ public class Room implements worldComponents{
     }
 
     public int roomWIDTH() {
+        if (WIDTH == 1) {
+            return WIDTH + 1; // This is so it's not a 1x1
+        }
         return WIDTH;
     }
     public int roomHEIGHT() {
+        if (HEIGHT == 1) {
+            return HEIGHT + 1; // This is so it's not a 1x1
+        }
         return HEIGHT;
     }
 
