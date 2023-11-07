@@ -37,7 +37,7 @@ public class Room implements worldComponents{
         if (yLocation + HEIGHT > projWorld.worldHEIGHT() - 1 || yLocation < 1) {
             return false;
         }
-        // Check if can create room
+        // Checks if you can create room
         for (int x = xLocation; x <= WIDTH; x++) {
             for (int y = yLocation; y <= HEIGHT; y++) {
                 if (projWorld.getTile(x, y) != Tileset.NOTHING) {
@@ -45,11 +45,27 @@ public class Room implements worldComponents{
                 }
             }
         }
+        // Checks if there would be one block space free surrounding that room (No other rooms right next to it)
+        for (int x = xLocation - 1; x <= WIDTH + 1; x++) {
+            for (int y = yLocation - 1; y <= HEIGHT + 1; y++) {
+                if (projWorld.getTile(x, y) == Tileset.FLOOR) {
+                    return false;
+                }
+
+            }
+        }
         return true;
     }
 
-    @Override
-    public List<Integer> dimensions() {
-        return List.of(WIDTH,HEIGHT);
+    public int roomWIDTH() {
+        return WIDTH;
     }
+    public int roomHEIGHT() {
+        return HEIGHT;
+    }
+
+
+
+    // TODO: Create method that maybe returns an ArrayList containing the coordinates of the Room
+
 }

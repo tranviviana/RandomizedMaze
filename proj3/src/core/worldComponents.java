@@ -8,5 +8,5 @@ public interface worldComponents {
     component is filling in from the left to the right upwards */
     public boolean placeable();
     /* for testing purposes but returns the width then length of the object */
-    public List<Integer> dimensions();
+
 }

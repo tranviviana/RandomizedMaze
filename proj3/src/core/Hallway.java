@@ -16,8 +16,5 @@ public class Hallway implements worldComponents {
 
 
 
-    @Override
-    public List<Integer> dimensions() {
-        return List.of(WIDTH, HEIGHT);
-    }
+
 }
