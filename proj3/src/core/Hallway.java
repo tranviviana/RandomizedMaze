@@ -3,11 +3,11 @@ import java.util.*;
 
 public class Hallway implements worldComponents {
     private Random randomGenerator;
-    private int length;
-    private static final int width = 1;
+    private int HEIGHT;
+    private static final int WIDTH = 1;
     public Hallway(Random worldSeed) {
         randomGenerator = worldSeed;
-        length = randomGenerator.nextInt();
+        HEIGHT = randomGenerator.nextInt();
     }
     @Override
     public boolean placeable() {
@@ -18,6 +18,6 @@ public class Hallway implements worldComponents {
 
     @Override
     public List<Integer> dimensions() {
-        return List.of(width, length);
+        return List.of(WIDTH, HEIGHT);
     }
 }
