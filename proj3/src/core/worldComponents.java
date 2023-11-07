@@ -10,7 +10,7 @@ public interface worldComponents {
     public boolean placeable(int x, int y);
     /* depending on the random function and the grid size to decide whether to terminate calls to object creation */
     public boolean canCreateMore();
-    /* for testing purposes but returns the width and length of the object */ 
+    /* for testing purposes but returns the width and length of the object */
     public List<Integer> dimensions();
 
 
