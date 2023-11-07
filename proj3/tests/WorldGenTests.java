@@ -1,4 +1,5 @@
 import core.AutograderBuddy;
+import core.World;
 import edu.princeton.cs.algs4.StdDraw;
 import org.junit.jupiter.api.Test;
 import tileengine.TERenderer;
