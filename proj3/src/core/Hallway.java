@@ -1,25 +1,20 @@
 package core;
-
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Hallway implements worldComponents {
     private Random randomGenerator;
     private int length;
     private static final int width = 1;
-    public Hallway() {
-        randomGenerator = new Random();
+    public Hallway(Random worldSeed) {
+        randomGenerator = worldSeed;
         length = randomGenerator.nextInt();
     }
     @Override
-    public boolean placeable(int x, int y) {
+    public boolean placeable() {
         return false;
     }
 
-    @Override
-    public boolean canCreateMore() {
-        return false;
-    }
+
 
     @Override
     public List<Integer> dimensions() {
