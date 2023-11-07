@@ -104,6 +104,7 @@ public class TETile {
     public char character() {
         return character;
     }
+    // DONT TOUCH THIS!!!!!!!!!!
 
     /**
      * Description of the tile. Useful for displaying mouseover text or
