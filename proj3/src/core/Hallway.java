@@ -10,14 +10,11 @@ public class Hallway implements worldComponents {
         length = randomGenerator.nextInt();
     }
     @Override
-    public boolean placeable(int x, int y) {
+    public boolean placeable() {
         return false;
     }
 
-    @Override
-    public boolean canCreateMore() {
-        return false;
-    }
+
 
     @Override
     public List<Integer> dimensions() {
