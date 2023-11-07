@@ -12,6 +12,4 @@ public interface worldComponents {
     public boolean canCreateMore();
     /* for testing purposes but returns the width and length of the object */
     public List<Integer> dimensions();
-
-
 }
