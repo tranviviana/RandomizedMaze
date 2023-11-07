@@ -1,4 +1,4 @@
 package core;
 
-public class worldComponents {
+public interface worldComponents {
 }
