@@ -37,7 +37,7 @@ public class World {
             int yLocation = randomSeed.nextInt(maxHEIGHT);
             Room currRoom = new Room(randomSeed, this, xLocation, yLocation);
             if (currRoom.placeable()) {
-                fillSpace(xLocation, yLocation, xLocation + currRoom.roomWIDTH, yLocation + currRoom.roomHEIGHT, Tileset.FLOOR);
+                fillSpace(xLocation, yLocation, xLocation + currRoom.roomWIDTH(), yLocation + currRoom.roomHEIGHT(), Tileset.FLOOR);
             }
 
         }
