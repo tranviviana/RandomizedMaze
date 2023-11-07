@@ -3,14 +3,14 @@ package core;
 import java.util.*;
 
 public class Room implements worldComponents{
-    private int length;
-    private int width;
+    private int HEIGHT;
+    private int WIDTH;
     private int xLocation;
     private int yLocation;
 
-    public Room(Random worldSeed, World projWorld, int x, int y) {
-        length = worldSeed.nextInt();
-        width = worldSeed.nextInt();
+    public Room (Random worldSeed, World projWorld, int x, int y) {
+        HEIGHT = worldSeed.nextInt();
+        WIDTH = worldSeed.nextInt();
         xLocation = x;
         yLocation = y;
 
@@ -22,6 +22,6 @@ public class Room implements worldComponents{
 
     @Override
     public List<Integer> dimensions() {
-        return List.of(width,length);
+        return List.of(WIDTH,HEIGHT);
     }
 }
