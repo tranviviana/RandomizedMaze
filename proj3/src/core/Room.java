@@ -30,6 +30,7 @@ public class Room implements worldComponents{
     }
     @Override
     public boolean placeable() {
+        if (xLocation + HEIGHT > )
         for (int x = xLocation; x <= WIDTH; x++) {
             for (int y = yLocation; y <= HEIGHT; y++) {
                 if (projWorld[x][y] != Tileset.NOTHING) {
