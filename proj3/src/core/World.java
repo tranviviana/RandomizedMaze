@@ -34,8 +34,11 @@ public class World {
             }
         }
     }
-    private TETile[][] worldState() {
+    public TETile[][] worldState() {
         return projWorld;
+    }
+    public Collection<Integer> dimensions() {
+        return List.of(WIDTH, HEIGHT);
     }
 
 }
