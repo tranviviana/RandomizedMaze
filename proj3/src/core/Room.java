@@ -5,7 +5,7 @@ import tileengine.Tileset;
 
 import java.util.*;
 
-public class Room implements worldComponents{
+public class Room {
     private int HEIGHT;
     private int WIDTH;
     private int xLocation;
@@ -20,16 +20,16 @@ public class Room implements worldComponents{
      * @param y
      */
     //need to change division in the future to set the maximum size of the room
-    public Room (Random worldSeed, World projWorld, int x, int y) {
-        WIDTH = worldSeed.nextInt(projWorld.WIDTH);
-        HEIGHT = worldSeed.nextInt(projWorld.HEIGHT);
+    public Room (int width, int height, World projWorld, int x, int y) {
+        WIDTH = width;
+        HEIGHT = height;
         xLocation = x;
         yLocation = y;
         this.projWorld = projWorld;
 
 
     }
-    @Override
+
     public boolean placeable() {
         // Check if its within boundaries - minus on because of the walls
         if (xLocation + WIDTH > projWorld.WIDTH - 1 || xLocation < 1)  {
