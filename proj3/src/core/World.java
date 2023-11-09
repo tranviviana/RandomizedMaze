@@ -28,17 +28,20 @@ public class World {
     }
     //creates a random room of different sizes and places them on grid if possible
     private void generateRooms() {
-        for (int room = 0; room < numberRooms; room++) {
-            int roomWIDTH = randomGenerator.nextInt(minRoomSize, maxRoomSize);
-            int roomHEIGHT = randomGenerator.nextInt(minRoomSize, maxRoomSize);
-            int xLocation = randomGenerator.nextInt(WIDTH);
-            int yLocation = randomGenerator.nextInt(HEIGHT);
-            Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
-            if (currentRoom.placeable()) {
-                fillSpace(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
+        int placed = 0;
+        while (placed < 3) {
+            for (int room = 0; room < numberRooms; room++) {
+                int roomWIDTH = randomGenerator.nextInt(minRoomSize, maxRoomSize);
+                int roomHEIGHT = randomGenerator.nextInt(minRoomSize, maxRoomSize);
+                int xLocation = randomGenerator.nextInt(WIDTH);
+                int yLocation = randomGenerator.nextInt(HEIGHT);
+                Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
+                if (currentRoom.placeable()) {
+                    placed++;
+                    fillSpace(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
+                }
             }
         }
-
     }
     private void fillSpace(int startX, int startY, int endX, int endY, TETile tileType) {
         for (int x = startX; x < endX; x++) {
