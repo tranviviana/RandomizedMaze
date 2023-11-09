@@ -57,8 +57,8 @@ public class World {
                 projWorld[x][y] = tileType;
             }
         }
-
     }
+
     public TETile[][] worldState () {
         return projWorld;
     }
