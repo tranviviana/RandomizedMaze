@@ -32,10 +32,10 @@ public class Room implements worldComponents{
     @Override
     public boolean placeable() {
         // Check if its within boundaries - minus on because of the walls
-        if (xLocation + WIDTH > projWorld.worldWidth() - 1 || xLocation < 1)  {
+        if (xLocation + WIDTH > projWorld.WIDTH - 1 || xLocation < 1)  {
             return false;
         }
-        if (yLocation + HEIGHT > projWorld.worldHEIGHT() - 1 || yLocation < 1) {
+        if (yLocation + HEIGHT > projWorld.HEIGHT - 1 || yLocation < 1) {
             return false;
         }
         // Checks if you can create room
