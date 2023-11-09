@@ -9,8 +9,8 @@ public class World {
     private static final int maxHEIGHT = 60;
     private static final int maxWIDTH = 100;
     private Random randomSeed;
-    private int HEIGHT;
-    private int WIDTH;
+    public int HEIGHT;
+    public int WIDTH;
     private TETile[][] projWorld;
     private int quantityofRooms;
 
@@ -67,12 +67,7 @@ public class World {
         public TETile[][] worldState () {
             return projWorld;
         }
-        public int worldWidth () {
-            return WIDTH;
-        }
-        public int worldHEIGHT () {
-            return HEIGHT;
-        }
+
         public TETile getTile ( int x, int y){
             return projWorld[x][y];
         }
