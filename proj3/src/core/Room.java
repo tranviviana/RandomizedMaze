@@ -49,7 +49,7 @@ public class Room implements worldComponents{
         // Checks if there would be one block space free surrounding that room (No other rooms right next to it)
         for (int x = xLocation - 1; x <= WIDTH + 1; x++) {
             for (int y = yLocation - 1; y <= HEIGHT + 1; y++) {
-                if (projWorld.getTile(x, y) == Tileset.FLOOR) {
+                if (projWorld.getTile(x, y) == Tileset.FLOWER) {
                     return false;
                 }
 
