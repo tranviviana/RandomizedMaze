@@ -6,23 +6,22 @@ import tileengine.Tileset;
 import java.util.*;
 
 public class Room {
-    private int HEIGHT;
-    private int WIDTH;
+    private int roomHEIGHT;
+    private int roomWIDTH;
     private int xLocation;
     private int yLocation;
     private World projWorld;
 
     /**
      *
-     * @param worldSeed
      * @param projWorld
      * @param x
      * @param y
      */
     //need to change division in the future to set the maximum size of the room
     public Room (int width, int height, World projWorld, int x, int y) {
-        WIDTH = width;
-        HEIGHT = height;
+        roomWIDTH = width;
+        roomHEIGHT = height;
         xLocation = x;
         yLocation = y;
         this.projWorld = projWorld;
@@ -32,23 +31,23 @@ public class Room {
 
     public boolean placeable() {
         // Check if its within boundaries - minus on because of the walls
-        if (xLocation + WIDTH > projWorld.WIDTH - 1 || xLocation < 1)  {
+        if (xLocation + roomWIDTH > projWorld.WIDTH - 1 || xLocation < 1)  {
             return false;
         }
-        if (yLocation + HEIGHT > projWorld.HEIGHT - 1 || yLocation < 1) {
+        if (yLocation + roomHEIGHT > projWorld.HEIGHT - 1 || yLocation < 1) {
             return false;
         }
         // Checks if you can create room
-        for (int x = xLocation; x <= WIDTH; x++) {
-            for (int y = yLocation; y <= HEIGHT; y++) {
+        for (int x = xLocation; x <= xLocation + roomWIDTH; x++) {
+            for (int y = yLocation; y <= yLocation + roomHEIGHT; y++) {
                 if (projWorld.getTile(x, y) != Tileset.NOTHING) {
                     return false;
                 }
             }
         }
         // Checks if there would be one block space free surrounding that room (No other rooms right next to it)
-        for (int x = xLocation - 2; x <= WIDTH + 2; x++) {
-            for (int y = yLocation - 2; y <= HEIGHT + 2; y++) {
+        for (int x = xLocation - 1; x <= xLocation + roomWIDTH + 1; x++) {
+            for (int y = yLocation - 1; y <= yLocation + roomHEIGHT + 1; y++) {
                 if (projWorld.getTile(x, y) == Tileset.FLOWER) {
                     return false;
                 }
@@ -59,16 +58,16 @@ public class Room {
     }
 
     public int roomWIDTH() {
-        if (WIDTH == 1) {
-            return WIDTH + 1; // This is so it's not a 1x1
+        if (roomWIDTH == 1) {
+            return roomWIDTH + 1; // This is so it's not a 1x1
         }
-        return WIDTH;
+        return roomWIDTH;
     }
     public int roomHEIGHT() {
-        if (HEIGHT == 1) {
-            return HEIGHT + 1; // This is so it's not a 1x1
+        if (roomHEIGHT == 1) {
+            return roomHEIGHT + 1; // This is so it's not a 1x1
         }
-        return HEIGHT;
+        return roomHEIGHT;
     }
 
 
