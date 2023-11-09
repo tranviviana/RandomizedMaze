@@ -9,17 +9,19 @@ public class World {
     TETile[][] projWorld;
     Random randomGenerator;
     public static final int minWorldSize = 30;
-    public static final int maxWorldSize = 70;
+    public static final int maxWorldHeight = 50;
+    public static final int maxWorldWidth = 100;
     public static final int maxRoomSize = minWorldSize / 2;
     public static final int minRoomSize = 2;
     public int WIDTH;
     public int HEIGHT;
     public int numberRooms;
+
     /*fills the world starting from the start position to wherever it will end*/
     public World (Long seed) {
         randomGenerator = new Random(seed);
-        WIDTH = randomGenerator.nextInt(minWorldSize, maxWorldSize);
-        HEIGHT = randomGenerator.nextInt(minWorldSize, maxWorldSize);
+        WIDTH = randomGenerator.nextInt(minWorldSize, maxWorldWidth);
+        HEIGHT = randomGenerator.nextInt(minWorldSize, maxWorldHeight);
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, Math.min(WIDTH,HEIGHT));
