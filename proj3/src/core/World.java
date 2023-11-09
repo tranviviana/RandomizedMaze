@@ -9,7 +9,7 @@ public class World {
     TETile[][] projWorld;
     Random randomGenerator;
     public static final int minWorldSize = 30;
-    public static final int maxWorldSize = 60;
+    public static final int maxWorldSize = 70;
     public static final int maxRoomSize = minWorldSize / 2;
     public static final int minRoomSize = 2;
     public int WIDTH;
