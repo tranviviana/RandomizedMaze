@@ -8,9 +8,9 @@ import java.util.*;
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
-    public static final int minWorldSize = 40;
-    public static final int maxWorldSIze = 160;
-    public static final int maxRoomDivide = 8;
+    public static final int minWorldSize = 30;
+    public static final int maxWorldSize = 60;
+    public static final int maxRoomSize = minWorldSize / 2;
     public static final int minRoomSize = 2;
     public int WIDTH;
     public int HEIGHT;
@@ -18,8 +18,8 @@ public class World {
     /*fills the world starting from the start position to wherever it will end*/
     public World (Long seed) {
         randomGenerator = new Random(seed);
-        WIDTH = randomGenerator.nextInt(minWorldSize, maxWorldSIze);
-        HEIGHT = randomGenerator.nextInt(minWorldSize, maxWorldSIze);
+        WIDTH = randomGenerator.nextInt(minWorldSize, maxWorldSize);
+        HEIGHT = randomGenerator.nextInt(minWorldSize, maxWorldSize);
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, Math.min(WIDTH,HEIGHT));
@@ -29,8 +29,8 @@ public class World {
     //creates a random room of different sizes and places them on grid if possible
     private void generateRooms() {
         for (int room = 0; room < numberRooms; room++) {
-            int roomWIDTH = randomGenerator.nextInt(minRoomSize, WIDTH/maxRoomDivide);
-            int roomHEIGHT = randomGenerator.nextInt(minRoomSize, HEIGHT/maxRoomDivide);
+            int roomWIDTH = randomGenerator.nextInt(minRoomSize, maxRoomSize);
+            int roomHEIGHT = randomGenerator.nextInt(minRoomSize, maxRoomSize);
             int xLocation = randomGenerator.nextInt(WIDTH);
             int yLocation = randomGenerator.nextInt(HEIGHT);
             Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
