@@ -31,10 +31,10 @@ public class Room {
 
     public boolean placeable() {
         // Check if its within boundaries - minus on because of the walls
-        if (xLocation + roomWIDTH > projWorld.WIDTH - 1 || xLocation < 1)  {
+        if (xLocation + roomWIDTH >= projWorld.WIDTH - 1 || xLocation < 1)  {
             return false;
         }
-        if (yLocation + roomHEIGHT > projWorld.HEIGHT - 1 || yLocation < 1) {
+        if (yLocation + roomHEIGHT >= projWorld.HEIGHT - 1 || yLocation < 1) {
             return false;
         }
         // Checks if you can create room
