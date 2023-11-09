@@ -21,8 +21,8 @@ public class Room implements worldComponents{
      */
     //need to change division in the future to set the maximum size of the room
     public Room (Random worldSeed, World projWorld, int x, int y) {
-        WIDTH = worldSeed.nextInt(projWorld.worldWidth());
-        HEIGHT = worldSeed.nextInt(projWorld.worldHEIGHT());
+        WIDTH = worldSeed.nextInt(projWorld.WIDTH);
+        HEIGHT = worldSeed.nextInt(projWorld.HEIGHT);
         xLocation = x;
         yLocation = y;
         this.projWorld = projWorld;
