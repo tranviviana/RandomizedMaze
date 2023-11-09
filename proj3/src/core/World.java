@@ -45,7 +45,6 @@ public class World {
             Room currRoom = new Room(randomSeed, this, xLocation, yLocation);
             if (currRoom.placeable()) {
                 fillSpace(xLocation, yLocation, xLocation + currRoom.roomWIDTH(), yLocation + currRoom.roomHEIGHT(), Tileset.FLOWER);
-                fillSpace(xLocation, yLocation, xLocation + currRoom.roomWIDTH(), yLocation + currRoom.roomHEIGHT(), Tileset.FLOOR);
             }
 
         }
