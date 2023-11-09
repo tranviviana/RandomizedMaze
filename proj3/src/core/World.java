@@ -26,10 +26,10 @@ public class World {
 //        HEIGHT = 40;
 //        WIDTH = 40;
 //        quantityofRooms = 1;
-        HEIGHT = randomSeed.nextInt(0, maxHEIGHT);
-        WIDTH = randomSeed.nextInt(0, maxWIDTH);
+        HEIGHT = Math.abs(randomSeed.nextInt(10, maxHEIGHT));
+        WIDTH = Math.abs(randomSeed.nextInt(10, maxWIDTH));
         projWorld = new TETile[WIDTH][HEIGHT];
-        quantityofRooms = randomSeed.nextInt(0,60);
+        quantityofRooms = randomSeed.nextInt(60);
         fillSpace(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
         fillRooms();
     }
@@ -40,8 +40,8 @@ public class World {
         for (int i = 0; i < quantityofRooms; i++) {
 //            int xLocation = 10;
 //            int yLocation = 10;
-            int xLocation = randomSeed.nextInt(0, maxWIDTH);
-            int yLocation = randomSeed.nextInt(0, maxHEIGHT);
+            int xLocation = randomSeed.nextInt(maxWIDTH);
+            int yLocation = randomSeed.nextInt(maxHEIGHT);
             Room currRoom = new Room(randomSeed, this, xLocation, yLocation);
             if (currRoom.placeable()) {
                 fillSpace(xLocation, yLocation, xLocation + currRoom.roomWIDTH(), yLocation + currRoom.roomHEIGHT(), Tileset.FLOWER);
