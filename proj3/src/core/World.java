@@ -23,8 +23,8 @@ public class World {
     }
     private void generateRooms() {
         for (int room = 0; room < numberRooms; room++) {
-            int roomWIDTH = randomGenerator.nextInt(2, WIDTH);
-            int roomHEIGHT = randomGenerator.nextInt(2, HEIGHT);
+            int roomWIDTH = randomGenerator.nextInt(2, WIDTH/6);
+            int roomHEIGHT = randomGenerator.nextInt(2, HEIGHT/6);
             int xLocation = randomGenerator.nextInt(WIDTH);
             int yLocation = randomGenerator.nextInt(HEIGHT);
             Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
