@@ -32,7 +32,7 @@ public class World {
         quantityofRooms = randomSeed.nextInt(0,60);
         fillSpace(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
         fillRooms();
-        }
+    }
 
     /*fills all the possible rooms */
     /*needs to stop creating rooms if grid is too filled NEEEED TO FINISH */
@@ -51,28 +51,21 @@ public class World {
     }
     /*fills the world starting from the start position to wherever it will end*/
     private void fillSpace(int startX, int startY, int endX, int endY, TETile tileType) {
-        int currentX = startX;
-        int currentY = startY;
-        while (currentY < endY) {
-            while(currentX < endX){
-                projWorld[currentX][currentY] = tileType;
-                currentX += 1;
+
+        for (int x = startX; x < endX; x++) {
+            for (int y = startY; y < endY; y++) {
+                projWorld[x][y] = tileType;
             }
-            currentX = startX;
-            currentY += 1;
         }
 
     }
-        public TETile[][] worldState () {
-            return projWorld;
-        }
+    public TETile[][] worldState () {
+        return projWorld;
+    }
 
-        public TETile getTile ( int x, int y){
-            return projWorld[x][y];
-        }
+    public TETile getTile ( int x, int y){
+        return projWorld[x][y];
+    }
 
 
 }
-
-
-
