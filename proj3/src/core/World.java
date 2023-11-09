@@ -19,6 +19,19 @@ public class World {
         projWorld = new TETile[WIDTH][HEIGHT];
         numberRooms = randomGenerator.nextInt(3, Math.min(WIDTH,HEIGHT));
         fillSpace(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
+        generateRooms();
+    }
+    private void generateRooms() {
+        for (int room = 0; room < numberRooms; room++) {
+            int roomWIDTH = randomGenerator.nextInt(2, WIDTH);
+            int roomHEIGHT = randomGenerator.nextInt(2, HEIGHT);
+            int xLocation = randomGenerator.nextInt(WIDTH);
+            int yLocation = randomGenerator.nextInt(HEIGHT);
+            Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
+            if (currentRoom.placeable()) {
+                fillSpace(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
+            }
+        }
 
     }
     private void fillSpace(int startX, int startY, int endX, int endY, TETile tileType) {
