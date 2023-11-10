@@ -79,7 +79,7 @@ public class World {
                 for (int startY = room1y; startY > room2y; randomGenerator.nextInt(0, yDifference)) {
                     for (int y = room1y; y >)
                 }
-                
+
             }
 
         } else if (room2x < room1x && room2y > room1y) { // when Room2x < Room1x, but room2y > room1y
