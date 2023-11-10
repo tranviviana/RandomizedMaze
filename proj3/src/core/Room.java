@@ -1,6 +1,5 @@
 package core;
 
-import tileengine.TETile;
 import tileengine.Tileset;
 
 import java.util.*;
@@ -31,6 +30,9 @@ public class Room {
 
     public boolean placeable() {
         // Check if its within boundaries - minus on because of the walls
+        if (xLocation - 1 <= 0 || yLocation - 1 <= 0) {
+            return false;
+        }
         if (xLocation + roomWIDTH >= projWorld.WIDTH - 1 || xLocation < 1)  {
             return false;
         }
@@ -55,6 +57,15 @@ public class Room {
             }
         }
         return true;
+    }
+    // returns the middle of the room in list format {0, 0}
+    public List<Integer> roomMiddle() {
+        int xMiddle = (xLocation + roomWIDTH) / 2;
+        int yMiddle = (yLocation + roomHEIGHT) / 2;
+        List<Integer> xyMiddle = new ArrayList<>();
+        xyMiddle.add(xMiddle);
+        xyMiddle.add(yMiddle);
+        return xyMiddle;
     }
 
     public int roomWIDTH() {
