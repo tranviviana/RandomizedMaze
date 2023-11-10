@@ -99,20 +99,20 @@ public class World {
     }
 
     public void fillHallway(int room1x, int room1y, int room2x, int room2y) {
-        if () { //
-
-        } else if () { // Room2x > Room1x, but room2y < room1y
+        if (room2x > room1x && room2y < room1y) { // Room2x > Room1x, but room2y < room1y
             int xDifference = room2x - room1x;
             int yDifference = room1y - room2y;
             for (int startX = room1x; startX < room2x; startX += randomGenerator.nextInt(0, xDifference)) {
                 fillRooms(room1x, room1y, startX, room1y, Tileset.FLOWER);
                 room1x = startX;
-                for (int startY = room1y; startY > room2y; randomGenerator.nextInt(0, yDifference)) {
-                    for (int y = room1y; y >)
+                for (int startY = room1y; startY > room2y; startY -= randomGenerator.nextInt(0, yDifference)) {
+                    for (int y = room1y; y > startY; y--) {
+                        projWorld[startX][y] = Tileset.FLOWER;
+                    }
+                    room1y = startY;
                 }
 
             }
-
         } else if (room2x < room1x && room2y > room1y) { // when Room2x < Room1x, but room2y > room1y
             int xDifference = room1x - room2x;
             int yDifference = room2y - room1y;
