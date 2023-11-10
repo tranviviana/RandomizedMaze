@@ -25,7 +25,7 @@ public class World {
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, WIDTH);
-        fillSpace(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
+        fillRooms(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
         generateRooms();
         roomLocations = new PriorityQueue<>();
     }
@@ -43,20 +43,46 @@ public class World {
                 Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
                 if (currentRoom.placeable()) {
                     placed++;
-                    fillSpace(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
+                    fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
                     roomLocations.add(currentRoom.roomMiddle());
                 }
             }
         }
     }
     //fills the tiles on the TileSet
-    private void fillSpace(int startX, int startY, int endX, int endY, TETile tileType) {
+    private void fillRooms(int startX, int startY, int endX, int endY, TETile tileType) {
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
                 projWorld[x][y] = tileType;
             }
         }
     }
+    private void fillWalls(int xStart, int yStart) {
+        fillYDirection(xStart, yStart, -1);
+        fillYDirection(xStart, yStart, +1);
+
+    }
+    private void fillYDirection (int xStart, int yStart, int directionY) {
+        int fillY = 0;
+        int workingY = yStart;
+        while (getTile(xStart -1, workingY) == Tileset.FLOWER &&  getTile(xStart, workingY + movingY) == Tileset.NOTHING) {
+            //working upwards or downwards
+            fillY = fillY + directionY;
+        }
+        fillRooms(xStart, yStart, xStart, yStart + fillY, Tileset.WALL);
+        if (getTile(xStart -1, workingY + directionY) == Tileset.NOTHING) {
+            //fills up to the top edge of room
+            fillXDirection(xStart,yStart + fillY + directionY);
+        } else if (getTile(xStart, workingY + directionY) != Tileset.NOTHING) {
+            //responds to a hallway leaving from it
+            fillXDirection(xStart, yStart + fillY);
+        }
+    }
+    private void fillXDirection (int xStart, int yStart) {
+
+    }
+
+
 
     // returns what the world looks like (for autograder)
     public TETile[][] worldState () {
@@ -74,7 +100,7 @@ public class World {
             int xDifference = room2x - room1x;
             int yDifference = room1y - room2y;
             for (int startX = room1x; startX < room2x; startX += randomGenerator.nextInt(0, xDifference)) {
-                fillSpace(room1x, room1y, startX, room1y, Tileset.FLOWER);
+                fillRooms(room1x, room1y, startX, room1y, Tileset.FLOWER);
                 room1x = startX;
                 for (int startY = room1y; startY > room2y; randomGenerator.nextInt(0, yDifference)) {
                     for (int y = room1y; y >)
@@ -91,7 +117,7 @@ public class World {
                 }
                 room1x = startX;
                 for (int startY = room1y; startY < room2y; startY += randomGenerator.nextInt(0, yDifference)) {
-                    fillSpace(room1x, room1y, room1x, startY, Tileset.FLOWER);
+                    fillRooms(room1x, room1y, room1x, startY, Tileset.FLOWER);
                     room2y = startY;
                 }
             }
@@ -99,10 +125,10 @@ public class World {
             int xDifference = room2x - room1x;
             int yDifference = room2y - room1y;
             for (int startX = room1x; startX < room2x; startX += randomGenerator.nextInt(0, xDifference)) {
-                fillSpace(room1x, room1y, startX, room1y, Tileset.FLOWER);
+                fillRooms(room1x, room1y, startX, room1y, Tileset.FLOWER);
                 room1x = startX;
                 for (int startY = room1y; startY < room2y; startY += randomGenerator.nextInt(0, yDifference)) {
-                    fillSpace(room1x, room1y, room1x, startY, Tileset.FLOWER);
+                    fillRooms(room1x, room1y, room1x, startY, Tileset.FLOWER);
                     room2y = startY;
                 }
             }
