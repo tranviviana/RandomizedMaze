@@ -58,6 +58,20 @@ public class World {
             }
         }
     }
+    private void fillWalls(int xStart, int yStart) {
+        fillUp(xStart, yStart);
+
+    }
+    private void fillUp (int xStart, int yStart) {
+        int fillUp = 0;
+        int changingY = yStart
+        while (getTile(xStart -1, changingY) != Tileset.NOTHING &&  getTile(xStart, changingY +1) == Tileset.NOTHING) {
+            //working upwards
+            fillUp++;
+        }
+        fillSpace();
+    }
+
 
     // returns what the world looks like (for autograder)
     public TETile[][] worldState () {

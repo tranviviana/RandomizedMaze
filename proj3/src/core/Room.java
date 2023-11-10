@@ -77,6 +77,7 @@ public class Room {
        return List.of(xWall,roomMiddle().get(1));
     }
 
+
     public int roomWIDTH() {
         if (roomWIDTH == 1) {
             return roomWIDTH + 1; // This is so it's not a 1x1
