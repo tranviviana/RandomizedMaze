@@ -14,8 +14,10 @@ public class World {
     public int WIDTH;
     public int HEIGHT;
     public int numberRooms;
+    private TreeSet<List<Integer>> roomLocations;
 
-    /*fills the world starting from the start position to wherever it will end*/
+    /*fills the world starting from the start position to wherever it will end
+     @param Long seed to generate the same world when the same seed is passed through */
     public World (Long seed) {
         randomGenerator = new Random(seed);
         WIDTH = 90;
@@ -25,8 +27,9 @@ public class World {
         numberRooms = randomGenerator.nextInt(3, WIDTH);
         fillSpace(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
         generateRooms();
+        roomLocations = new TreeSet<>();
     }
-    //creates a random room of different sizes and places them on grid if possible
+    //creates a random room of different sizes, generating random locations, and places them on grid if possible
     private void generateRooms() {
         int placed = 0;
         while (placed < 3) {
@@ -39,10 +42,12 @@ public class World {
                 if (currentRoom.placeable()) {
                     placed++;
                     fillSpace(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
+                    currentRoom.roomMiddle();
                 }
             }
         }
     }
+    //fills the tiles on the TileSet
     private void fillSpace(int startX, int startY, int endX, int endY, TETile tileType) {
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
@@ -51,10 +56,11 @@ public class World {
         }
     }
 
+    // returns what the world looks like (for autograder)
     public TETile[][] worldState () {
         return projWorld;
     }
-
+    // returns the tileType of a certain x and y location
     public TETile getTile ( int x, int y){
         return projWorld[x][y];
     }
