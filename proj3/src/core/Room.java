@@ -8,8 +8,8 @@ import java.util.*;
 public class Room {
     private int roomHEIGHT;
     private int roomWIDTH;
-    private int xLocation;
-    private int yLocation;
+    public int xLocation;
+    public int yLocation;
     private World projWorld;
 
     /**
