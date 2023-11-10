@@ -14,11 +14,12 @@ public class World {
     public static final TETile floorRep = Tileset.FLOWER;
     public static final TETile wallRep = Tileset.WALL;
     public static final TETile nothingRep = Tileset.NOTHING;
+    public static List<List<Integer>> listofMiddle;
 
     public int WIDTH;
     public int HEIGHT;
     public int numberRooms;
-    private PriorityQueue<List<Integer>> roomLocations;
+    //private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
@@ -30,6 +31,7 @@ public class World {
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, WIDTH);
         fillRooms(0,0, WIDTH, HEIGHT, nothingRep);
+        listofMiddle = new ArrayList<>();
         generateRooms();
         //roomLocations = new PriorityQueue<>();
     }
@@ -47,6 +49,7 @@ public class World {
                 int yLocation = randomGenerator.nextInt(HEIGHT);
                 Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
                 if (currentRoom.placeable()) {
+                    listofMiddle.add(currentRoom.roomMiddle());
                     placed++;
                     fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, floorRep);
                     //roomLocations.add(currentRoom.roomMiddle());
