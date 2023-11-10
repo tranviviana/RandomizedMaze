@@ -29,7 +29,7 @@ public class World {
         generateRooms();
         roomLocations = new PriorityQueue<>();
     }
-    
+
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
     * stores the location of the rooms*/
