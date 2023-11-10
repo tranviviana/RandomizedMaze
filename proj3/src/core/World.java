@@ -14,7 +14,7 @@ public class World {
     public int WIDTH;
     public int HEIGHT;
     public int numberRooms;
-    private TreeSet<List<Integer>> roomLocations;
+    private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
@@ -27,9 +27,12 @@ public class World {
         numberRooms = randomGenerator.nextInt(3, WIDTH);
         fillSpace(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
         generateRooms();
-        roomLocations = new TreeSet<>();
+        roomLocations = new PriorityQueue<>();
     }
-    //creates a random room of different sizes, generating random locations, and places them on grid if possible
+    
+    }
+    /*creates a random room of different sizes, generating random locations, and places them on grid if possible
+    * stores the location of the rooms*/
     private void generateRooms() {
         int placed = 0;
         while (placed < 3) {
@@ -42,7 +45,7 @@ public class World {
                 if (currentRoom.placeable()) {
                     placed++;
                     fillSpace(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
-                    currentRoom.roomMiddle();
+                    roomLocations.add(currentRoom.roomMiddle());
                 }
             }
         }
