@@ -63,29 +63,21 @@ public class World {
         }
     }
     //recursively calls itself till all of the grid is filled
-    private void fillWalls(int xStart, int yStart) {
-        fillYDirection(xStart, yStart, -1);
-        fillYDirection(xStart, yStart, +1);
-
-    }
-    private void fillYDirection (int xStart, int yStart, int directionY) {
-        int fillY = 0;
-        while (getTile(xStart -1, yStart) == floorRep &&  getTile(xStart, yStart + directionY) == nothingRep) {
-            //working upwards or downwards
-            fillY = fillY + directionY;
-        }
-        fillRooms(xStart, yStart, xStart, yStart + fillY, wallRep);
-        if (getTile(xStart -1, yStart + directionY) == nothingRep) {
-            //fills up to the top edge of room
-            fillXDirection(xStart,yStart + fillY + directionY);
-        } else if (getTile(xStart, yStart + directionY) != nothingRep) {
-            //responds to a hallway leaving from it
-            fillXDirection(xStart, yStart + fillY);
+    private void fillWalls() {
+        for (int x = 0; x < WIDTH; x++) {
+            for (int y = 0; y < HEIGHT; y++) {
+                if (x - 1 > 0) {
+                    //check right side
+                }
+                else {
+                    //check left side
+                }
+                
+                if (getTile(x-1, y) == floorRep || )
+            }
         }
     }
-    private void fillXDirection (int xStart, int yStart) {
 
-    }
 
 
 

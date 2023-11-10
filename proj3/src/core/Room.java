@@ -67,15 +67,15 @@ public class Room {
         xyMiddle.add(yMiddle);
         return xyMiddle;
     }
-    /*returns the location where to work from in walls (right most room)*/
-    public List<Integer> roomPerimeter() {
-        int travelingSide = roomWIDTH / 2;
-        int xWall = roomMiddle().get(0) + travelingSide;
-        while (projWorld.getTile(xWall, roomMiddle().get(1)) != World.nothingRep) {
-            xWall++;
-        }
-       return List.of(xWall,roomMiddle().get(1));
-    }
+//    /*returns the location where to work from in walls (right most room)*/
+//    public List<Integer> roomPerimeter() {
+//        int travelingSide = roomWIDTH / 2;
+//        int xWall = roomMiddle().get(0) + travelingSide;
+//        while (projWorld.getTile(xWall, roomMiddle().get(1)) != World.nothingRep) {
+//            xWall++;
+//        }
+//       return List.of(xWall,roomMiddle().get(1));
+//    }
 
 
     public int roomWIDTH() {
