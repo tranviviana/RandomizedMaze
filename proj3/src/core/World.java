@@ -25,7 +25,7 @@ public class World {
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, WIDTH);
-        fillSpace(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
+        fillRooms(0,0, WIDTH, HEIGHT, Tileset.NOTHING);
         generateRooms();
         roomLocations = new PriorityQueue<>();
     }
@@ -44,14 +44,14 @@ public class World {
                 Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
                 if (currentRoom.placeable()) {
                     placed++;
-                    fillSpace(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
+                    fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, Tileset.FLOWER);
                     roomLocations.add(currentRoom.roomMiddle());
                 }
             }
         }
     }
     //fills the tiles on the TileSet
-    private void fillSpace(int startX, int startY, int endX, int endY, TETile tileType) {
+    private void fillRooms(int startX, int startY, int endX, int endY, TETile tileType) {
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
                 projWorld[x][y] = tileType;
@@ -59,18 +59,30 @@ public class World {
         }
     }
     private void fillWalls(int xStart, int yStart) {
-        fillUp(xStart, yStart);
+        fillYDirection(xStart, yStart, -1);
+        fillYDirection(xStart, yStart, +1);
 
     }
-    private void fillUp (int xStart, int yStart) {
-        int fillUp = 0;
-        int changingY = yStart
-        while (getTile(xStart -1, changingY) != Tileset.NOTHING &&  getTile(xStart, changingY +1) == Tileset.NOTHING) {
-            //working upwards
-            fillUp++;
+    private void fillYDirection (int xStart, int yStart, int directionY) {
+        int fillY = 0;
+        int workingY = yStart;
+        while (getTile(xStart -1, workingY) == Tileset.FLOWER &&  getTile(xStart, workingY + movingY) == Tileset.NOTHING) {
+            //working upwards or downwards
+            fillY = fillY + directionY;
         }
-        fillSpace();
+        fillRooms(xStart, yStart, xStart, yStart + fillY, Tileset.WALL);
+        if (getTile(xStart -1, workingY + directionY) == Tileset.NOTHING) {
+            //fills up to the top edge of room
+            fillXDirection(xStart,yStart + fillY + directionY);
+        } else if (getTile(xStart, workingY + directionY) != Tileset.NOTHING) {
+            //responds to a hallway leaving from it
+            fillXDirection(xStart, yStart + fillY);
+        }
     }
+    private void fillXDirection (int xStart, int yStart) {
+
+    }
+
 
 
     // returns what the world looks like (for autograder)
