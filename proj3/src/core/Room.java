@@ -60,8 +60,8 @@ public class Room {
     }
     // returns the middle of the room in list format {0, 0}
     public List<Integer> roomMiddle() {
-        int xMiddle = (xLocation + roomWIDTH) / 2;
-        int yMiddle = (yLocation + roomHEIGHT) / 2;
+        int xMiddle = (xLocation + (roomWIDTH / 2));
+        int yMiddle = (yLocation + (roomHEIGHT / 2));
         List<Integer> xyMiddle = new ArrayList<>();
         xyMiddle.add(xMiddle);
         xyMiddle.add(yMiddle);
