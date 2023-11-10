@@ -38,8 +38,8 @@ public class Room {
             return false;
         }
         // Checks if you can create room
-        for (int x = xLocation; x <= xLocation + roomWIDTH; x++) {
-            for (int y = yLocation; y <= yLocation + roomHEIGHT; y++) {
+        for (int x = xLocation; x < xLocation + roomWIDTH; x++) {
+            for (int y = yLocation; y < yLocation + roomHEIGHT; y++) {
                 if (projWorld.getTile(x, y) != Tileset.NOTHING) {
                     return false;
                 }
