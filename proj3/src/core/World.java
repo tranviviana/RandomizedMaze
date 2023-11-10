@@ -70,16 +70,15 @@ public class World {
     }
     private void fillYDirection (int xStart, int yStart, int directionY) {
         int fillY = 0;
-        int workingY = yStart;
-        while (getTile(xStart -1, workingY) == floorRep &&  getTile(xStart, workingY + directionY) == nothingRep) {
+        while (getTile(xStart -1, yStart) == floorRep &&  getTile(xStart, yStart + directionY) == nothingRep) {
             //working upwards or downwards
             fillY = fillY + directionY;
         }
         fillRooms(xStart, yStart, xStart, yStart + fillY, wallRep);
-        if (getTile(xStart -1, workingY + directionY) == nothingRep) {
+        if (getTile(xStart -1, yStart + directionY) == nothingRep) {
             //fills up to the top edge of room
             fillXDirection(xStart,yStart + fillY + directionY);
-        } else if (getTile(xStart, workingY + directionY) != nothingRep) {
+        } else if (getTile(xStart, yStart + directionY) != nothingRep) {
             //responds to a hallway leaving from it
             fillXDirection(xStart, yStart + fillY);
         }
