@@ -39,7 +39,7 @@ public class World {
      * stores the location of the rooms*/
     private void generateRooms() {
         int placed = 0;
-        while (placed < 3) {
+        while (placed < 4) {
             for (int room = 0; room < numberRooms; room++) {
                 int roomWIDTH = randomGenerator.nextInt(MINROOMSIZE, MAXROOMSIZE);
                 int roomHEIGHT = randomGenerator.nextInt(MINROOMSIZE, MAXROOMSIZE);
@@ -143,27 +143,8 @@ public class World {
         int currentX = room1x;
         int currentY = room1y;
 
-        // CROSS SCENARIO
-        if (currentX == room2x && room1y > room2y) { // room1x == room2x, but room1y > room2y
-            for (int y = currentY; y != room2y; y--) {
-                projWorld[currentX][y] = FLOORREP;
-            }
-        }
-        if (currentX == room2x && room2y > room1y) { // room1x == room2x, but room1y < room2y
-            for (int y = currentY; y != room2y; y++) {
-                projWorld[currentX][y] = FLOORREP;
-            }
-        }
-        if (currentX < room2x && room1y == room2y) {
-            for (int x = currentX; x != room2x; x++) {
-                projWorld[x][currentY] = FLOORREP;
-            }
-        }
-        if (currentX > room2x && room1y == room2y) {
-            for (int x = currentX; x != room2x; x--) {
-                projWorld[x][currentY] = FLOORREP;
-            }
-        }
+        fillHallWayHelper1(currentX, currentY, room2x, room2y);
+
         if (currentX != room2x && currentY != room2y) {
             // Scenario 1: room1x > room2x && room1x < room2y
             if (currentX > room2x && currentY < room2y) {
@@ -231,24 +212,51 @@ public class World {
             }
             // Scenario 4: room1x > room2x && room1y > room2y
             if (currentX > room2x && currentY > room2y) {
-                while (currentX != room2x || currentY != room2y) {
-                    if (currentX != room2x) {
-                        int xDifference = currentX - room2x;
-                        int hallwayEndX = currentX - randomGenerator.nextInt(1, xDifference + 1);
-                        for (int x = currentX; x != hallwayEndX; x--) {
-                            projWorld[x][currentY] = FLOORREP;
-                        }
-                        currentX = hallwayEndX;
-                    }
-                    if (currentY != room2y) {
-                        int yDifference = currentY - room2y;
-                        int hallwayEndY = currentY - randomGenerator.nextInt(1, yDifference + 1);
-                        for (int y = currentY; y != hallwayEndY; y--) {
-                            projWorld[currentX][y] = FLOORREP;
-                        }
-                        currentY = hallwayEndY;
-                    }
+                fillHallWayHelper2(currentX, currentY, room2x, room2y);
+            }
+        }
+    }
+    public void fillHallWayHelper1(int room1x, int room1y, int room2x, int room2y) {
+        // CROSS SCENARIO
+
+        if (room1x == room2x && room1y > room2y) { // room1x == room2x, but room1y > room2y
+            for (int y = room1y; y != room2y; y--) {
+                projWorld[room1x][y] = FLOORREP;
+            }
+        }
+        if (room1x == room2x && room2y > room1y) { // room1x == room2x, but room1y < room2y
+            for (int y = room1y; y != room2y; y++) {
+                projWorld[room1x][y] = FLOORREP;
+            }
+        }
+        if (room1x < room2x && room1y == room2y) {
+            for (int x = room1x; x != room2x; x++) {
+                projWorld[x][room1y] = FLOORREP;
+            }
+        }
+        if (room1x > room2x && room1y == room2y) {
+            for (int x = room1x; x != room2x; x--) {
+                projWorld[x][room1y] = FLOORREP;
+            }
+        }
+    }
+    public void fillHallWayHelper2(int currentX, int currentY, int room2x, int room2y) {
+        while (currentX != room2x || currentY != room2y) {
+            if (currentX != room2x) {
+                int xDifference = currentX - room2x;
+                int hallwayEndX = currentX - randomGenerator.nextInt(1, xDifference + 1);
+                for (int x = currentX; x != hallwayEndX; x--) {
+                    projWorld[x][currentY] = FLOORREP;
                 }
+                currentX = hallwayEndX;
+            }
+            if (currentY != room2y) {
+                int yDifference = currentY - room2y;
+                int hallwayEndY = currentY - randomGenerator.nextInt(1, yDifference + 1);
+                for (int y = currentY; y != hallwayEndY; y--) {
+                    projWorld[currentX][y] = FLOORREP;
+                }
+                currentY = hallwayEndY;
             }
         }
     }
