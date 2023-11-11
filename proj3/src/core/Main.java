@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.List;
 
 public class Main {
+    //doesnt process and doesnt account for pressing random letters in between
     public static void processingSeedStrokes() {
         StringBuilder seedType = new StringBuilder();
         while (StdDraw.hasNextKeyTyped()) {
@@ -16,7 +17,7 @@ public class Main {
             if (c == 's' || c == 'S') {
                 break;
             }
-            seedType.append(String.valueOf(c));
+            seedType.append(c);
         }
         World testingWorld = new World(Long.parseLong(String.valueOf(seedType)));
         TETile[][] tiles = testingWorld.worldState();
@@ -37,10 +38,11 @@ public class Main {
         StdDraw.text(0.5, 0.3, "New Game (N)");
         StdDraw.text(0.5, 0.2, "Load Game (L)");
         StdDraw.text(0.5, 0.1, "Quit (Q)");
-        if (StdDraw.hasNextKeyTyped()) {
+        while (StdDraw.hasNextKeyTyped()) {
             char c = StdDraw.nextKeyTyped();
             if (c == 'N' || c == 'n') {
                 processingSeedStrokes();
+                break;
             }
         }
         TERenderer ter = new TERenderer();
