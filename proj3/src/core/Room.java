@@ -6,8 +6,8 @@ import java.util.*;
 public class Room {
     private int roomHEIGHT;
     private int roomWIDTH;
-    public int xLocation;
-    public int yLocation;
+    private int xLocation;
+    private int yLocation;
     private World projWorld;
 
     /**
@@ -17,7 +17,7 @@ public class Room {
      * @param y
      */
     //need to change division in the future to set the maximum size of the room
-    public Room (int width, int height, World projWorld, int x, int y) {
+    public Room(int width, int height, World projWorld, int x, int y) {
         roomWIDTH = width;
         roomHEIGHT = height;
         xLocation = x;
@@ -32,10 +32,10 @@ public class Room {
         if (xLocation - 1 <= 0 || yLocation - 1 <= 0) {
             return false;
         }
-        if (xLocation + roomWIDTH >= projWorld.WIDTH - 1 || xLocation < 1)  {
+        if (xLocation + roomWIDTH >= World.WIDTH - 1 || xLocation < 1)  {
             return false;
         }
-        if (yLocation + roomHEIGHT >= projWorld.HEIGHT - 1 || yLocation < 1) {
+        if (yLocation + roomHEIGHT >= World.HEIGHT - 1 || yLocation < 1) {
             return false;
         }
         // Checks if you can create room
@@ -66,15 +66,15 @@ public class Room {
         xyMiddle.add(yMiddle);
         return xyMiddle;
     }
-//    /*returns the location where to work from in walls (right most room)*/
-//    public List<Integer> roomPerimeter() {
-//        int travelingSide = roomWIDTH / 2;
-//        int xWall = roomMiddle().get(0) + travelingSide;
-//        while (projWorld.getTile(xWall, roomMiddle().get(1)) != World.nothingRep) {
-//            xWall++;
-//        }
-//       return List.of(xWall,roomMiddle().get(1));
-//    }
+    /*returns the location where to work from in walls (right most room)
+    public List<Integer> roomPerimeter() {
+        int travelingSide = roomWIDTH / 2;
+        int xWall = roomMiddle().get(0) + travelingSide;
+        while (projWorld.getTile(xWall, roomMiddle().get(1)) != World.nothingRep) {
+            xWall++;
+        }
+       return List.of(xWall,roomMiddle().get(1));
+    } */
 
 
     public int roomWIDTH() {
@@ -89,9 +89,4 @@ public class Room {
         }
         return roomHEIGHT;
     }
-
-
-
-
-
 }
