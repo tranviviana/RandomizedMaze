@@ -8,17 +8,16 @@ import java.util.*;
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
-
-    public static final int MAXROOMSIZE = 50 / 4;
-    public static final int MINROOMSIZE = 2;
     public static final TETile FLOORREP = Tileset.FLOWER;
     public static final TETile WALLREP = Tileset.WALL;
     public static final TETile NOTHINGREP = Tileset.NOTHING;
-    private List<List<Integer>> listofMiddle;
 
-    public static final int WIDTH = 90;
+    public static final int WIDTH = 80;
     public static final int HEIGHT = 50;
+    public static final int MAXROOMSIZE = WIDTH / 4;
+    public static final int MINROOMSIZE = 2;   
     private int numberRooms;
+    private List<List<Integer>> listofMiddle;  
     //private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
@@ -31,7 +30,8 @@ public class World {
         fillRooms(0, 0, WIDTH, HEIGHT, NOTHINGREP);
         listofMiddle = new ArrayList<>();
         generateRooms();
-        //roomLocations = new PriorityQueue<>();
+        callingHallways();
+        fillWalls();
     }
 
 
@@ -53,8 +53,6 @@ public class World {
                 }
             }
         }
-        callingHallways();
-        fillWalls();
     }
     /*goes through each of the rooms and connects the room to the next room over
     * at the end connects the first to the last*/
@@ -78,24 +76,25 @@ public class World {
     }
 
     /*goes through each of the tiles in the grid.. if its within the margin it checks all four directions
-    if its one of the side ones it checks within the marigins to avoid null error*/
+    if its one of the side ones it checks within the margins to avoid null error*/
     private void fillWalls() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 if (projWorld[x][y] == NOTHINGREP) {
                     //working through the tops of rooms/hallways
-                    if (x - 1 < 0 || x - 1 > 0 && x + 1 < WIDTH) {
+                    if (x + 1 < WIDTH) {
                         if (checkSurrounding(x + 1, y)) {
                             projWorld[x][y] = WALLREP;
                         }
                     }
                     if (x - 1 > 0) {
                         if (checkSurrounding(x - 1, y)) {
-                            projWorld[x][y] = WALLREP;
+                              projWorld[x][y] = WALLREP;
                         }
                     }
+
                     //working through sides of rooms/ hallways
-                    if (y - 1 < 0 || y - 1 > 0 && y + 1 < HEIGHT) {
+                    if ( y + 1 < HEIGHT) {
                         if (checkSurrounding(x, y + 1)) {
                             projWorld[x][y] = WALLREP;
                         }
@@ -105,7 +104,8 @@ public class World {
                             projWorld[x][y] = WALLREP;
                         }
                     }
-                    if (y - 1 > 0 && y + 1 < HEIGHT && x - 1 > 0 && x + 1 < WIDTH) {
+
+                    if (y - 1 >= 0 && y + 1 < HEIGHT && x - 1 >= 0 && x + 1 < WIDTH) {
                         //checking bottom left top right
                         if (checkSurrounding(x - 1, y - 1)  || checkSurrounding(x + 1, y + 1)) {
                             projWorld[x][y] = WALLREP;
@@ -119,6 +119,9 @@ public class World {
             }
         }
     }
+
+
+    // avoids repeating the floor rep
     private boolean checkSurrounding(int x, int y) {
         return projWorld[x][y] == FLOORREP;
     }
@@ -130,8 +133,8 @@ public class World {
     public TETile getTile(int x, int y) {
         return projWorld[x][y];
     }
-    //LEAVE COMMENTS EDWIN!!!!!
 
+    //LEAVE COMMENTS EDWIN!!!!!
     public void fillHallway(int room1x, int room1y, int room2x, int room2y) {
         if (room2x > room1x && room2y < room1y) { // Room2x > Room1x, but room2y < room1y
             int xDifference = room2x - room1x;
