@@ -105,13 +105,13 @@ public class World {
                         }
                     }
                     if (y - 1 > 0 && y + 1 < HEIGHT && x - 1 > 0 && x + 1 < WIDTH) {
+                        //checking bottom left top right
                         if (checkSurrounding(x - 1, y - 1)  || checkSurrounding(x + 1, y + 1)) {
-                            //checking bottom left top right
-                                projWorld[x][y] = WALLREP;
+                            projWorld[x][y] = WALLREP;
                         }
+                        //checking bottom right top left
                         if (checkSurrounding(x - 1, y + 1) || checkSurrounding(x + 1, y - 1)) {
-                            //checking bottom right top left
-                                  projWorld[x][y] = WALLREP;
+                            projWorld[x][y] = WALLREP;
                         }
                     }
                 }
