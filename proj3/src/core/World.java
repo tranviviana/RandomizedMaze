@@ -60,7 +60,7 @@ public class World {
     /*goes through each of the rooms and connects the room to the next room over
     * at the end connects the first to the last*/
     private void callingHallways() {
-        int roomMiddles = listofMiddle.size();
+        int roomMiddles = listofMiddle.size() - 1;
         for (int room = 0; room < roomMiddles; room++) {
             //lines toooooo long
             fillHallway(listofMiddle.get(room).get(0), listofMiddle.get(room).get(1), listofMiddle.get(room + 1).get(0), listofMiddle.get(room + 1).get(1));
@@ -82,8 +82,8 @@ public class World {
     private void fillWalls() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                if (x - 1 > 0 && x + 1 < WIDTH) {
-                    if (projWorld[x - 1][y] == FLOORREP || projWorld[x + 1][y] == FLOORREP) {
+                if (x - 1 > 0 && x + 1 < WIDTH && projWorld[x][y] == NOTHINGREP) {
+                    if (projWorld[x - 1][y] == FLOORREP || projWorld[x + 1][y] == FLOORREP ) {
                         projWorld[x][y] = WALLREP;
                     }
                 } else if (x - 1 < 0) {
@@ -95,7 +95,7 @@ public class World {
                         projWorld[x][y] = WALLREP;
                     }
                 }
-                if (y - 1 > 0 && y + 1 < HEIGHT) {
+                if (y - 1 > 0 && y + 1 < HEIGHT && projWorld[x][y] == NOTHINGREP) {
                     if (projWorld[x][y - 1] == FLOORREP || projWorld[x][y + 1] == FLOORREP) {
                         projWorld[x][y] = WALLREP;
                     }
