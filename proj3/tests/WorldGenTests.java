@@ -9,12 +9,14 @@ public class WorldGenTests {
     @Test
     public void basicTest() throws Exception {
         // put different seeds here to test different worlds
-        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n56758665");
+
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n444444s");
+
 
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
-        StdDraw.pause(5000); // pause for 5 seconds so you can see the output
+        StdDraw.pause(50000); // pause for 5 seconds so you can see the output
     }
 
     @Test
