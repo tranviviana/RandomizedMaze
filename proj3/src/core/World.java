@@ -14,19 +14,17 @@ public class World {
     public static final TETile FLOORREP = Tileset.FLOWER;
     public static final TETile WALLREP = Tileset.WALL;
     public static final TETile NOTHINGREP = Tileset.NOTHING;
-    public List<List<Integer>> listofMiddle;
+    private List<List<Integer>> listofMiddle;
 
-    public int WIDTH;
-    public int HEIGHT;
-    public int numberRooms;
+    public static final int WIDTH = 90;
+    public static final int HEIGHT = 50;
+    private int numberRooms;
     //private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
-    public World (Long seed) {
+    public World(Long seed) {
         randomGenerator = new Random(seed);
-        WIDTH = 90;
-        HEIGHT = 50;
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, WIDTH);
@@ -64,9 +62,11 @@ public class World {
     private void callingHallways() {
         int roomMiddles = listofMiddle.size();
         for (int room = 0; room < roomMiddles; room++) {
-            fillHallway(listofMiddle.get(room).get(0), listofMiddle.get(room).get(1), listofMiddle.get(room + 1).get(0), listofMiddle.get(room +1).get(1));
+            //lines toooooo long
+            fillHallway(listofMiddle.get(room).get(0), listofMiddle.get(room).get(1), listofMiddle.get(room + 1).get(0), listofMiddle.get(room + 1).get(1));
         }
-        fillHallway(listofMiddle.get(0).get(0), listofMiddle.get(0).get(1),listofMiddle.get(roomMiddles).get(0), listofMiddle.get(roomMiddles).get(1));
+        //lines toooooo long
+        fillHallway(listofMiddle.get(0).get(0), listofMiddle.get(0).get(1), listofMiddle.get(roomMiddles).get(0), listofMiddle.get(roomMiddles).get(1));
     }
     //fills the tiles on the TileSet for rectangle like things
     private void fillRooms(int startX, int startY, int endX, int endY, TETile tileType) {
@@ -82,20 +82,19 @@ public class World {
     private void fillWalls() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                if (x - 1 > 0 && x + 1 < WIDTH ) {
-                    if (projWorld[x - 1][y] == FLOORREP || projWorld[x+1][y] == FLOORREP) {
+                if (x - 1 > 0 && x + 1 < WIDTH) {
+                    if (projWorld[x - 1][y] == FLOORREP || projWorld[x + 1][y] == FLOORREP) {
                         projWorld[x][y] = WALLREP;
                     }
                 } else if (x - 1 < 0) {
                     if (projWorld[x + 1][y] == FLOORREP) {
                         projWorld[x][y] = WALLREP;
                     }
-                }
-                    else if (x + 1 == WIDTH) {
-                        if (projWorld[x - 1][y] == FLOORREP) {
-                            projWorld[x][y] = WALLREP;
-                        }
+                } else if (x + 1 == WIDTH) {
+                    if (projWorld[x - 1][y] == FLOORREP) {
+                        projWorld[x][y] = WALLREP;
                     }
+                }
                 if (y - 1 > 0 && y + 1 < HEIGHT) {
                     if (projWorld[x][y - 1] == FLOORREP || projWorld[x][y + 1] == FLOORREP) {
                         projWorld[x][y] = WALLREP;
@@ -104,13 +103,11 @@ public class World {
                     if (projWorld[x][y + 1] == FLOORREP) {
                         projWorld[x][y] = WALLREP;
                     }
-                } else if (y + 1 == WIDTH) {
+                } else if (y + 1 == HEIGHT) {
                     if (projWorld[x][y - 1] == FLOORREP) {
                         projWorld[x][y] = WALLREP;
                     }
                 }
-
-
             }
         }
     }
@@ -120,11 +117,9 @@ public class World {
         return projWorld;
     }
     // returns the tileType of a certain x and y location
-    public TETile getTile ( int x, int y){
+    public TETile getTile (int x, int y) {
         return projWorld[x][y];
     }
-
-
     //LEAVE COMMENTS EDWIN!!!!!
 
     public void fillHallway(int room1x, int room1y, int room2x, int room2y) {

@@ -1,6 +1,5 @@
 package core;
 
-import tileengine.Tileset;
 
 import java.util.*;
 
@@ -93,6 +92,6 @@ public class Room {
 
 
 
-    // TODO: Create method that maybe returns an ArrayList containing the coordinates of the Room
+
 
 }
