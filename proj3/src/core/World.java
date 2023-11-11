@@ -82,32 +82,41 @@ public class World {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 if (projWorld[x][y] == NOTHINGREP) {
-                       if (x - 1 < 0 || x - 1 > 0 && x + 1 < WIDTH) {
-                            if (projWorld[x + 1][y] == FLOORREP) {
+                    //working through the tops of rooms/hallways
+                    if (x - 1 < 0 || x - 1 > 0 && x + 1 < WIDTH) {
+                        if (checkSurrounding(x + 1, y)) {
+                            projWorld[x][y] = WALLREP;
+                        }
+                    }
+                    if (x - 1 > 0) {
+                        if (checkSurrounding(x - 1, y)) {
+                            projWorld[x][y] = WALLREP;
+                        }
+                    }
+                    //working through sides of rooms/ hallways
+                    if (y - 1 < 0 || y - 1 > 0 && y + 1 < HEIGHT) {
+                        if (checkSurrounding(x, y + 1)) {
+                            projWorld[x][y] = WALLREP;
+                        }
+                    }
+                    if (y - 1 > 0) {
+                        if (checkSurrounding(x, y - 1)) {
+                            projWorld[x][y] = WALLREP;
+                        }
+                    }
+                    if (y - 1 > 0 && y + 1 < HEIGHT && x - 1 > 0 && x + 1 < WIDTH) {
+                        if (checkSurrounding(x - 1, y - 1) || checkSurrounding(x - 1, y + 1) || checkSurrounding(x + 1, y - 1)|| checkSurrounding(x + 1, y + 1) ) {
                                 projWorld[x][y] = WALLREP;
-                            }
-                       }
-                       if (x - 1 > 0) {
-                           if (projWorld[x - 1][y] == FLOORREP) {
-                               projWorld[x][y] = WALLREP;
-                           }
-                       }
-                       if (y - 1 < 0 || y - 1 > 0 && y + 1 < HEIGHT) {
-                           if (projWorld[x][y + 1] == FLOORREP) {
-                                projWorld[x][y] = WALLREP;
-                           }
-                       }
-                       if (y - 1 > 0) {
-                               if (projWorld[x][y - 1] == FLOORREP) {
-                               projWorld[x][y] = WALLREP;
-                               }
-                       }
+                        }
+                    }
+
                 }
             }
         }
     }
-
-
+    private boolean checkSurrounding(int x, int y) {
+        return projWorld[x][y] == FLOORREP;
+    }
     // returns what the world looks like (for autograder)
     public TETile[][] worldState() {
         return projWorld;
