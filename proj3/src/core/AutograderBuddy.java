@@ -18,7 +18,7 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     /*  @source splitting line is ChatGPT generated  */
-    public static TETile[][] getWorldFromInput(String input) {
+    public static TETile[][] getWorldFromInput(String input) throws Exception {
         String[] parts = input.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
         World testingWorld = new World(Long.parseLong(parts[1]));
         return testingWorld.worldState();
