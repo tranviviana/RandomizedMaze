@@ -42,7 +42,7 @@ public class Room {
         // Checks if you can create room
         for (int x = xLocation; x < xLocation + roomWIDTH; x++) {
             for (int y = yLocation; y < yLocation + roomHEIGHT; y++) {
-                if (projWorld.getTile(x, y) != World.nothingRep) {
+                if (projWorld.getTile(x, y) != World.NOTHINGREP) {
                     return false;
                 }
             }
@@ -50,7 +50,7 @@ public class Room {
         // Checks if there would be one block space free surrounding that room (No other rooms right next to it)
         for (int x = xLocation - 1; x <= xLocation + roomWIDTH + 1; x++) {
             for (int y = yLocation - 1; y <= yLocation + roomHEIGHT + 1; y++) {
-                if (projWorld.getTile(x, y) == World.floorRep) {
+                if (projWorld.getTile(x, y) == World.FLOORREP) {
                     return false;
                 }
 

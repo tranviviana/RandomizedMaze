@@ -9,12 +9,12 @@ public class World {
     TETile[][] projWorld;
     Random randomGenerator;
 
-    public static final int maxRoomSize = 50 / 4;
-    public static final int minRoomSize = 2;
-    public static final TETile floorRep = Tileset.FLOWER;
-    public static final TETile wallRep = Tileset.WALL;
-    public static final TETile nothingRep = Tileset.NOTHING;
-    public static List<List<Integer>> listofMiddle;
+    public static final int MAXROOMSIZE = 50 / 4;
+    public static final int MINROOMSIZE = 2;
+    public static final TETile FLOORREP = Tileset.FLOWER;
+    public static final TETile WALLREP = Tileset.WALL;
+    public static final TETile NOTHINGREP = Tileset.NOTHING;
+    public List<List<Integer>> listofMiddle;
 
     public int WIDTH;
     public int HEIGHT;
@@ -30,7 +30,7 @@ public class World {
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, WIDTH);
-        fillRooms(0,0, WIDTH, HEIGHT, nothingRep);
+        fillRooms(0,0, WIDTH, HEIGHT, NOTHINGREP);
         listofMiddle = new ArrayList<>();
         generateRooms();
         //roomLocations = new PriorityQueue<>();
@@ -43,21 +43,32 @@ public class World {
         int placed = 0;
         while (placed < 3) {
             for (int room = 0; room < numberRooms; room++) {
-                int roomWIDTH = randomGenerator.nextInt(minRoomSize, maxRoomSize);
-                int roomHEIGHT = randomGenerator.nextInt(minRoomSize, maxRoomSize);
+                int roomWIDTH = randomGenerator.nextInt(MINROOMSIZE, MAXROOMSIZE);
+                int roomHEIGHT = randomGenerator.nextInt(MINROOMSIZE, MAXROOMSIZE);
                 int xLocation = randomGenerator.nextInt(WIDTH);
                 int yLocation = randomGenerator.nextInt(HEIGHT);
                 Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
                 if (currentRoom.placeable()) {
                     listofMiddle.add(currentRoom.roomMiddle());
                     placed++;
-                    fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, floorRep);
+                    fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, FLOORREP);
                     //roomLocations.add(currentRoom.roomMiddle());
                 }
             }
         }
+        callingHallways();
+        fillWalls();
     }
-    //fills the tiles on the TileSet
+    /*goes through each of the rooms and connects the room to the next room over
+    * at the end connects the first to the last*/
+    private void callingHallways() {
+        int roomMiddles = listofMiddle.size();
+        for (int room = 0; room < roomMiddles; room++) {
+            fillHallway(listofMiddle.get(room).get(0), listofMiddle.get(room).get(1), listofMiddle.get(room + 1).get(0), listofMiddle.get(room +1).get(1));
+        }
+        fillHallway(listofMiddle.get(0).get(0), listofMiddle.get(0).get(1),listofMiddle.get(roomMiddles).get(0), listofMiddle.get(roomMiddles).get(1));
+    }
+    //fills the tiles on the TileSet for rectangle like things
     private void fillRooms(int startX, int startY, int endX, int endY, TETile tileType) {
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
@@ -65,35 +76,37 @@ public class World {
             }
         }
     }
-    //recursively calls itself till all of the grid is filled
+
+    /*goes through each of the tiles in the grid.. if its within the margin it checks all four directions
+    if its one of the side ones it checks within the marigins to avoid null error*/
     private void fillWalls() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 if (x - 1 > 0 && x + 1 < WIDTH ) {
-                    if (projWorld[x - 1][y] == floorRep || projWorld[x+1][y] == floorRep) {
-                        projWorld[x][y] = wallRep;
+                    if (projWorld[x - 1][y] == FLOORREP || projWorld[x+1][y] == FLOORREP) {
+                        projWorld[x][y] = WALLREP;
                     }
                 } else if (x - 1 < 0) {
-                    if (projWorld[x + 1][y] == floorRep) {
-                        projWorld[x][y] = wallRep;
+                    if (projWorld[x + 1][y] == FLOORREP) {
+                        projWorld[x][y] = WALLREP;
                     }
                 }
                     else if (x + 1 == WIDTH) {
-                        if (projWorld[x - 1][y] == floorRep) {
-                            projWorld[x][y] = wallRep;
+                        if (projWorld[x - 1][y] == FLOORREP) {
+                            projWorld[x][y] = WALLREP;
                         }
                     }
                 if (y - 1 > 0 && y + 1 < HEIGHT) {
-                    if (projWorld[x][y - 1] == floorRep || projWorld[x][y + 1] == floorRep) {
-                        projWorld[x][y] = wallRep;
+                    if (projWorld[x][y - 1] == FLOORREP || projWorld[x][y + 1] == FLOORREP) {
+                        projWorld[x][y] = WALLREP;
                     }
                 } else  if (y - 1 < 0) {
-                    if (projWorld[x][y + 1] == floorRep) {
-                        projWorld[x][y] = wallRep;
+                    if (projWorld[x][y + 1] == FLOORREP) {
+                        projWorld[x][y] = WALLREP;
                     }
                 } else if (y + 1 == WIDTH) {
-                    if (projWorld[x][y - 1] == floorRep) {
-                        projWorld[x][y] = wallRep;
+                    if (projWorld[x][y - 1] == FLOORREP) {
+                        projWorld[x][y] = WALLREP;
                     }
                 }
 
@@ -101,9 +114,6 @@ public class World {
             }
         }
     }
-
-
-
 
     // returns what the world looks like (for autograder)
     public TETile[][] worldState () {
@@ -114,16 +124,19 @@ public class World {
         return projWorld[x][y];
     }
 
+
+    //LEAVE COMMENTS EDWIN!!!!!
+
     public void fillHallway(int room1x, int room1y, int room2x, int room2y) {
         if (room2x > room1x && room2y < room1y) { // Room2x > Room1x, but room2y < room1y
             int xDifference = room2x - room1x;
             int yDifference = room1y - room2y;
             for (int startX = room1x; startX < room2x; startX += randomGenerator.nextInt(0, xDifference)) {
-                fillRooms(room1x, room1y, startX, room1y, Tileset.FLOWER);
+                fillRooms(room1x, room1y, startX, room1y, FLOORREP);
                 room1x = startX;
                 for (int startY = room1y; startY > room2y; startY -= randomGenerator.nextInt(0, yDifference)) {
                     for (int y = room1y; y > startY; y--) {
-                        projWorld[startX][y] = Tileset.FLOWER;
+                        projWorld[startX][y] = FLOORREP;
                     }
                     room1y = startY;
                 }
@@ -134,11 +147,11 @@ public class World {
             int yDifference = room2y - room1y;
             for (int startX = room1x; startX > room2x; startX -= randomGenerator.nextInt(0, xDifference)) {
                 for (int x = room1x; x > startX; x--) {
-                    projWorld[x][room1y] = Tileset.FLOWER;
+                    projWorld[x][room1y] = FLOORREP;
                 }
                 room1x = startX;
                 for (int startY = room1y; startY < room2y; startY += randomGenerator.nextInt(0, yDifference)) {
-                    fillRooms(room1x, room1y, room1x, startY, Tileset.FLOWER);
+                    fillRooms(room1x, room1y, room1x, startY, FLOORREP);
                     room2y = startY;
                 }
             }
@@ -146,10 +159,10 @@ public class World {
             int xDifference = room2x - room1x;
             int yDifference = room2y - room1y;
             for (int startX = room1x; startX < room2x; startX += randomGenerator.nextInt(0, xDifference)) {
-                fillRooms(room1x, room1y, startX, room1y, Tileset.FLOWER);
+                fillRooms(room1x, room1y, startX, room1y, FLOORREP);
                 room1x = startX;
                 for (int startY = room1y; startY < room2y; startY += randomGenerator.nextInt(0, yDifference)) {
-                    fillRooms(room1x, room1y, room1x, startY, Tileset.FLOWER);
+                    fillRooms(room1x, room1y, room1x, startY, FLOORREP);
                     room2y = startY;
                 }
             }
