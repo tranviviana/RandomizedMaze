@@ -30,10 +30,6 @@ public class World {
         fillRooms(0, 0, WIDTH, HEIGHT, NOTHINGREP);
         listofMiddle = new ArrayList<>();
         generateRooms();
-        System.out.println(listofMiddle);
-        // fillHallway(22, 12, 59, 16);
-        // projWorld[22][12] = Tileset.WATER;
-        // projWorld[59][16] = Tileset.WATER;
         callingHallways();
         fillWalls();
     }
