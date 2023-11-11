@@ -61,10 +61,11 @@ public class World {
     private void callingHallways() {
         int roomMiddles = listofMiddle.size() - 1;
         for (int room = 0; room < roomMiddles; room++) {
-            //lines toooooo long
-            fillHallway(listofMiddle.get(room).get(0), listofMiddle.get(room).get(1), listofMiddle.get(room + 1).get(0), listofMiddle.get(room + 1).get(1));
+            List<Integer> currentRoom =  listofMiddle.get(room);
+            List<Integer> nextRoom = listofMiddle.get(room + 1);
+            fillHallway(currentRoom.get(0), currentRoom.get(1), nextRoom.get(0), nextRoom.get(1));
         }
-        //lines toooooo long
+        //lines toooooo long  meant to connect last to first
         fillHallway(listofMiddle.get(0).get(0), listofMiddle.get(0).get(1), listofMiddle.get(roomMiddles).get(0), listofMiddle.get(roomMiddles).get(1));
     }
     //fills the tiles on the TileSet for rectangle like things
