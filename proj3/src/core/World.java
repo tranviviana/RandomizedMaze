@@ -15,7 +15,7 @@ public class World {
     public static final int WIDTH = 80;
     public static final int HEIGHT = 50;
     public static final int MAXROOMSIZE = WIDTH / 4;
-    public static final int MINROOMSIZE = 2;   
+    public static final int MINROOMSIZE = 3;
     private int numberRooms;
     private List<List<Integer>> listofMiddle;  
     //private PriorityQueue<List<Integer>> roomLocations;
