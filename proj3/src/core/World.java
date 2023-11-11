@@ -28,7 +28,7 @@ public class World {
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, WIDTH);
-        fillRooms(0,0, WIDTH, HEIGHT, NOTHINGREP);
+        fillRooms(0, 0, WIDTH, HEIGHT, NOTHINGREP);
         listofMiddle = new ArrayList<>();
         generateRooms();
         //roomLocations = new PriorityQueue<>();
@@ -113,11 +113,11 @@ public class World {
     }
 
     // returns what the world looks like (for autograder)
-    public TETile[][] worldState () {
+    public TETile[][] worldState() {
         return projWorld;
     }
     // returns the tileType of a certain x and y location
-    public TETile getTile (int x, int y) {
+    public TETile getTile(int x, int y) {
         return projWorld[x][y];
     }
     //LEAVE COMMENTS EDWIN!!!!!
