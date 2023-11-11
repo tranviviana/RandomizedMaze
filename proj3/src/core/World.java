@@ -114,7 +114,6 @@ public class World {
                                   projWorld[x][y] = WALLREP;
                         }
                     }
-
                 }
             }
         }
