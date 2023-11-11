@@ -50,7 +50,6 @@ public class World {
                     listofMiddle.add(currentRoom.roomMiddle());
                     placed++;
                     fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, FLOORREP);
-                    //roomLocations.add(currentRoom.roomMiddle());
                 }
             }
         }
@@ -82,35 +81,32 @@ public class World {
     private void fillWalls() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                if (x - 1 > 0 && x + 1 < WIDTH && projWorld[x][y] == NOTHINGREP) {
-                    if (projWorld[x - 1][y] == FLOORREP || projWorld[x + 1][y] == FLOORREP ) {
-                        projWorld[x][y] = WALLREP;
-                    }
-                } else if (x - 1 < 0) {
-                    if (projWorld[x + 1][y] == FLOORREP) {
-                        projWorld[x][y] = WALLREP;
-                    }
-                } else if (x + 1 == WIDTH) {
-                    if (projWorld[x - 1][y] == FLOORREP) {
-                        projWorld[x][y] = WALLREP;
-                    }
-                }
-                if (y - 1 > 0 && y + 1 < HEIGHT && projWorld[x][y] == NOTHINGREP) {
-                    if (projWorld[x][y - 1] == FLOORREP || projWorld[x][y + 1] == FLOORREP) {
-                        projWorld[x][y] = WALLREP;
-                    }
-                } else  if (y - 1 < 0) {
-                    if (projWorld[x][y + 1] == FLOORREP) {
-                        projWorld[x][y] = WALLREP;
-                    }
-                } else if (y + 1 == HEIGHT) {
-                    if (projWorld[x][y - 1] == FLOORREP) {
-                        projWorld[x][y] = WALLREP;
-                    }
+                if (projWorld[x][y] == NOTHINGREP) {
+                       if (x - 1 < 0 || x - 1 > 0 && x + 1 < WIDTH) {
+                            if (projWorld[x + 1][y] == FLOORREP) {
+                                projWorld[x][y] = WALLREP;
+                            }
+                       }
+                       if (x - 1 > 0) {
+                           if (projWorld[x - 1][y] == FLOORREP) {
+                               projWorld[x][y] = WALLREP;
+                           }
+                       }
+                       if (y - 1 < 0 || y - 1 > 0 && y + 1 < HEIGHT) {
+                           if (projWorld[x][y + 1] == FLOORREP) {
+                                projWorld[x][y] = WALLREP;
+                           }
+                       }
+                       if (y - 1 > 0) {
+                               if (projWorld[x][y - 1] == FLOORREP) {
+                               projWorld[x][y] = WALLREP;
+                               }
+                       }
                 }
             }
         }
     }
+
 
     // returns what the world looks like (for autograder)
     public TETile[][] worldState() {
