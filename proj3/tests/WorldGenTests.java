@@ -14,7 +14,7 @@ public class WorldGenTests {
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
-        StdDraw.pause(5000); // pause for 5 seconds so you can see the output
+        StdDraw.pause(10000); // pause for 5 seconds so you can see the output
     }
 
     @Test
@@ -25,5 +25,14 @@ public class WorldGenTests {
     @Test
     public void basicSaveTest() {
         // TODO: write a test that calls getWorldFromInput twice, with "n123swasd:q" and with "lwasd"
+    }
+
+    public void EdTest() {
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n784927345s");
+
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length);
+        ter.renderFrame(tiles);
+        StdDraw.pause(10000); // pause for 5 seconds so you can see the output
     }
 }
