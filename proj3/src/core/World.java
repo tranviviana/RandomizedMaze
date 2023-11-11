@@ -65,7 +65,11 @@ public class World {
             fillHallway(currentRoom.get(0), currentRoom.get(1), nextRoom.get(0), nextRoom.get(1));
         }
         //lines toooooo long  meant to connect last to first
-        fillHallway(listofMiddle.get(0).get(0), listofMiddle.get(0).get(1), listofMiddle.get(roomMiddles).get(0), listofMiddle.get(roomMiddles).get(1));
+        int xCoordOne = listofMiddle.get(0).get(0);
+        int yCoordOne = listofMiddle.get(0).get(1);
+        int xCoordTwo = listofMiddle.get(roomMiddles).get(0);
+        int yCoordTwo = listofMiddle.get(roomMiddles).get(1);
+        fillHallway(xCoordOne, yCoordOne, xCoordTwo, yCoordTwo);
     }
 
     //fills the tiles on the TileSet for rectangle like things
