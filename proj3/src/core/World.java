@@ -66,14 +66,35 @@ public class World {
     private void fillWalls() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                if (x - 1 > 0) {
-                    //check right side
+                if (x - 1 > 0 && x + 1 < WIDTH ) {
+                    if (projWorld[x - 1][y] == floorRep || projWorld[x+1][y] == floorRep) {
+                        projWorld[x][y] = wallRep;
+                    }
+                } else if (x - 1 < 0) {
+                    if (projWorld[x + 1][y] == floorRep) {
+                        projWorld[x][y] = wallRep;
+                    }
                 }
-                else {
-                    //check left side
+                    else if (x + 1 == WIDTH) {
+                        if (projWorld[x - 1][y] == floorRep) {
+                            projWorld[x][y] = wallRep;
+                        }
+                    }
+                if (y - 1 > 0 && y + 1 < HEIGHT) {
+                    if (projWorld[x][y - 1] == floorRep || projWorld[x][y + 1] == floorRep) {
+                        projWorld[x][y] = wallRep;
+                    }
+                } else  if (y - 1 < 0) {
+                    if (projWorld[x][y + 1] == floorRep) {
+                        projWorld[x][y] = wallRep;
+                    }
+                } else if (y + 1 == WIDTH) {
+                    if (projWorld[x][y - 1] == floorRep) {
+                        projWorld[x][y] = wallRep;
+                    }
                 }
-                
-                if (getTile(x-1, y) == floorRep || )
+
+
             }
         }
     }
