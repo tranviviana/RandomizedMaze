@@ -7,7 +7,7 @@ import tileengine.TETile;
 
 public class WorldGenTests {
     @Test
-    public void basicTest() {
+    public void basicTest() throws Exception {
         // put different seeds here to test different worlds
         TETile[][] tiles = AutograderBuddy.getWorldFromInput("n5197880843569031643s");
 

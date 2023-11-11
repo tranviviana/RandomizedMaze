@@ -146,22 +146,22 @@ public class World {
         // CROSS SCENARIO
         if (currentX == room2x && room1y > room2y) { // room1x == room2x, but room1y > room2y
             for (int y = currentY; y != room2y; y--) {
-                projWorld[currentX][y] = Tileset.FLOWER;
+                projWorld[currentX][y] = FLOORREP;
             }
         }
         if (currentX == room2x && room2y > room1y) { // room1x == room2x, but room1y < room2y
             for (int y = currentY; y != room2y; y++) {
-                projWorld[currentX][y] = Tileset.FLOWER;
+                projWorld[currentX][y] = FLOORREP;
             }
         }
         if (currentX < room2x && room1y == room2y) {
             for (int x = currentX; x != room2x; x++) {
-                projWorld[x][currentY] = Tileset.FLOWER;
+                projWorld[x][currentY] = FLOORREP;
             }
         }
         if (currentX > room2x && room1y == room2y) {
             for (int x = currentX; x != room2x; x--) {
-                projWorld[x][currentY] = Tileset.FLOWER;
+                projWorld[x][currentY] = FLOORREP;
             }
         }
         if (currentX != room2x && currentY != room2y) {
@@ -172,7 +172,7 @@ public class World {
                         int xDifference = currentX - room2x;
                         int hallwayEndX = currentX - randomGenerator.nextInt(1, xDifference + 1);
                         for (int x = currentX; x != hallwayEndX; x--) {
-                            projWorld[x][currentY] = Tileset.FLOWER;
+                            projWorld[x][currentY] = FLOORREP;
                         }
                         currentX = hallwayEndX;
                     }
@@ -180,7 +180,7 @@ public class World {
                         int yDifference = room2y - currentY;
                         int hallwayEndY = currentY + randomGenerator.nextInt(1, yDifference + 1);
                         for (int y = currentY; y < hallwayEndY; y++) {
-                            projWorld[currentX][y] = Tileset.FLOWER;
+                            projWorld[currentX][y] = FLOORREP;
                         }
                         currentY = hallwayEndY;
                     }
@@ -193,7 +193,7 @@ public class World {
                         int xDifference = room2x - currentX;
                         int hallwayEndX = currentX + randomGenerator.nextInt(1, xDifference + 1);
                         for (int x = currentX; x != hallwayEndX; x++) {
-                            projWorld[x][currentY] = Tileset.FLOWER;
+                            projWorld[x][currentY] = FLOORREP;
                         }
                         currentX = hallwayEndX;
                     }
@@ -201,7 +201,7 @@ public class World {
                         int yDifference = currentY - room2y;
                         int hallwayEndY = currentY - randomGenerator.nextInt(1, yDifference + 1);
                         for (int y = currentY; y != hallwayEndY; y--) {
-                            projWorld[currentX][y] = Tileset.FLOWER;
+                            projWorld[currentX][y] = FLOORREP;
                         }
                         currentY = hallwayEndY;
                     }
@@ -215,7 +215,7 @@ public class World {
                         int xDifference = room2x - currentX;
                         int hallwayEndX = currentX + randomGenerator.nextInt(1, xDifference + 1);
                         for (int x = currentX; x != hallwayEndX; x++) {
-                            projWorld[x][currentY] = Tileset.FLOWER;
+                            projWorld[x][currentY] = FLOORREP;
                         }
                         currentX = hallwayEndX;
                     }
@@ -223,7 +223,7 @@ public class World {
                         int yDifference = room2y - currentY;
                         int hallwayEndY = currentY + randomGenerator.nextInt(1, yDifference + 1);
                         for (int y = currentY; y < hallwayEndY; y++) {
-                            projWorld[currentX][y] = Tileset.FLOWER;
+                            projWorld[currentX][y] = FLOORREP;
                         }
                         currentY = hallwayEndY;
                     }
@@ -236,7 +236,7 @@ public class World {
                         int xDifference = currentX - room2x;
                         int hallwayEndX = currentX - randomGenerator.nextInt(1, xDifference + 1);
                         for (int x = currentX; x != hallwayEndX; x--) {
-                            projWorld[x][currentY] = Tileset.FLOWER;
+                            projWorld[x][currentY] = FLOORREP;
                         }
                         currentX = hallwayEndX;
                     }
@@ -244,7 +244,7 @@ public class World {
                         int yDifference = currentY - room2y;
                         int hallwayEndY = currentY - randomGenerator.nextInt(1, yDifference + 1);
                         for (int y = currentY; y != hallwayEndY; y--) {
-                            projWorld[currentX][y] = Tileset.FLOWER;
+                            projWorld[currentX][y] = FLOORREP;
                         }
                         currentY = hallwayEndY;
                     }
@@ -253,121 +253,3 @@ public class World {
         }
     }
 }
-        // END OF CROSS SCENARIO
-
-//        while (currentX != room2x && currentY != room2y) {
-//            // Scenario 1: room1x > room2x && room1x < room2y
-//            if (currentX > room2x && currentY < room2y) {
-//                int xDifference = currentX - room2x;
-//                int hallwayEndX = currentX - randomGenerator.nextInt(1, xDifference + 1);
-//                for (int x = currentX; x != hallwayEndX; x--) {
-//                    projWorld[x][currentY] = Tileset.FLOWER;
-//                }
-//                currentX = hallwayEndX;
-//
-//                int yDifference = room2y - currentY;
-//                int hallwayEndY = currentY + randomGenerator.nextInt(1, yDifference + 1);
-//                for (int y = currentY; y < hallwayEndY; y++) {
-//                    projWorld[currentX][y] = Tileset.FLOWER;
-//                }
-//                currentY = hallwayEndY;
-//            }
-//            // Scenario 2: room1x < room2x && room1y > room2y
-//            if (currentX < room2x && currentY > room2y) {
-//                int yDifference = room1y - room2y;
-//                int hallwayEndY = currentY - randomGenerator.nextInt(1, yDifference + 1);
-//                for (int y = currentY; y != hallwayEndY; y--) {
-//                    projWorld[currentX][y] = Tileset.FLOWER;
-//                }
-//                currentY = hallwayEndY;
-//
-//                int xDifference = room2x - currentX;
-//                int hallwayEndX = currentX + randomGenerator.nextInt(1, xDifference + 1);
-//                for (int x = currentX; x != hallwayEndX; x++) {
-//                    projWorld[x][currentY] = Tileset.FLOWER;
-//                }
-//                currentX = hallwayEndX;
-//            }
-//            // Scenario 3: room1x < room2x && room1y < room2y
-//            if (currentX < room2x && currentY < room2y) {
-//                int xDifference = room2x - currentX;
-//                int hallwayEndX = currentX + randomGenerator.nextInt(1, xDifference + 1);
-//                for (int x = currentX; x != hallwayEndX; x++) {
-//                    projWorld[x][currentY] = Tileset.FLOWER;
-//                }
-//                currentX = hallwayEndX;
-//
-//                int yDifference = room2y - currentY;
-//                int hallwayEndY = currentY + randomGenerator.nextInt(1, yDifference + 1);
-//                for (int y = currentY; y < hallwayEndY; y++) {
-//                    projWorld[currentX][y] = Tileset.FLOWER;
-//                }
-//                currentY = hallwayEndY;
-//            }
-//            // Scenario 4: room1x > room2x && room1y > room2y
-//            if (currentX > room2x && currentY > room2y) {
-//                int xDifference = currentX - room2x;
-//                int hallwayEndX = currentX - randomGenerator.nextInt(1, xDifference + 1);
-//                for (int x = currentX; x != hallwayEndX; x--) {
-//                    projWorld[x][currentY] = Tileset.FLOWER;
-//                }
-//                currentX = hallwayEndX;
-//
-//                int yDifference = room1y - room2y;
-//                int hallwayEndY = currentY - randomGenerator.nextInt(1, yDifference + 1);
-//                for (int y = currentY; y != hallwayEndY; y--) {
-//                    projWorld[currentX][y] = Tileset.FLOWER;
-//                }
-//                currentY = hallwayEndY;
-//            } else {
-//                break;
-//            }
-//
-//            }
-//        }
-
-
-
-
-
-    // if (room2x > room1x && room2y < room1y) { // Room2x > Room1x, but room2y < room1y
-    //            int xDifference = room2x - room1x;
-    //            int yDifference = room1y - room2y;
-    //            for (int startX = room1x; startX < room2x; startX += randomGenerator.nextInt(0, xDifference)) {
-    //                fillRooms(room1x, room1y, startX, room1y, FLOORREP);
-    //                room1x = startX;
-    //                for (int startY = room1y; startY > room2y; startY -= randomGenerator.nextInt(0, yDifference)) {
-    //                    for (int y = room1y; y > startY; y--) {
-    //                        projWorld[startX][y] = FLOORREP;
-    //                    }
-    //                    room1y = startY;
-    //                }
-    //
-    //            }
-    //        } else if (room2x < room1x && room2y > room1y) { // when Room2x < Room1x, but room2y > room1y
-    //            int xDifference = room1x - room2x;
-    //            int yDifference = room2y - room1y;
-    //            for (int startX = room1x; startX > room2x; startX -= randomGenerator.nextInt(0, xDifference)) {
-    //                for (int x = room1x; x > startX; x--) {
-    //                    projWorld[x][room1y] = FLOORREP;
-    //                }
-    //                room1x = startX;
-    //                for (int startY = room1y; startY < room2y; startY += randomGenerator.nextInt(0, yDifference)) {
-    //                    fillRooms(room1x, room1y, room1x, startY, FLOORREP);
-    //                    room2y = startY;
-    //                }
-    //            }
-    //        } else { // when room2x and room2y is bigger than room1x and room1y
-    //            int xDifference = room2x - room1x;
-    //            int yDifference = room2y - room1y;
-    //            for (int startX = room1x; startX < room2x; startX += randomGenerator.nextInt(0, xDifference)) {
-    //                fillRooms(room1x, room1y, startX, room1y, FLOORREP);
-    //                room1x = startX;
-    //                for (int startY = room1y; startY < room2y; startY += randomGenerator.nextInt(0, yDifference)) {
-    //                    fillRooms(room1x, room1y, room1x, startY, FLOORREP);
-    //                    room2y = startY;
-    //                }
-    //            }
-    //        }
-    //    }
-

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Main {
     //doesnt process and doesnt account for pressing random letters in between
-    public static void processingSeedStrokes() {
+    public static void processingSeedStrokes() throws Exception {
         StringBuilder seedType = new StringBuilder();
         while (StdDraw.hasNextKeyTyped()) {
             char c = StdDraw.nextKeyTyped();
@@ -26,7 +26,7 @@ public class Main {
         ter.renderFrame(tiles);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         StdDraw.setCanvasSize(1200, 800);
         StdDraw.clear(Color.black);
         StdDraw.setPenColor(Color.white);
