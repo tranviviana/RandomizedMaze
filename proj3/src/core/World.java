@@ -2,8 +2,11 @@ package core;
 
 import tileengine.TETile;
 import tileengine.Tileset;
-
+import edu.princeton.cs.algs4.StdDraw;
 import java.util.*;
+
+import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
+import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 
 public class World {
     TETile[][] projWorld;
@@ -18,6 +21,8 @@ public class World {
     public static final int MINROOMSIZE = 3;
     private int numberRooms;
     private List<List<Integer>> listofMiddle;
+
+    private boolean isGameOver = true;
     //private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
@@ -32,6 +37,7 @@ public class World {
         generateRooms();
         callingHallways();
         fillWalls();
+        spawnAvatar();
     }
 
 
@@ -263,5 +269,31 @@ public class World {
                 currentY = hallwayEndY;
             }
         }
+    }
+    public void spawnAvatar() {
+        Avatar character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
+//        while (isGameOver) {
+//            if (hasNextKeyTyped()) {
+//                char c = nextKeyTyped();
+//                userInputHandler(character, c);
+//            }
+//        }
+    }
+    private void userInputHandler(Avatar character, char c) {
+        switch (c) {
+            case 'w':
+                character.avatarMove(0, 1);
+                break;
+            case 'a':
+                character.avatarMove(-1, 0);
+                break;
+            case 'd':
+                character.avatarMove(1, 0);
+                break;
+            case 's':
+                character.avatarMove(0, -1);
+                break;
+        }
+
     }
 }

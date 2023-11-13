@@ -6,10 +6,12 @@ import tileengine.TERenderer;
 import tileengine.TETile;
 
 public class WorldGenTests {
+
+    public boolean isGameOver = true;
     @Test
     public void basicTest() throws Exception {
         // put different seeds here to test different worlds
-        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n222222s");
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n3636363s");
 
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);

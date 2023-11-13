@@ -78,6 +78,9 @@ public class Main {
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
+
+
+
         StdDraw.pause(100000000);
     }
 
