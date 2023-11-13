@@ -13,23 +13,8 @@ public class Main {
     public static final int TITLEFONT = 60;
     public static final int REGULARFONT = 30;
     public static final double CENTER = 0.5;
-    //doesnt process and doesnt account for pressing random letters in between
-    public static void processingSeedStrokes() throws Exception {
-        StringBuilder seedType = new StringBuilder();
-        while (StdDraw.hasNextKeyTyped()) {
-            char c = StdDraw.nextKeyTyped();
-            if (c == 's' || c == 'S') {
-                break;
-            }
-            seedType.append(c);
-        }
-        World testingWorld = new World(Long.parseLong(String.valueOf(seedType)));
-        TETile[][] tiles = testingWorld.worldState();
-        TERenderer ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length);
-        ter.renderFrame(tiles);
-    }
-
+    
+    /*creates the initial new game screen */
     public static void main(String[] args) throws Exception {
         StdDraw.setCanvasSize(CANVASWIDTH, CANVASHEIGHT);
         StdDraw.clear(Color.black);
@@ -42,15 +27,60 @@ public class Main {
         StdDraw.text(CENTER, CENTER - 0.2, "New Game (N)");
         StdDraw.text(CENTER, CENTER - 0.3, "Load Game (L)");
         StdDraw.text(CENTER, CENTER - 0.4, "Quit (Q)");
-        while (StdDraw.hasNextKeyTyped()) {
-            char c = StdDraw.nextKeyTyped();
+        newGame();
+    }
+    /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
+    public static void newGame() {
+        char c = ' ' ;
+        do while (StdDraw.hasNextKeyTyped()) {
+            c = StdDraw.nextKeyTyped();
             if (c == 'N' || c == 'n') {
                 processingSeedStrokes();
                 break;
             }
         }
-        TERenderer ter = new TERenderer();
+        while (true);
+    }
 
+    //do we need to put backspace key????
+    //assumesseed is all nums
+    /*controls the input section, regenerating screen to show what has been typed in*/
+    public static void processingSeedStrokes() {
+        StdDraw.clear(Color.BLACK);
+        StdDraw.text(CENTER, CENTER, "Enter Seed");
+        StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
+        StdDraw.show();
+        StdDraw.setPenColor(Color.BLACK);
+        StringBuilder longDeveloping = new StringBuilder();
+
+        char c = ' ';
+        do while (StdDraw.hasNextKeyTyped()) {
+            c = StdDraw.nextKeyTyped();
+            if (c == 's' || c == 'S') {
+                startGame(Long.parseLong(longDeveloping.toString()));
+                break;
+
+            }
+            longDeveloping.append(c);
+            StdDraw.setPenColor(Color.white);
+            StdDraw.text(CENTER, CENTER, "Enter Seed");
+            StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
+            StdDraw.setPenColor(Color.black);
+            StdDraw.text(CENTER, CENTER - 0.2, String.valueOf(longDeveloping));
+            StdDraw.show();
+        }
+        while (true);
+    }
+    /*start the game but currently just shows the screen since there is not interactivity yet*/
+    public static void startGame(long seed) {
+        World testingWorld = new World(seed);
+        TETile[][] tiles = testingWorld.worldState();
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length);
+        ter.renderFrame(tiles);
+        StdDraw.pause(100000000);
     }
 
 }
+
+
