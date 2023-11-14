@@ -272,6 +272,8 @@ public class World {
     }
     public void spawnAvatar() {
         Avatar character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
+        character.avatarMove(0, 1);
+        character.avatarMove(1, 0);
 //        while (isGameOver) {
 //            if (hasNextKeyTyped()) {
 //                char c = nextKeyTyped();
