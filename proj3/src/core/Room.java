@@ -10,6 +10,7 @@ public class Room {
     private int yLocation;
     private World projWorld;
 
+
     /**
      *
      * @param projWorld
@@ -77,5 +78,20 @@ public class Room {
             return roomHEIGHT + 1; // This is so it's not a 1x1
         }
         return roomHEIGHT;
+    }
+
+    public List<Integer> ghostHelper() {
+        List<Integer> list = new ArrayList<>();
+        if (((roomWIDTH / 2) - 1) == 0) {
+            list.add(1);
+        } else {
+            list.add((roomWIDTH / 2) - 1);
+        }
+        if (((roomHEIGHT / 2) - 1) == 0) {
+            list.add(1);
+        } else {
+            list.add((roomHEIGHT / 2) - 1);
+        }
+        return list;
     }
 }
