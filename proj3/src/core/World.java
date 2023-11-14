@@ -57,7 +57,6 @@ public class World {
         generateHUD();
         ghostSpawner();
 
-
     }
     public void generateHUD() {
         StdDraw.setPenColor(Color.blue);
