@@ -28,6 +28,7 @@ public class World {
     public static boolean isGameOver = false;
     private TETile[][] tiles;
     private TERenderer ter;
+    private Avatar character;
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
@@ -43,6 +44,7 @@ public class World {
         generateRooms();
         callingHallways();
         fillWalls();
+        character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
         ghostSpawner();
         tiles = worldState();
         ter = new TERenderer();
@@ -55,6 +57,7 @@ public class World {
     public void generateHUD() {
         StdDraw.setPenColor(Color.blue);
         StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
+        StdDraw.text(0,HEIGHT+5, String.valueOf(character.ghostsBusted));
         StdDraw.show();
     }
 
@@ -276,7 +279,6 @@ public class World {
         }
     }
     public void spawnAvatar() {
-        Avatar character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
         renderFrame(ter);
         while (!isGameOver) {
             if (hasNextKeyTyped()) {
