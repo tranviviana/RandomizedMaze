@@ -6,24 +6,20 @@ import tileengine.Tileset;
 import java.awt.*;
 
 public class Avatar {
-
-    private final TETile tile;
-    private final Color color = Color.RED;
+    private static final Color color = Color.RED;
+    private static final TETile tile =  new TETile('a', color, Color.black, "Avatar");
     private TETile[][] projWorld;
-    int width;
-    int height;
-    int xPos;
-    int yPos;
+    private static final int width = 1;
+    private static final int height = 1;
+    public int xPos;
+    public int yPos;
 
     Point pos;
     public Avatar(TETile[][] projWorld, int startX, int startY) {
-        this.tile = new TETile('a', color, Color.black, "Avatar");
-        this.width = 1;
-        this.height = 1;
         this.xPos = startX;
         this.yPos = startY;
         this.projWorld = projWorld;
-        projWorld[startX][startY] = this.tile;
+        projWorld[startX][startY] = tile;
     }
 
      // Does not check if canMove.
