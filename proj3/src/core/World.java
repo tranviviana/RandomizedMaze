@@ -1,7 +1,16 @@
 package core;
 
+import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
+<<<<<<< HEAD
+=======
+import edu.princeton.cs.algs4.StdDraw;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+>>>>>>> 3ae637c52c8a7b30cfd0e349d3266d4775fcc257
 
 import java.awt.*;
 import java.util.*;
@@ -16,7 +25,7 @@ public class World {
     public static final TETile ghostTile = new TETile('G', Color.gray, Color.black, "Ghost");
 
     public static final int WIDTH = 80;
-    public static final int HEIGHT = 50;
+    public static final int HEIGHT = 40;
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
     private int numberRooms;
@@ -24,10 +33,16 @@ public class World {
     private List<List<Integer>> sizeofRooms;
 
     private boolean isGameOver = false;
+<<<<<<< HEAD
+=======
+    private TETile[][] tiles;
+    private TERenderer ter;
+>>>>>>> 3ae637c52c8a7b30cfd0e349d3266d4775fcc257
     //private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
+    /*creates UI and spawns the avatar*/
     public World(Long seed) {
         randomGenerator = new Random(seed);
         projWorld = new TETile[WIDTH][HEIGHT];
@@ -39,8 +54,19 @@ public class World {
         generateRooms();
         callingHallways();
         fillWalls();
-        spawnAvatar();
+        tiles = worldState();
+        ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length + 5);
+        ter.renderFrame(tiles);
+        generateHUD();
         ghostSpawner();
+
+
+    }
+    public void generateHUD() {
+        StdDraw.setPenColor(Color.blue);
+        StdDraw.rectangle(0,-5, (double) WIDTH /2,0.1);
+        StdDraw.show();
     }
 
 
@@ -274,17 +300,12 @@ public class World {
             }
         }
     }
-    public void spawnAvatar() {
-        Avatar character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
-        character.avatarMove(0, 1);
-        character.avatarMove(1, 0);
-//        while (!isGameOver) {
-//            if (hasNextKeyTyped()) {
-//                char c = nextKeyTyped();
-//                userInputHandler(character, c);
-//            }
-//        }
+
+    /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
+    public void renderFrame(TERenderer renderingFunction) {
+        renderingFunction.renderFrame(this.worldState());
     }
+    /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
         switch (c) {
             case 'w':
@@ -300,7 +321,6 @@ public class World {
                 character.avatarMove(0, -1);
                 break;
         }
-
     }
 
     public void ghostSpawner() {
