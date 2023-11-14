@@ -13,9 +13,10 @@ public class Main {
     public static final int TITLEFONT = 60;
     public static final int REGULARFONT = 30;
     public static final double CENTER = 0.5;
+
     
     /*creates the initial new game screen */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         StdDraw.setCanvasSize(CANVASWIDTH, CANVASHEIGHT);
         StdDraw.clear(Color.black);
         StdDraw.setPenColor(Color.white);
@@ -71,15 +72,9 @@ public class Main {
         }
         while (true);
     }
-    /*start the game but currently just shows the screen since there is not interactivity yet*/
+    /*start the game in world*/
     public static void startGame(long seed) {
         World testingWorld = new World(seed);
-        TETile[][] tiles = testingWorld.worldState();
-        TERenderer ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length);
-        ter.renderFrame(tiles);
-
- 
     }
 
 }

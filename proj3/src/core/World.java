@@ -1,5 +1,6 @@
 package core;
 
+import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
 import edu.princeton.cs.algs4.StdDraw;
@@ -22,11 +23,14 @@ public class World {
     private int numberRooms;
     private List<List<Integer>> listofMiddle;
 
-    private boolean isGameOver = true;
+    private boolean isGameOver = false;
+    private TETile[][] tiles;
+    private TERenderer ter;
     //private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
+    /*creates UI and spawns the avatar*/
     public World(Long seed) {
         randomGenerator = new Random(seed);
         projWorld = new TETile[WIDTH][HEIGHT];
@@ -37,7 +41,12 @@ public class World {
         generateRooms();
         callingHallways();
         fillWalls();
+        tiles = worldState();
+        ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length);
+        ter.renderFrame(tiles);
         spawnAvatar();
+
     }
 
 
@@ -272,15 +281,20 @@ public class World {
     }
     public void spawnAvatar() {
         Avatar character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
-        character.avatarMove(0, 1);
-        character.avatarMove(1, 0);
-//        while (isGameOver) {
-//            if (hasNextKeyTyped()) {
-//                char c = nextKeyTyped();
-//                userInputHandler(character, c);
-//            }
-//        }
+        renderFrame(ter);
+        while (!isGameOver) {
+            if (hasNextKeyTyped()) {
+                char c = nextKeyTyped();
+                userInputHandler(character, c);
+                renderFrame(ter);
+            }
+        }
     }
+    /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
+    public void renderFrame(TERenderer renderingFunction) {
+        renderingFunction.renderFrame(this.worldState());
+    }
+    /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
         switch (c) {
             case 'w':
@@ -296,6 +310,5 @@ public class World {
                 character.avatarMove(0, -1);
                 break;
         }
-
     }
 }
