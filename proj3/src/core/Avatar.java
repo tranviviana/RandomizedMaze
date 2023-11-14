@@ -13,8 +13,10 @@ public class Avatar {
     private static final int height = 1;
     public int xPos;
     public int yPos;
+    public int numberofGhosts = World.numberRooms;
+    public int ghostsBusted = 0;
 
-    Point pos;
+
     public Avatar(TETile[][] projWorld, int startX, int startY) {
         this.xPos = startX;
         this.yPos = startY;
@@ -30,6 +32,12 @@ public class Avatar {
 
     private boolean canAvatarMove(int deltaX, int deltaY) {
         if (projWorld[xPos + deltaX][yPos + deltaY] == World.FLOORREP) {
+            return true;
+        } else if (projWorld[xPos + deltaX][yPos + deltaY] == World.ghostTile) {
+            ghostsBusted++;
+            if (ghostsBusted == numberofGhosts) {
+                return World.isGameOver;
+            }
             return true;
         }
         return false;

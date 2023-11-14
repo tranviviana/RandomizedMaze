@@ -22,10 +22,10 @@ public class World {
     public static final int HEIGHT = 40;
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
-    private int numberRooms;
+    public static int numberRooms;
     private List<List<Integer>> listofMiddle;
     private List<List<Integer>> sizeofRooms;
-    private boolean isGameOver = false;
+    public static boolean isGameOver = false;
     private TETile[][] tiles;
     private TERenderer ter;
     //private PriorityQueue<List<Integer>> roomLocations;
