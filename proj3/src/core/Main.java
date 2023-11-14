@@ -79,7 +79,7 @@ public class Main {
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
 
-        StdDraw.pause(100000000);
+ 
     }
 
 }
