@@ -19,7 +19,7 @@ public class World {
     public static final TETile ghostTile = new TETile('G', Color.gray, Color.black, "Ghost");
 
     public static final int WIDTH = 80;
-    public static final int HEIGHT = 50;
+    public static final int HEIGHT = 40;
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
     private int numberRooms;
@@ -39,6 +39,7 @@ public class World {
         numberRooms = randomGenerator.nextInt(3, WIDTH);
         fillRooms(0, 0, WIDTH, HEIGHT, NOTHINGREP);
         listofMiddle = new ArrayList<>();
+        sizeofRooms = new ArrayList<>();
         generateRooms();
         callingHallways();
         fillWalls();
@@ -70,6 +71,7 @@ public class World {
                 int yLocation = randomGenerator.nextInt(HEIGHT);
                 Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
                 if (currentRoom.placeable()) {
+                    sizeofRooms.add(currentRoom.ghostHelper());
                     listofMiddle.add(currentRoom.roomMiddle());
                     placed++;
                     fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, FLOORREP);
