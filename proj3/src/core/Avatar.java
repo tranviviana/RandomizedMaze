@@ -42,8 +42,8 @@ public class Avatar {
         if (canAvatarMove(deltaX, deltaY)) {
             drawAvatar(projWorld, xPos + deltaX, yPos + deltaY);
             projWorld[xPos][yPos] = World.FLOORREP;
-            xPos += xPos + deltaX;
-            yPos += yPos + deltaY;
+            xPos += deltaX;
+            yPos += deltaY;
         }
     }
 
