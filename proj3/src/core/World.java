@@ -42,7 +42,6 @@ public class World {
         fillWalls();
         tiles = worldState();
         ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length);
         ter.initialize(tiles.length, tiles[0].length + 5);
         ter.renderFrame(tiles);
         generateHUD();
@@ -51,7 +50,7 @@ public class World {
     }
     public void generateHUD() {
         StdDraw.setPenColor(Color.blue);
-        StdDraw.rectangle(0,-5, (double) WIDTH /2,0.1);
+        StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
         StdDraw.show();
     }
 
@@ -285,6 +284,7 @@ public class World {
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame(TERenderer renderingFunction) {
         renderingFunction.renderFrame(this.worldState());
+        generateHUD();
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
