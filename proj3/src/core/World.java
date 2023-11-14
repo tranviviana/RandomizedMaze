@@ -3,14 +3,12 @@ package core;
 import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
-<<<<<<< HEAD
-=======
 import edu.princeton.cs.algs4.StdDraw;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
->>>>>>> 3ae637c52c8a7b30cfd0e349d3266d4775fcc257
+
 
 import java.awt.*;
 import java.util.*;
@@ -33,11 +31,9 @@ public class World {
     private List<List<Integer>> sizeofRooms;
 
     private boolean isGameOver = false;
-<<<<<<< HEAD
-=======
     private TETile[][] tiles;
     private TERenderer ter;
->>>>>>> 3ae637c52c8a7b30cfd0e349d3266d4775fcc257
+
     //private PriorityQueue<List<Integer>> roomLocations;
 
     /*fills the world starting from the start position to wherever it will end
