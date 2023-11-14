@@ -24,6 +24,7 @@ public class World {
 
     public static final int WIDTH = 80;
     public static final int HEIGHT = 40;
+    //could propose a problem because we might need to delete a room lol
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
     private int numberRooms;
@@ -60,7 +61,8 @@ public class World {
     }
     public void generateHUD() {
         StdDraw.setPenColor(Color.blue);
-        StdDraw.rectangle(0,-5, (double) WIDTH /2,0.1);
+        StdDraw.filledRectangle(0, tiles[0].length + 5, WIDTH,2.5);
+        projWorld[WIDTH-1][HEIGHT-1] = Tileset.WATER;
         StdDraw.show();
     }
 
@@ -299,6 +301,7 @@ public class World {
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame(TERenderer renderingFunction) {
         renderingFunction.renderFrame(this.worldState());
+        generateHUD();
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
