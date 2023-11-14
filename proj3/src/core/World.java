@@ -4,7 +4,10 @@ import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
 import edu.princeton.cs.algs4.StdDraw;
+
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
 import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
@@ -17,7 +20,7 @@ public class World {
     public static final TETile NOTHINGREP = Tileset.NOTHING;
 
     public static final int WIDTH = 80;
-    public static final int HEIGHT = 50;
+    public static final int HEIGHT = 40;
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
     private int numberRooms;
@@ -43,10 +46,16 @@ public class World {
         fillWalls();
         tiles = worldState();
         ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length);
+        ter.initialize(tiles.length, tiles[0].length + 5);
         ter.renderFrame(tiles);
+        generateHUD();
         spawnAvatar();
 
+    }
+    public void generateHUD() {
+        StdDraw.setPenColor(Color.blue);
+        StdDraw.rectangle(0,-5, (double) WIDTH /2,0.1);
+        StdDraw.show();
     }
 
 
