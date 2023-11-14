@@ -1,5 +1,4 @@
 package core;
-
 import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
@@ -9,11 +8,8 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
-
+import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
+import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
@@ -23,20 +19,16 @@ public class World {
     public static final TETile ghostTile = new TETile('G', Color.gray, Color.black, "Ghost");
 
     public static final int WIDTH = 80;
-    public static final int HEIGHT = 40;
-    //could propose a problem because we might need to delete a room lol
+    public static final int HEIGHT = 50;
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
     private int numberRooms;
     private List<List<Integer>> listofMiddle;
     private List<List<Integer>> sizeofRooms;
-
     private boolean isGameOver = false;
     private TETile[][] tiles;
     private TERenderer ter;
-
     //private PriorityQueue<List<Integer>> roomLocations;
-
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
     /*creates UI and spawns the avatar*/
@@ -47,22 +39,22 @@ public class World {
         numberRooms = randomGenerator.nextInt(3, WIDTH);
         fillRooms(0, 0, WIDTH, HEIGHT, NOTHINGREP);
         listofMiddle = new ArrayList<>();
-        sizeofRooms = new ArrayList<>();
         generateRooms();
         callingHallways();
         fillWalls();
+        ghostSpawner();
         tiles = worldState();
         ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length);
         ter.initialize(tiles.length, tiles[0].length + 5);
         ter.renderFrame(tiles);
         generateHUD();
-        ghostSpawner();
+        spawnAvatar();
 
     }
     public void generateHUD() {
         StdDraw.setPenColor(Color.blue);
-        StdDraw.filledRectangle(0, tiles[0].length + 5, WIDTH,2.5);
-        projWorld[WIDTH-1][HEIGHT-1] = Tileset.WATER;
+        StdDraw.rectangle(0,-5, (double) WIDTH /2,0.1);
         StdDraw.show();
     }
 
@@ -79,7 +71,6 @@ public class World {
                 int yLocation = randomGenerator.nextInt(HEIGHT);
                 Room currentRoom = new Room(roomWIDTH, roomHEIGHT, this, xLocation, yLocation);
                 if (currentRoom.placeable()) {
-                    sizeofRooms.add(currentRoom.ghostHelper());
                     listofMiddle.add(currentRoom.roomMiddle());
                     placed++;
                     fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, FLOORREP);
@@ -87,7 +78,6 @@ public class World {
             }
         }
     }
-
     /*goes through each of the rooms and connects the room to the next room over
      * at the end connects the first to the last*/
     private void callingHallways() {
@@ -104,7 +94,6 @@ public class World {
         int yCoordTwo = listofMiddle.get(roomMiddles).get(1);
         fillHallway(xCoordOne, yCoordOne, xCoordTwo, yCoordTwo);
     }
-
     //fills the tiles on the TileSet for rectangle like things
     private void fillRooms(int startX, int startY, int endX, int endY, TETile tileType) {
         for (int x = startX; x < endX; x++) {
@@ -113,7 +102,6 @@ public class World {
             }
         }
     }
-
     /*goes through each of the tiles in the grid.. if its within the margin it checks all four directions
     if its one of the side ones it checks within the margins to avoid null error*/
     private void fillWalls() {
@@ -131,7 +119,6 @@ public class World {
                             projWorld[x][y] = WALLREP;
                         }
                     }
-
                     //working through sides of rooms/ hallways
                     if (y + 1 < HEIGHT) {
                         if (checkSurrounding(x, y + 1)) {
@@ -143,7 +130,6 @@ public class World {
                             projWorld[x][y] = WALLREP;
                         }
                     }
-
                     if (y - 1 >= 0 && y + 1 < HEIGHT && x - 1 >= 0 && x + 1 < WIDTH) {
                         //checking bottom left top right
                         if (checkSurrounding(x - 1, y - 1) || checkSurrounding(x + 1, y + 1)) {
@@ -158,30 +144,23 @@ public class World {
             }
         }
     }
-
-
     // avoids repeating the floor rep
     private boolean checkSurrounding(int x, int y) {
         return projWorld[x][y] == FLOORREP;
     }
-
     // returns what the world looks like (for autograder)
     public TETile[][] worldState() {
         return projWorld;
     }
-
     // returns the tileType of a certain x and y location
     public TETile getTile(int x, int y) {
         return projWorld[x][y];
     }
-
     //LEAVE COMMENTS EDWIN!!!!!
     public void fillHallway(int room1x, int room1y, int room2x, int room2y) {
         int currentX = room1x;
         int currentY = room1y;
-
         fillHallWayHelper1(currentX, currentY, room2x, room2y);
-
         if (currentX != room2x && currentY != room2y) {
             // Scenario 1: room1x > room2x && room1x < room2y
             if (currentX > room2x && currentY < room2y) {
@@ -223,7 +202,6 @@ public class World {
                         }
                         currentY = hallwayEndY;
                     }
-
                 }
             }
             // Scenario 3: room1x < room2x && room1y < room2y
@@ -255,7 +233,6 @@ public class World {
     }
     public void fillHallWayHelper1(int room1x, int room1y, int room2x, int room2y) {
         // CROSS SCENARIO
-
         if (room1x == room2x && room1y > room2y) { // room1x == room2x, but room1y > room2y
             for (int y = room1y; y != room2y; y--) {
                 projWorld[room1x][y] = FLOORREP;
@@ -297,11 +274,20 @@ public class World {
             }
         }
     }
-
+    public void spawnAvatar() {
+        Avatar character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
+        renderFrame(ter);
+        while (!isGameOver) {
+            if (hasNextKeyTyped()) {
+                char c = nextKeyTyped();
+                userInputHandler(character, c);
+                renderFrame(ter);
+            }
+        }
+    }
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame(TERenderer renderingFunction) {
         renderingFunction.renderFrame(this.worldState());
-        generateHUD();
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
@@ -320,7 +306,6 @@ public class World {
                 break;
         }
     }
-
     public void ghostSpawner() {
         for (List<Integer> rooms : listofMiddle) {
 
