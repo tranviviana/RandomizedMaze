@@ -58,7 +58,7 @@ public class World {
         //StdDraw.setPenColor(Color.blue);
         //StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
         StdDraw.setPenColor(Color.WHITE);
-        StdDraw.text(1, HEIGHT + 4, "Tile:" );
+        StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description() );
         //hard coded-location
         StdDraw.text(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.ghostsBusted);
         StdDraw.show();
@@ -304,10 +304,7 @@ public class World {
     private TETile tileMoused() {
         Double xLocation = StdDraw.mouseX();
         Double yLocation = StdDraw.mouseY();
-        if (yLocation >= HEIGHT) {
-            return NOTHINGREP;
-        }
-        return null;
+        return projWorld[(int) Math.floor(xLocation)][(int) Math.floor(yLocation)];
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
