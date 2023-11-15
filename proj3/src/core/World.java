@@ -16,7 +16,7 @@ public class World {
     public static final TETile FLOORREP = Tileset.FLOOR;
     public static final TETile WALLREP = Tileset.WALL;
     public static final TETile NOTHINGREP = Tileset.NOTHING;
-    public static final TETile ghostTile = new TETile('G', Color.gray, Color.black, "Ghost", "core/ghosts.jpg");
+    public static final TETile ghostTile = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
 
     public static final int WIDTH = 80;
     public static final int HEIGHT = 40;
@@ -334,13 +334,19 @@ public class World {
     public void ghostSpawner() {
         for (List<Integer> rooms : listofMiddle) {
 
+            // Overall: comparing the coordinates of the rooms with the size of the rooms
+            // Comments: I'm looking over this and I think I could have done it a better way but lol.
+
             List<Integer> random = sizeofRooms.get(0);
             sizeofRooms.remove(0);
 
+            // Getting random numbers.
+            // Did this way because nextInt does not take negative bounds into consideration
             int randomNumber = randomGenerator.nextInt(0, 4);
             int spawnX = 0;
             int spawnY = 0;
 
+            // Depending on the random number. Ghosts spawn in a random location surrounding the origin.
             if (randomNumber == 0) {
                 spawnX = rooms.get(0) + randomGenerator.nextInt(random.get(0));
                 spawnY = rooms.get(1) + randomGenerator.nextInt(random.get(1));

@@ -1,8 +1,6 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
-import tileengine.TERenderer;
-import tileengine.TETile;
 
 import java.awt.*;
 
@@ -28,7 +26,7 @@ public class Main {
         StdDraw.text(CENTER, CENTER - 0.2, "New Game (N)");
         StdDraw.text(CENTER, CENTER - 0.3, "Load Game (L)");
         StdDraw.text(CENTER, CENTER - 0.4, "Quit (Q)");
-        StdDraw.picture(CENTER, CENTER + 0.05, "core/test.png");
+        StdDraw.picture(CENTER, CENTER + 0.05, "core/images/titleghost.png");
         newGame();
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
