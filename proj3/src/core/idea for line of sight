@@ -1,0 +1,7 @@
+
+World 1: Actual World
+World 2: Black World
+
+1. Make another world that is all black tiles (World 2)
+2. Copy the surrounding area of the avatar's coordinates into World 2
+3. Every time avatar moves make the world black and then repeat step 2.

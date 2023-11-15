@@ -10,6 +10,7 @@ import java.util.List;
 
 import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
 import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
+
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
