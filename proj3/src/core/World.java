@@ -53,6 +53,7 @@ public class World {
         spawnAvatar();
 
     }
+    /*style of the upper HUD shows how many ghosts busted*/
     public void generateHUD() {
         //StdDraw.setPenColor(Color.blue);
         //StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
