@@ -5,7 +5,7 @@ import tileengine.TERenderer;
 import tileengine.TETile;
 
 import java.awt.*;
-/*eat a butt edwin*/
+
 
 public class Main {
     public static final int CANVASWIDTH = 1200;

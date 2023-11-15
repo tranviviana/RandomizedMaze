@@ -58,8 +58,9 @@ public class World {
         //StdDraw.setPenColor(Color.blue);
         //StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
         StdDraw.setPenColor(Color.WHITE);
+        StdDraw.text(1, HEIGHT + 4, "Tile:" );
         //hard coded-location
-        StdDraw.textRight(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.ghostsBusted);
+        StdDraw.text(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.ghostsBusted);
         StdDraw.show();
     }
 
@@ -298,6 +299,15 @@ public class World {
     /*returns when a person can still play or not */
     public boolean isGameOver() {
         return character.ghostsBusted == numberRooms;
+    }
+    /* converts the x and y location to the tile type */
+    private TETile tileMoused() {
+        Double xLocation = StdDraw.mouseX();
+        Double yLocation = StdDraw.mouseY();
+        if (yLocation >= HEIGHT) {
+            return NOTHINGREP;
+        }
+        return null;
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
