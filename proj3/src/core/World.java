@@ -282,18 +282,23 @@ public class World {
         }
     }
     public void spawnAvatar() {
-        renderFrame(ter);
+        renderFrame();
+        TETile currentTile = tileMoused();
         while (!isGameOver()) {
+            if (tileMoused() != currentTile) {
+                currentTile = tileMoused();
+                renderFrame();
+            }
             if (hasNextKeyTyped() ) {
                 char c = nextKeyTyped();
                 userInputHandler(character, c);
-                renderFrame(ter);
+                renderFrame();
             }
         }
     }
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
-    public void renderFrame(TERenderer renderingFunction) {
-        renderingFunction.renderFrame(this.worldState());
+    public void renderFrame() {
+        ter.renderFrame(this.worldState());
         generateHUD();
     }
     /*returns when a person can still play or not */
