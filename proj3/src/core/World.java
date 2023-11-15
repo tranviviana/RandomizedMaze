@@ -25,7 +25,6 @@ public class World {
     public static int numberRooms;
     private List<List<Integer>> listofMiddle;
     private List<List<Integer>> sizeofRooms;
-    public static boolean isGameOver = false;
     private TETile[][] tiles;
     private TERenderer ter;
     private Avatar character;
@@ -55,9 +54,11 @@ public class World {
 
     }
     public void generateHUD() {
-        StdDraw.setPenColor(Color.blue);
-        StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
-        StdDraw.text(0,HEIGHT+5, String.valueOf(character.ghostsBusted));
+        //StdDraw.setPenColor(Color.blue);
+        //StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
+        StdDraw.setPenColor(Color.WHITE);
+        //hard coded-location
+        StdDraw.textRight(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.ghostsBusted);
         StdDraw.show();
     }
 
@@ -280,8 +281,8 @@ public class World {
     }
     public void spawnAvatar() {
         renderFrame(ter);
-        while (!isGameOver) {
-            if (hasNextKeyTyped()) {
+        while (!isGameOver()) {
+            if (hasNextKeyTyped() ) {
                 char c = nextKeyTyped();
                 userInputHandler(character, c);
                 renderFrame(ter);
@@ -292,6 +293,10 @@ public class World {
     public void renderFrame(TERenderer renderingFunction) {
         renderingFunction.renderFrame(this.worldState());
         generateHUD();
+    }
+    /*returns when a person can still play or not */
+    public boolean isGameOver() {
+        return character.ghostsBusted == numberRooms;
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {

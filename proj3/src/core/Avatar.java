@@ -35,9 +35,6 @@ public class Avatar {
             return true;
         } else if (projWorld[xPos + deltaX][yPos + deltaY] == World.ghostTile) {
             ghostsBusted++;
-            if (ghostsBusted == numberofGhosts) {
-                return World.isGameOver;
-            }
             return true;
         }
         return false;
