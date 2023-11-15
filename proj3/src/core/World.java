@@ -304,6 +304,9 @@ public class World {
     private TETile tileMoused() {
         Double xLocation = StdDraw.mouseX();
         Double yLocation = StdDraw.mouseY();
+        if (xLocation >= WIDTH || yLocation >= HEIGHT) {
+            return NOTHINGREP;
+        }
         return projWorld[(int) Math.floor(xLocation)][(int) Math.floor(yLocation)];
     }
     /*takes in the movement inputs*/
