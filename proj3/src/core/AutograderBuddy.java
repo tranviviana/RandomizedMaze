@@ -3,6 +3,9 @@ package core;
 import tileengine.TETile;
 import tileengine.Tileset;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AutograderBuddy {
 
     /**
@@ -19,12 +22,22 @@ public class AutograderBuddy {
      */
     /*  @source splitting line is ChatGPT generated  */
     public static TETile[][] getWorldFromInput(String input)  {
-        String[] parts = input.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+        char[] result = input.toCharArray();
+        StringBuilder seed = new StringBuilder();
+        int i = 1;
+        while (result[i] != 's' && result[i] != 'S') {
+            seed.append(result[i]);
+            i++;
+        }
+        World testingWorld = new World(Long.parseLong(seed.toString()));
 
-        World testingWorld = new World(Long.parseLong(parts[1]));
+        for (int j = 3; j < result.length; j++) {
+            testingWorld.userInputHandler(testingWorld.character, result[j]);
+        }
         return testingWorld.worldState();
 
         //throw new RuntimeException("Please fill out AutograderBuddy!");
+
 
     }
 

@@ -25,7 +25,7 @@ public class World {
     private List<List<Integer>> sizeofRooms;
     private TETile[][] tiles;
     private TERenderer ter;
-    private Avatar character;
+    public Avatar character;
     private StringBuilder stringInput;
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
@@ -56,7 +56,7 @@ public class World {
 
 
     /*style of the upper HUD shows how many ghosts busted*/
-    public void generateHUD() {
+    private void generateHUD() {
         //StdDraw.setPenColor(Color.blue);
         //StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
         StdDraw.setPenColor(Color.WHITE);
@@ -167,7 +167,7 @@ public class World {
         return projWorld[x][y];
     }
     //LEAVE COMMENTS EDWIN!!!!!
-    public void fillHallway(int room1x, int room1y, int room2x, int room2y) {
+    private void fillHallway(int room1x, int room1y, int room2x, int room2y) {
         int currentX = room1x;
         int currentY = room1y;
         fillHallWayHelper1(currentX, currentY, room2x, room2y);
@@ -242,7 +242,7 @@ public class World {
         }
     }
 
-    public void fillHallWayHelper1(int room1x, int room1y, int room2x, int room2y) {
+    private void fillHallWayHelper1(int room1x, int room1y, int room2x, int room2y) {
         // CROSS SCENARIO
         if (room1x == room2x && room1y > room2y) { // room1x == room2x, but room1y > room2y
             for (int y = room1y; y != room2y; y--) {
@@ -265,7 +265,7 @@ public class World {
             }
         }
     }
-    public void fillHallWayHelper2(int currentX, int currentY, int room2x, int room2y) {
+    private void fillHallWayHelper2(int currentX, int currentY, int room2x, int room2y) {
         while (currentX != room2x || currentY != room2y) {
             if (currentX != room2x) {
                 int xDifference = currentX - room2x;
@@ -285,7 +285,7 @@ public class World {
             }
         }
     }
-    public void spawnAvatar() {
+    private void spawnAvatar() {
         renderFrame();
         TETile currentTile = tileMoused();
         while (!isGameOver()) {
@@ -301,12 +301,12 @@ public class World {
         }
     }
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
-    public void renderFrame() {
+    private void renderFrame() {
         ter.renderFrame(this.worldState());
         generateHUD();
     }
     /*returns when a person can still play or not */
-    public boolean isGameOver() {
+    private boolean isGameOver() {
         return character.ghostsBusted == numberRooms;
     }
     /* converts the x and y location to the tile type */
@@ -319,7 +319,7 @@ public class World {
         return projWorld[(int) Math.floor(xLocation)][(int) Math.floor(yLocation)];
     }
     /*takes in the movement inputs*/
-    private void userInputHandler(Avatar character, char c) {
+    public void userInputHandler(Avatar character, char c) {
         if (c == ':') {
             stringInput.append(c);
             int waitingForNextKey = 0;
@@ -354,7 +354,7 @@ public class World {
         System.exit(0);
     }
 
-    public void ghostSpawner() {
+    private void ghostSpawner() {
         for (List<Integer> rooms : listofMiddle) {
             // Overall: comparing the coordinates of the rooms with the size of the rooms
             // Comments: I'm looking over this and I think I could have done it a better way but lol.
