@@ -297,7 +297,19 @@ public class World {
                 renderFrame();
             }
         }
+        renderGameOver();
 
+    }
+    /*finished Game screen will need to change but just existing*/
+    public void renderGameOver() {
+        StdDraw.setCanvasSize(800, 800);
+        StdDraw.clear(Color.black);
+        StdDraw.setPenColor(Color.white);
+        Font font = new Font("Poppins", Font.BOLD, 60);
+        StdDraw.setFont(font);
+        StdDraw.text(0.5, 0.8, "GAME HAS ENDED");
+        StdDraw.picture(0.5, 0.55, "core/images/titleghost.png");
+        StdDraw.show();
     }
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame() {
@@ -307,8 +319,6 @@ public class World {
 
     /*returns when a person can still play or not */
     public boolean isGameOver() {
-        System.out.println(character.ghostsBusted);
-        System.out.println(numberRooms);
         return character.ghostsBusted == numberRooms;
     }
     /* converts the x and y location to the tile type */
