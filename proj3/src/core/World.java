@@ -345,9 +345,11 @@ public class World {
     }
     // saves the current state of the game in a txt file to be loaded into later
     private void saveAndQuit() {
-        try(PrintWriter writer = new PrintWriter("save-file.txt", "UTF-8")) {
-            writer.print(worldState());
-            writer.print(randomAtState());
+        String filePath =  "proj3/src/core/save-file.txt";;
+        try(PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
+            System.out.println("in the try method");
+            writer.println(worldState());
+            writer.println(randomAtState());
         } catch (IOException e) {
             e.printStackTrace();
         }
