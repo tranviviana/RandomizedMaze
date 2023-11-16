@@ -49,21 +49,38 @@ public class Main {
             if (c == 'l' || c == 'L') {
                 System.out.println("l was pressed");
                 //load the old game
-                //World oldWorld = new World(Objects.requireNonNull(reload("proj3/src/core/save-file.txt")));
+                return reload();
 
             }
         }
         while (true);
     }
-    public static World reload(String filename) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            return (World) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    //@source readline generate by chatGPT
+    /*reads the line with all of the movements and the seed to create a world*/
+    public static World reload() {
+        String filename = "proj3/src/core/save-file.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            return loadedWorld(br.readLine());
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static World loadedWorld(String input)  {
+        char[] result = input.toCharArray();
+        StringBuilder seed = new StringBuilder();
+        int i = 1;
+        while (result[i] != 's' && result[i] != 'S') {
+            seed.append(result[i]);
+            i++;
+        }
+        World testingWorld = new World(Long.parseLong(seed.toString()));
+        for (int j = 3; j < result.length; j++) {
+            testingWorld.userInputHandler(testingWorld.character, result[j]);
+        }
+        return testingWorld;
+    }
 
 
     //do we need to put backspace key????

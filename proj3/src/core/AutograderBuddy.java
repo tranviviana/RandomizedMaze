@@ -34,12 +34,12 @@ public class AutograderBuddy {
         for (int j = 3; j < result.length; j++) {
             testingWorld.userInputHandler(testingWorld.character, result[j]);
         }
-        TETile[][] tiles = testingWorld.worldState();
-        TERenderer ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length + 5);
-        ter.renderFrame(tiles);
-        testingWorld.generateHUD();
-        testingWorld.playGame(ter);
+//        TETile[][] tiles = testingWorld.worldState();
+//        TERenderer ter = new TERenderer();
+//        ter.initialize(tiles.length, tiles[0].length + 5);
+//        ter.renderFrame(tiles);
+//        testingWorld.generateHUD();
+//        testingWorld.playGame(ter);
         return testingWorld.worldState();
 
         //throw new RuntimeException("Please fill out AutograderBuddy!");
