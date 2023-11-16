@@ -41,7 +41,8 @@ public class Main {
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
     public static World newGame() throws Exception {
-        do { while (StdDraw.hasNextKeyTyped()) {
+        do {
+            while (StdDraw.hasNextKeyTyped()) {
             char c = StdDraw.nextKeyTyped();
             if (c == 'N' || c == 'n') {
                 return processingSeedStrokes();
@@ -50,9 +51,8 @@ public class Main {
                 System.out.println("l was pressed");
                 //load the old game
                 return reload();
-
             }
-        }
+            }
         }
         while (true);
     }
@@ -97,20 +97,22 @@ public class Main {
         StringBuilder longDeveloping = new StringBuilder();
 
         char c = ' ';
-        do while (StdDraw.hasNextKeyTyped()) {
-            c = StdDraw.nextKeyTyped();
-            if (c == 's' || c == 'S') {
-                return startGame(Long.parseLong(longDeveloping.toString()));
+        do {
+            while (StdDraw.hasNextKeyTyped()) {
+                c = StdDraw.nextKeyTyped();
+                if (c == 's' || c == 'S') {
+                    return startGame(Long.parseLong(longDeveloping.toString()));
 
+                }
+                //when game ends it escapes here
+                longDeveloping.append(c);
+                StdDraw.setPenColor(Color.white);
+                StdDraw.text(CENTER, CENTER, "Enter Seed");
+                StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
+                StdDraw.setPenColor(Color.black);
+                StdDraw.text(CENTER, CENTER - 0.2, String.valueOf(longDeveloping));
+                StdDraw.show();
             }
-            //when game ends it escapes here
-            longDeveloping.append(c);
-            StdDraw.setPenColor(Color.white);
-            StdDraw.text(CENTER, CENTER, "Enter Seed");
-            StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
-            StdDraw.setPenColor(Color.black);
-            StdDraw.text(CENTER, CENTER - 0.2, String.valueOf(longDeveloping));
-            StdDraw.show();
         }
         while (true);
     }
