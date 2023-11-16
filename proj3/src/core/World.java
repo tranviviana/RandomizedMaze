@@ -343,7 +343,7 @@ public class World {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!isAutograderTrue){
+        if (!isAutograderTrue) {
             System.exit(0);
         }
     }
