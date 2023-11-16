@@ -1,6 +1,5 @@
 package core;
 
-import core.images.AutoGraderReader;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
@@ -59,7 +58,7 @@ public class Main {
     public static World reload() {
         String filename = "proj3/src/core/save-file.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            AutoGraderReader autograder = new AutoGraderReader(br.readLine());
+            AutograderBuddy.AutoGraderReader autograder = new AutograderBuddy.AutoGraderReader(br.readLine());
             return autograder.loadedWorldFromInput();
 
         } catch (IOException e) {
