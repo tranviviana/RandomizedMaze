@@ -9,7 +9,7 @@ public class WorldGenTests {
 
     public boolean isGameOver = true;
     @Test
-    public void basicTest() throws Exception {
+    public void basicTest() {
         TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123412s");
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
