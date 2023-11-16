@@ -4,6 +4,8 @@ import tileengine.TETile;
 import tileengine.Tileset;
 import edu.princeton.cs.algs4.StdDraw;
 import java.awt.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
 
@@ -50,6 +52,9 @@ public class World {
         ter.renderFrame(tiles);
         generateHUD();
         spawnAvatar();
+    }
+    public World(Random seed, TETile oldWorld) {
+
     }
     /*style of the upper HUD shows how many ghosts busted*/
     public void generateHUD() {
@@ -156,6 +161,10 @@ public class World {
     public TETile[][] worldState() {
         return projWorld;
     }
+    //returns where in the random the world is at
+    public Random randomAtState() {
+        return randomGenerator;
+    }
     // returns the tileType of a certain x and y location
     public TETile getTile(int x, int y) {
         return projWorld[x][y];
@@ -235,6 +244,7 @@ public class World {
             }
         }
     }
+
     public void fillHallWayHelper1(int room1x, int room1y, int room2x, int room2y) {
         // CROSS SCENARIO
         if (room1x == room2x && room1y > room2y) { // room1x == room2x, but room1y > room2y
@@ -326,7 +336,29 @@ public class World {
             case 's':
                 character.avatarMove(0, -1);
                 break;
+            case ':':
+                int waitingForNextKey = 0;
+                while (waitingForNextKey == 0) {
+                    if (hasNextKeyTyped()) {
+                        c = nextKeyTyped();
+                        if (c == 'q' || c == 'Q') {
+                            //save and quit
+                            saveAndQuit();
+                        }
+                        waitingForNextKey = 1;
+                    }
+                }
         }
+    }
+    // saves the current state of the game in a txt file to be loaded into later
+    private void saveAndQuit() {
+        try(PrintWriter writer = new PrintWriter("save-file.txt", "UTF-8")) {
+            writer.print(worldState());
+            writer.print(randomAtState());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
     }
     public void ghostSpawner() {
         for (List<Integer> rooms : listofMiddle) {

@@ -14,7 +14,7 @@ public class Main {
 
     
     /*creates the initial new game screen */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         StdDraw.setCanvasSize(CANVASWIDTH, CANVASHEIGHT);
         StdDraw.clear(Color.black);
         StdDraw.setPenColor(Color.white);
@@ -30,13 +30,15 @@ public class Main {
         newGame();
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
-    public static void newGame() {
-        char c = ' ' ;
+    public static void newGame() throws Exception {
         do while (StdDraw.hasNextKeyTyped()) {
-            c = StdDraw.nextKeyTyped();
+            char c = StdDraw.nextKeyTyped();
             if (c == 'N' || c == 'n') {
                 processingSeedStrokes();
                 break;
+            }
+            if (c == 'l' || c == 'L') {
+                //load the old game
             }
         }
         while (true);
@@ -45,7 +47,7 @@ public class Main {
     //do we need to put backspace key????
     //assumesseed is all nums
     /*controls the input section, regenerating screen to show what has been typed in*/
-    public static void processingSeedStrokes() {
+    public static void processingSeedStrokes() throws Exception {
         StdDraw.clear(Color.BLACK);
         StdDraw.text(CENTER, CENTER, "Enter Seed");
         StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
@@ -58,7 +60,7 @@ public class Main {
             c = StdDraw.nextKeyTyped();
             if (c == 's' || c == 'S') {
                 startGame(Long.parseLong(longDeveloping.toString()));
-                break;
+                throw new Exception();
 
             }
             //when game ends it escapes here
