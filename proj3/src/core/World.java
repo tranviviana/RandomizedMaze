@@ -26,11 +26,13 @@ public class World {
     private TETile[][] tiles;
     private TERenderer ter;
     private Avatar character;
+    private StringBuilder stringInput;
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
     /*creates UI and spawns the avatar*/
     public World(Long seed) {
+        stringInput = new StringBuilder();
         randomGenerator = new Random(seed);
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
@@ -50,15 +52,9 @@ public class World {
         generateHUD();
         spawnAvatar();
     }
-    public World(TETile[][] oldWorld, Random seed) {
-        randomGenerator = seed;
-        projWorld = oldWorld;
-        tiles = worldState();
-        ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length + 5);
-        ter.renderFrame(tiles);
 
-    }
+
+
     /*style of the upper HUD shows how many ghosts busted*/
     public void generateHUD() {
         //StdDraw.setPenColor(Color.blue);
@@ -165,9 +161,7 @@ public class World {
         return projWorld;
     }
     //returns where in the random the world is at
-    public Random randomAtState() {
-        return randomGenerator;
-    }
+
     // returns the tileType of a certain x and y location
     public TETile getTile(int x, int y) {
         return projWorld[x][y];
@@ -327,11 +321,13 @@ public class World {
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
         if (c == ':') {
+            stringInput.append(c);
             int waitingForNextKey = 0;
             while (waitingForNextKey == 0) {
                 if (hasNextKeyTyped()) {
                     c = nextKeyTyped();
                     if (c == 'q' || c == 'Q') {
+                        stringInput.append(c);
                         //save and quit
                         saveAndQuit();
                     }
@@ -339,6 +335,7 @@ public class World {
                 }
             }
         }
+        stringInput.append(c);
         switch (c) {
             case 'w' -> character.avatarMove(0, 1);
             case 'a' -> character.avatarMove(-1, 0);
@@ -348,16 +345,15 @@ public class World {
     }
     // saves the current state of the game in a txt file to be loaded into later
     private void saveAndQuit() {
-        String filePath =  "proj3/src/core/save-file.txt";;
+        String filePath =  "proj3/src/core/save-file.txt";
         try(PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
-            System.out.println("in the try method");
-            writer.println(worldState());
-            writer.println(randomAtState());
+            writer.println(stringInput);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.exit(0);
     }
+
     public void ghostSpawner() {
         for (List<Integer> rooms : listofMiddle) {
             // Overall: comparing the coordinates of the rooms with the size of the rooms

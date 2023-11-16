@@ -1,11 +1,10 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
-import tileengine.TETile;
 
 import java.awt.*;
 import java.io.*;
-import java.util.Random;
+import java.util.Objects;
 
 
 public class Main {
@@ -43,24 +42,22 @@ public class Main {
             if (c == 'l' || c == 'L') {
                 System.out.println("l was pressed");
                 //load the old game
-                loadFromFile("proj3/src/core/save-file.txt");
+                //World oldWorld = new World(Objects.requireNonNull(reload("proj3/src/core/save-file.txt")));
 
-                break;
             }
         }
         while (true);
     }
-    // Deserialization method for loading the World object from a file
-    public static World loadFromFile(String filename) {
-        System.out.println("in load from file");
+    public static World reload(String filename) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            World oldGame = new World ((TETile[][]) ois.readObject(), (Random) ois.readObject());
-            return oldGame;
+            return (World) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
+
+
 
     //do we need to put backspace key????
     //assumesseed is all nums

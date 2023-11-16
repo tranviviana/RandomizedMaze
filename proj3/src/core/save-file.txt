@@ -1,2 +1,1 @@
-[[Ltileengine.TETile;@2641e737
-java.util.Random@727803de
+core.World@727803de
