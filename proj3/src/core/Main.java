@@ -41,7 +41,7 @@ public class Main {
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
     public static World newGame() throws Exception {
-        do while (StdDraw.hasNextKeyTyped()) {
+        do { while (StdDraw.hasNextKeyTyped()) {
             char c = StdDraw.nextKeyTyped();
             if (c == 'N' || c == 'n') {
                 return processingSeedStrokes();
@@ -52,6 +52,7 @@ public class Main {
                 return reload();
 
             }
+        }
         }
         while (true);
     }

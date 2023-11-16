@@ -20,7 +20,7 @@ public class Avatar {
     }
     // Does not check if canMove.
     // Have to change if avator is more than 1 pixel
-    public void drawAvatar( int x, int y) {
+    public void drawAvatar(int x, int y) {
         projWorld[x][y] = TILE;
     }
 
