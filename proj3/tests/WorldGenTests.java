@@ -1,9 +1,12 @@
+
 import core.AutograderBuddy;
 import core.World;
+import core.blackWorld;
 import edu.princeton.cs.algs4.StdDraw;
 import org.junit.jupiter.api.Test;
 import tileengine.TERenderer;
 import tileengine.TETile;
+
 
 public class WorldGenTests {
 
@@ -12,11 +15,10 @@ public class WorldGenTests {
     public void basicTest() throws Exception {
         // put different seeds here to test different worlds
         TETile[][] tiles = AutograderBuddy.getWorldFromInput("n1111");
-
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
-        StdDraw.pause(500000); // pause for 5 seconds so you can see the output
+
     }
 
     @Test
@@ -27,5 +29,19 @@ public class WorldGenTests {
     @Test
     public void basicSaveTest() {
         // TODO: write a test that calls getWorldFromInput twice, with "n123swasd:q" and with "lwasd"
+    }
+
+    @Test
+    public void blackTest() {
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n1111");
+
+        blackWorld secondWorld = new blackWorld();
+        TETile[][] blackTiles = secondWorld.worldState();
+
+        TERenderer blackTer = new TERenderer();
+        blackTer.initialize(blackTiles.length, blackTiles[0].length);
+        blackTer.renderFrame(blackTiles);
+
+
     }
 }

@@ -11,7 +11,7 @@ import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
 import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 
 public class World {
-    TETile[][] projWorld;
+    public static TETile[][] projWorld;
     Random randomGenerator;
     public static final TETile FLOORREP = Tileset.FLOOR;
     public static final TETile WALLREP = Tileset.WALL;
@@ -26,7 +26,7 @@ public class World {
     private List<List<Integer>> sizeofRooms;
     private TETile[][] tiles;
     private TERenderer ter;
-    private Avatar character;
+    public static Avatar character;
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
@@ -299,7 +299,7 @@ public class World {
         generateHUD();
     }
     /*returns when a person can still play or not */
-    public boolean isGameOver() {
+    public static boolean isGameOver() {
         return character.ghostsBusted == numberRooms;
     }
     /* converts the x and y location to the tile type */
