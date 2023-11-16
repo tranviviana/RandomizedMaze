@@ -83,6 +83,7 @@ public class World {
                     placed++;
                     fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, FLOORREP);
                 }
+                numberRooms = placed;
             }
         }
     }
@@ -306,6 +307,8 @@ public class World {
 
     /*returns when a person can still play or not */
     public boolean isGameOver() {
+        System.out.println(character.ghostsBusted);
+        System.out.println(numberRooms);
         return character.ghostsBusted == numberRooms;
     }
     /* converts the x and y location to the tile type */
