@@ -19,22 +19,7 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input)  {
-        char[] result = input.toCharArray();
-        StringBuilder seed = new StringBuilder();
-        int i = 1;
-        while (result[i] != 's' && result[i] != 'S') {
-            seed.append(result[i]);
-            i++;
-        }
-        World testingWorld = new World(Long.parseLong(seed.toString()));
-        for (int j = i; j < result.length; j++) {
-            testingWorld.userInputHandler(result[j]);
-        }
-        return testingWorld.worldState();
-
-        //throw new RuntimeException("Please fill out AutograderBuddy!");
-
-
+        return Main.loadedWorld(input).worldState();
     }
 
 

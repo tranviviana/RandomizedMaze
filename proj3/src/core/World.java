@@ -20,7 +20,7 @@ public class World {
     public static final int HEIGHT = 40;
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
-    private static int numberRooms;
+    private int numberRooms;
     private List<List<Integer>> listofMiddle;
     private List<List<Integer>> sizeofRooms;
     private Avatar character;

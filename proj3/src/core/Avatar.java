@@ -4,8 +4,7 @@ import tileengine.TETile;
 import java.awt.*;
 
 public class Avatar {
-    private static final Color COLOR = Color.RED;
-    private static final TETile TILE =  new TETile('a', COLOR, Color.black, "Avatar", "core/images/avatar.jpg");
+    private static final TETile TILE =  new TETile('a', Color.RED, Color.black, "Avatar", "core/images/avatar.jpg");
     private TETile[][] projWorld;
     private int xPos;
     private int yPos;
