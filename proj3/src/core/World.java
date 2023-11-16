@@ -3,13 +3,13 @@ import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
 import edu.princeton.cs.algs4.StdDraw;
-
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
 import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
+
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
@@ -17,7 +17,6 @@ public class World {
     public static final TETile WALLREP = Tileset.WALL;
     public static final TETile NOTHINGREP = Tileset.NOTHING;
     public static final TETile ghostTile = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
-
     public static final int WIDTH = 80;
     public static final int HEIGHT = 40;
     public static final int MAXROOMSIZE = WIDTH / 4;
@@ -51,7 +50,6 @@ public class World {
         ter.renderFrame(tiles);
         generateHUD();
         spawnAvatar();
-
     }
     /*style of the upper HUD shows how many ghosts busted*/
     public void generateHUD() {
@@ -63,8 +61,6 @@ public class World {
         StdDraw.text(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.ghostsBusted);
         StdDraw.show();
     }
-
-
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
      * stores the location of the rooms*/
     private void generateRooms() {
@@ -82,9 +78,9 @@ public class World {
                     placed++;
                     fillRooms(xLocation, yLocation, xLocation + roomWIDTH, yLocation + roomHEIGHT, FLOORREP);
                 }
-                numberRooms = placed;
             }
         }
+        numberRooms = placed;
     }
     /*goes through each of the rooms and connects the room to the next room over
      * at the end connects the first to the last*/
@@ -290,32 +286,18 @@ public class World {
                 currentTile = tileMoused();
                 renderFrame();
             }
-            if (hasNextKeyTyped()) {
+            if (hasNextKeyTyped() ) {
                 char c = nextKeyTyped();
                 userInputHandler(character, c);
                 renderFrame();
             }
         }
-        renderGameOver();
-
-    }
-    /*finished Game screen will need to change but just existing*/
-    public void renderGameOver() {
-        StdDraw.setCanvasSize(800, 800);
-        StdDraw.clear(Color.black);
-        StdDraw.setPenColor(Color.white);
-        Font font = new Font("Poppins", Font.BOLD, 60);
-        StdDraw.setFont(font);
-        StdDraw.text(0.5, 0.8, "GAME HAS ENDED");
-        StdDraw.picture(0.5, 0.55, "core/images/titleghost.png");
-        StdDraw.show();
     }
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame() {
         ter.renderFrame(this.worldState());
         generateHUD();
     }
-
     /*returns when a person can still play or not */
     public boolean isGameOver() {
         return character.ghostsBusted == numberRooms;
@@ -348,19 +330,15 @@ public class World {
     }
     public void ghostSpawner() {
         for (List<Integer> rooms : listofMiddle) {
-
             // Overall: comparing the coordinates of the rooms with the size of the rooms
             // Comments: I'm looking over this and I think I could have done it a better way but lol.
-
             List<Integer> random = sizeofRooms.get(0);
             sizeofRooms.remove(0);
-
             // Getting random numbers.
             // Did this way because nextInt does not take negative bounds into consideration
             int randomNumber = randomGenerator.nextInt(0, 4);
             int spawnX = 0;
             int spawnY = 0;
-
             // Depending on the random number. Ghosts spawn in a random location surrounding the origin.
             if (randomNumber == 0) {
                 spawnX = rooms.get(0) + randomGenerator.nextInt(random.get(0));
@@ -375,11 +353,9 @@ public class World {
                 spawnX = rooms.get(0) - randomGenerator.nextInt(random.get(0));
                 spawnY = rooms.get(1) - randomGenerator.nextInt(random.get(1));
             }
-
             if (projWorld[spawnX][spawnY] == FLOORREP) {
                 projWorld[spawnX][spawnY] = ghostTile;
             }
-
         }
     }
 }
