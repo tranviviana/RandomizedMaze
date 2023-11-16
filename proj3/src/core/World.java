@@ -51,7 +51,7 @@ public class World {
         generateHUD();
         spawnAvatar();
     }
-    public World(Random seed, TETile[][] oldWorld) {
+    public World(TETile[][] oldWorld, Random seed) {
         randomGenerator = seed;
         projWorld = oldWorld;
         tiles = worldState();

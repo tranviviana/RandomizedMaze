@@ -4,8 +4,8 @@ import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TETile;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
+import java.util.Random;
 
 
 public class Main {
@@ -42,14 +42,26 @@ public class Main {
                 break;
             }
             if (c == 'l' || c == 'L') {
+                System.out.println("l was pressed");
                 //load the old game
+                loadFromFile("proj3/src/core/save-file.txt");
 
-                return;
+                break;
             }
         }
         while (true);
     }
-
+    // Deserialization method for loading the World object from a file
+    public static World loadFromFile(String filename) {
+        System.out.println("in load from file");
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            World oldGame = new World ((TETile[][]) ois.readObject(), (Random) ois.readObject());
+            return oldGame;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     //do we need to put backspace key????
     //assumesseed is all nums
