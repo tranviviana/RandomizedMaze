@@ -37,21 +37,20 @@ public class Main {
         ter.renderFrame(tiles);
         testingWorld.generateHUD();
         testingWorld.playGame(ter);
-
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
     public static World newGame() throws Exception {
         do {
             while (StdDraw.hasNextKeyTyped()) {
-            char c = StdDraw.nextKeyTyped();
-            if (c == 'N' || c == 'n') {
-                return processingSeedStrokes();
-            }
-            if (c == 'l' || c == 'L') {
-                System.out.println("l was pressed");
-                //load the old game
-                return reload();
-            }
+                char c = StdDraw.nextKeyTyped();
+                if (c == 'N' || c == 'n') {
+                    return processingSeedStrokes();
+                }
+                if (c == 'l' || c == 'L') {
+                    System.out.println("l was pressed");
+                    //load the old game
+                    return reload();
+                }
             }
         }
         while (true);
