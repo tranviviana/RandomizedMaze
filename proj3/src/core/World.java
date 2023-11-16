@@ -15,17 +15,15 @@ public class World {
     public static final TETile FLOORREP = Tileset.FLOOR;
     public static final TETile WALLREP = Tileset.WALL;
     public static final TETile NOTHINGREP = Tileset.NOTHING;
-    public static final TETile ghostTile = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
+    public static final TETile GHOSTTILE = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
     public static final int WIDTH = 80;
     public static final int HEIGHT = 40;
     public static final int MAXROOMSIZE = WIDTH / 4;
     public static final int MINROOMSIZE = 3;
-    public static int numberRooms;
+    private static int numberRooms;
     private List<List<Integer>> listofMiddle;
     private List<List<Integer>> sizeofRooms;
-    private TETile[][] tiles;
-    private TERenderer ter;
-    public Avatar character;
+    private Avatar character;
     private StringBuilder stringInput;
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
@@ -46,12 +44,6 @@ public class World {
         fillWalls();
         character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
         ghostSpawner();
-//        tiles = worldState();
-//        ter = new TERenderer();
-//        ter.initialize(tiles.length, tiles[0].length + 5);
-//        ter.renderFrame(tiles);
-
-//        playGame();
     }
 
 
@@ -291,7 +283,7 @@ public class World {
                 currentTile = tileMoused();
                 renderFrame(ter);
             }
-            if (hasNextKeyTyped() ) {
+            if (hasNextKeyTyped()) {
                 char c = nextKeyTyped();
                 userInputHandler(character, c);
                 renderFrame(ter);
@@ -343,7 +335,7 @@ public class World {
     // saves the current state of the game in a txt file to be loaded into later
     private void saveAndQuit() {
         String filePath =  "proj3/src/core/save-file.txt";
-        try(PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
+        try (PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
             writer.println(stringInput);
         } catch (IOException e) {
             e.printStackTrace();
@@ -377,7 +369,7 @@ public class World {
                 spawnY = rooms.get(1) - randomGenerator.nextInt(random.get(1));
             }
             if (projWorld[spawnX][spawnY] == FLOORREP) {
-                projWorld[spawnX][spawnY] = ghostTile;
+                projWorld[spawnX][spawnY] = GHOSTTILE;
             }
         }
     }
