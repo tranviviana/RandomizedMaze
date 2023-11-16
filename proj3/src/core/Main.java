@@ -55,10 +55,11 @@ public class Main {
         }
         while (true);
     }
+    /*reloads the game by parsing through the txt file and calling autograder to finish it*/
     public static World reload() {
         String filename = "proj3/src/core/save-file.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            AutograderBuddy.AutoGraderReader autograder = new AutograderBuddy.AutoGraderReader(br.readLine());
+            AutoGraderReader autograder = new AutoGraderReader(br.readLine());
             return autograder.loadedWorldFromInput();
 
         } catch (IOException e) {
