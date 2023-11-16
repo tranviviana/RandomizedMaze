@@ -39,7 +39,7 @@ public class Main {
         testingWorld.playGame(ter);
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
-    public static World newGame() throws Exception {
+    public static World newGame() {
         do {
             while (StdDraw.hasNextKeyTyped()) {
                 char c = StdDraw.nextKeyTyped();
@@ -47,7 +47,6 @@ public class Main {
                     return processingSeedStrokes();
                 }
                 if (c == 'l' || c == 'L') {
-                    System.out.println("l was pressed");
                     //load the old game
                     return reload();
                 }
@@ -68,13 +67,17 @@ public class Main {
         }
         return null;
     }
-    public static World loadedWorld(String input)  {
+    /*loading the world based off of history for user input*/
+    public static World loadedWorld(String input) {
         char[] result = input.toCharArray();
         StringBuilder seed = new StringBuilder();
-        int i = 1;
-        while (result[i] != 's' && result[i] != 'S') {
-            seed.append(result[i]);
+        int i = 0;
+        if (result[i] == 'n' || result[i] == 'N' ) {
             i++;
+            while (result[i] != 's' && result[i] != 'S') {
+                seed.append(result[i]);
+                i++;
+            }
         }
         World testingWorld = new World(Long.parseLong(seed.toString()));
         for (int j = i + 1; j < result.length; j++) {
@@ -82,6 +85,9 @@ public class Main {
         }
         return testingWorld;
     }
+    /*loading the world from autograder input */
+
+
 
 
     //do we need to put backspace key????

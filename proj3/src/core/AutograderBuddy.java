@@ -23,6 +23,7 @@ public class AutograderBuddy {
     }
 
 
+
     /**
      * Used to tell the autograder which tiles are the floor/ground (including
      * any lights/items resting on the ground). Change this
