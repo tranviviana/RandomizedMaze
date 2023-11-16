@@ -61,7 +61,6 @@ public class Main {
                 break;
 
             }
-            //when game ends it escapes here
             longDeveloping.append(c);
             StdDraw.setPenColor(Color.white);
             StdDraw.text(CENTER, CENTER, "Enter Seed");
