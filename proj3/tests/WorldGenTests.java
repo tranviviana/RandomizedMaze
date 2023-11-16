@@ -4,8 +4,12 @@ import core.World;
 import core.blackWorld;
 import edu.princeton.cs.algs4.StdDraw;
 import org.junit.jupiter.api.Test;
+import spark.utils.IOUtils;
 import tileengine.TERenderer;
 import tileengine.TETile;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 
 public class WorldGenTests {
@@ -18,6 +22,7 @@ public class WorldGenTests {
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
+
 
     }
 
