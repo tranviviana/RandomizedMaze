@@ -20,7 +20,7 @@ public class Avatar {
     }
     // Does not check if canMove.
     // Have to change if avator is more than 1 pixel
-    public void drawAvatar(TETile[][] projWorld, int x, int y) {
+    public void drawAvatar( int x, int y) {
         projWorld[x][y] = TILE;
     }
 
@@ -38,7 +38,7 @@ public class Avatar {
     }
     public void avatarMove(int deltaX, int deltaY) {
         if (canAvatarMove(deltaX, deltaY)) {
-            drawAvatar(projWorld, xPos + deltaX, yPos + deltaY);
+            drawAvatar(xPos + deltaX, yPos + deltaY);
             projWorld[xPos][yPos] = World.FLOORREP;
             xPos += deltaX;
             yPos += deltaY;
