@@ -320,13 +320,11 @@ public class World {
     /*takes in the movement inputs*/
     public void userInputHandler(Avatar character, char c) {
         if (c == ':') {
-            stringInput.append(c);
             int waitingForNextKey = 0;
             while (waitingForNextKey == 0) {
                 if (hasNextKeyTyped()) {
                     c = nextKeyTyped();
                     if (c == 'q' || c == 'Q') {
-                        stringInput.append(c);
                         //save and quit
                         saveAndQuit();
                     }

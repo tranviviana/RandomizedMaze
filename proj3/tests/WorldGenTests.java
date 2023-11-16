@@ -12,7 +12,6 @@ public class WorldGenTests {
     public void basicTest() throws Exception {
         // put different seeds here to test different worlds
         TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123412swwwwwwwww");
-
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
