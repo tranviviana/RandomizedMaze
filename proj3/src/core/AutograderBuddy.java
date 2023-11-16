@@ -1,5 +1,6 @@
 package core;
 
+import core.images.AutoGraderReader;
 import tileengine.TETile;
 import tileengine.Tileset;
 
@@ -19,7 +20,7 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input)  {
-        return Main.loadedWorld(input).worldState();
+        return AutoGraderReader.loadedWorldFromInput(input).worldState();
     }
 
 
