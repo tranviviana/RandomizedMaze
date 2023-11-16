@@ -289,18 +289,20 @@ public class World {
                 currentTile = tileMoused();
                 renderFrame();
             }
-            if (hasNextKeyTyped() ) {
+            if (hasNextKeyTyped()) {
                 char c = nextKeyTyped();
                 userInputHandler(character, c);
                 renderFrame();
             }
         }
+
     }
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame() {
         ter.renderFrame(this.worldState());
         generateHUD();
     }
+
     /*returns when a person can still play or not */
     public boolean isGameOver() {
         return character.ghostsBusted == numberRooms;
