@@ -45,6 +45,12 @@ public class AutoGraderReader {
         }
         World testingWorld = new World(Long.parseLong(seed.toString()));
         for (int j = i + 1; j < result.length; j++) {
+            if (result[j] == ':' && j + 1 < result.length) {
+                if (result[j + 1] == 'q' || result[j + 1] == 'Q') {
+                    testingWorld.saveAndQuit(true);
+                    return testingWorld;
+                }
+            }
             testingWorld.userInputHandler(result[j]);
         }
         return testingWorld;
