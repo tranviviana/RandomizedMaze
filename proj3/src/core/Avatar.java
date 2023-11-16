@@ -4,14 +4,11 @@ import tileengine.TETile;
 import java.awt.*;
 
 public class Avatar {
-    private static final Color color = Color.RED;
-    private static final TETile tile =  new TETile('a', color, Color.black, "Avatar", "core/images/avatar.jpg");
+    private static final Color COLOR = Color.RED;
+    private static final TETile TILE =  new TETile('a', COLOR, Color.black, "Avatar", "core/images/avatar.jpg");
     private TETile[][] projWorld;
-    private static final int width = 1;
-    private static final int height = 1;
-    public int xPos;
-    public int yPos;
-    public int numberofGhosts = World.numberRooms;
+    private int xPos;
+    private int yPos;
     public int ghostsBusted = 0;
 
 
@@ -19,13 +16,12 @@ public class Avatar {
         this.xPos = startX;
         this.yPos = startY;
         this.projWorld = projWorld;
-        projWorld[startX][startY] = tile;
+        projWorld[startX][startY] = TILE;
     }
-
-     // Does not check if canMove.
-     // Have to change if avator is more than 1 pixel
+    // Does not check if canMove.
+    // Have to change if avator is more than 1 pixel
     public void drawAvatar(TETile[][] projWorld, int x, int y) {
-        projWorld[x][y] = tile;
+        projWorld[x][y] = TILE;
     }
 
     private boolean canAvatarMove(int deltaX, int deltaY) {
@@ -45,25 +41,4 @@ public class Avatar {
             yPos += deltaY;
         }
     }
-
-//    private void userInputHandler(char c) {
-//        switch (c) {
-//            case 'a':
-//                movement.tryMove(-1, 0);
-//                break;
-//            case 's':
-//                movement.tryMove(0, -1);
-//                break;
-//            case 'd':
-//                movement.tryMove(1, 0);
-//                break;
-//            case 'q':
-//                movement.rotateLeft();
-//                break;
-//            case 'w':
-//                movement.rotateRight();
-//                break;
-//        }
-//
-//    }
 }

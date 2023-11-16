@@ -55,7 +55,8 @@ public class Main {
         }
         while (true);
     }
-    //@source readline generate by chatGPT
+    /*
+    *@source readline generate by chatGPT*/
     /*reads the line with all of the movements and the seed to create a world*/
     public static World reload() {
         String filename = "proj3/src/core/save-file.txt";

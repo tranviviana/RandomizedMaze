@@ -1,11 +1,8 @@
 package core;
 
-import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class AutograderBuddy {
 
@@ -21,7 +18,6 @@ public class AutograderBuddy {
      * @param input the input string to feed to your program
      * @return the 2D TETile[][] representing the state of the world
      */
-    /*  @source splitting line is ChatGPT generated  */
     public static TETile[][] getWorldFromInput(String input)  {
         char[] result = input.toCharArray();
         StringBuilder seed = new StringBuilder();
@@ -34,12 +30,6 @@ public class AutograderBuddy {
         for (int j = 3; j < result.length; j++) {
             testingWorld.userInputHandler(testingWorld.character, result[j]);
         }
-//        TETile[][] tiles = testingWorld.worldState();
-//        TERenderer ter = new TERenderer();
-//        ter.initialize(tiles.length, tiles[0].length + 5);
-//        ter.renderFrame(tiles);
-//        testingWorld.generateHUD();
-//        testingWorld.playGame(ter);
         return testingWorld.worldState();
 
         //throw new RuntimeException("Please fill out AutograderBuddy!");
