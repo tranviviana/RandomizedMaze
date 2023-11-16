@@ -34,7 +34,6 @@ public class Main {
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
     public static void newGame() throws Exception {
-        char c = ' ' ;
 
         do while (StdDraw.hasNextKeyTyped()) {
             char c = StdDraw.nextKeyTyped();

@@ -3,6 +3,7 @@ import tileengine.*;
 import edu.princeton.cs.algs4.StdDraw;
 import java.awt.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 
@@ -348,11 +349,11 @@ public class World {
     }
     // saves the current state of the game in a txt file to be loaded into later
     private void saveAndQuit() {
-        String filePath =  "proj3/src/core/save-file.txt";;
-        try(PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
+        String filePath = "proj3/src/core/save-file.txt";
+        try(PrintWriter writer = new PrintWriter(filePath, StandardCharsets.UTF_8)) {
             System.out.println("in the try method");
-            writer.println(worldState());
-            writer.println(randomAtState());
+            writer.print(worldState());
+            writer.print(randomAtState());
         } catch (IOException e) {
             e.printStackTrace();
         }
