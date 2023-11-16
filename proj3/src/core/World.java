@@ -33,6 +33,7 @@ public class World {
     /*creates UI and spawns the avatar*/
     public World(Long seed) {
         stringInput = new StringBuilder();
+        stringInput.append("n" + seed + "s");
         randomGenerator = new Random(seed);
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
