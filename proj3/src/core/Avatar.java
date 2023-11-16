@@ -1,11 +1,13 @@
 package core;
+import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TETile;
+import tileengine.Tileset;
 
 import java.awt.*;
 
 public class Avatar {
     private static final Color color = Color.RED;
-    private static final TETile tile =  new TETile('a', color, Color.black, "Avatar", "core/images/avatar.jpg");
+    private static final TETile tile =  new TETile('a', color, Color.black, "Avatar","core/avatar.jpg");
     private TETile[][] projWorld;
     private static final int width = 1;
     private static final int height = 1;
