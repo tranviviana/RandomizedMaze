@@ -1,9 +1,8 @@
 package core;
-import tileengine.TERenderer;
-import tileengine.TETile;
-import tileengine.Tileset;
+import tileengine.*;
 import edu.princeton.cs.algs4.StdDraw;
 import java.awt.*;
+import java.io.*;
 import java.util.*;
 import java.util.List;
 
@@ -50,6 +49,15 @@ public class World {
         ter.renderFrame(tiles);
         generateHUD();
         spawnAvatar();
+    }
+    public World(Random seed, TETile[][] oldWorld) {
+        randomGenerator = seed;
+        projWorld = oldWorld;
+        tiles = worldState();
+        ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length + 5);
+        ter.renderFrame(tiles);
+
     }
     /*style of the upper HUD shows how many ghosts busted*/
     public void generateHUD() {
@@ -156,6 +164,10 @@ public class World {
     public TETile[][] worldState() {
         return projWorld;
     }
+    //returns where in the random the world is at
+    public Random randomAtState() {
+        return randomGenerator;
+    }
     // returns the tileType of a certain x and y location
     public TETile getTile(int x, int y) {
         return projWorld[x][y];
@@ -235,6 +247,7 @@ public class World {
             }
         }
     }
+
     public void fillHallWayHelper1(int room1x, int room1y, int room2x, int room2y) {
         // CROSS SCENARIO
         if (room1x == room2x && room1y > room2y) { // room1x == room2x, but room1y > room2y
@@ -313,20 +326,37 @@ public class World {
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
-        switch (c) {
-            case 'w':
-                character.avatarMove(0, 1);
-                break;
-            case 'a':
-                character.avatarMove(-1, 0);
-                break;
-            case 'd':
-                character.avatarMove(1, 0);
-                break;
-            case 's':
-                character.avatarMove(0, -1);
-                break;
+        if (c == ':') {
+            int waitingForNextKey = 0;
+            while (waitingForNextKey == 0) {
+                if (hasNextKeyTyped()) {
+                    c = nextKeyTyped();
+                    if (c == 'q' || c == 'Q') {
+                        //save and quit
+                        saveAndQuit();
+                    }
+                    waitingForNextKey = 1;
+                }
+            }
         }
+        switch (c) {
+            case 'w' -> character.avatarMove(0, 1);
+            case 'a' -> character.avatarMove(-1, 0);
+            case 'd' -> character.avatarMove(1, 0);
+            case 's' -> character.avatarMove(0, -1);
+        }
+    }
+    // saves the current state of the game in a txt file to be loaded into later
+    private void saveAndQuit() {
+        String filePath =  "proj3/src/core/save-file.txt";;
+        try(PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
+            System.out.println("in the try method");
+            writer.println(worldState());
+            writer.println(randomAtState());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
     }
     public void ghostSpawner() {
         for (List<Integer> rooms : listofMiddle) {

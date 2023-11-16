@@ -1,8 +1,11 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TETile;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 
 public class Main {
@@ -32,15 +35,22 @@ public class Main {
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
     public static void newGame() throws Exception {
         char c = ' ' ;
+
         do while (StdDraw.hasNextKeyTyped()) {
-            c = StdDraw.nextKeyTyped();
+            char c = StdDraw.nextKeyTyped();
             if (c == 'N' || c == 'n') {
                 processingSeedStrokes();
                 break;
             }
+            if (c == 'l' || c == 'L') {
+                //load the old game
+
+                return;
+            }
         }
         while (true);
     }
+
 
     //do we need to put backspace key????
     //assumesseed is all nums
