@@ -323,31 +323,24 @@ public class World {
     }
     /*takes in the movement inputs*/
     private void userInputHandler(Avatar character, char c) {
-        switch (c) {
-            case 'w':
-                character.avatarMove(0, 1);
-                break;
-            case 'a':
-                character.avatarMove(-1, 0);
-                break;
-            case 'd':
-                character.avatarMove(1, 0);
-                break;
-            case 's':
-                character.avatarMove(0, -1);
-                break;
-            case ':':
-                int waitingForNextKey = 0;
-                while (waitingForNextKey == 0) {
-                    if (hasNextKeyTyped()) {
-                        c = nextKeyTyped();
-                        if (c == 'q' || c == 'Q') {
-                            //save and quit
-                            saveAndQuit();
-                        }
-                        waitingForNextKey = 1;
+        if (c == ':') {
+            int waitingForNextKey = 0;
+            while (waitingForNextKey == 0) {
+                if (hasNextKeyTyped()) {
+                    c = nextKeyTyped();
+                    if (c == 'q' || c == 'Q') {
+                        //save and quit
+                        saveAndQuit();
                     }
+                    waitingForNextKey = 1;
                 }
+            }
+        }
+        switch (c) {
+            case 'w' -> character.avatarMove(0, 1);
+            case 'a' -> character.avatarMove(-1, 0);
+            case 'd' -> character.avatarMove(1, 0);
+            case 's' -> character.avatarMove(0, -1);
         }
     }
     // saves the current state of the game in a txt file to be loaded into later
