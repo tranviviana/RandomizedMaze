@@ -11,9 +11,8 @@ public class AutoGraderReader {
         for (int c = 0; c < input.length(); c++) {
             actions.add(input.charAt(c));
         }
-
     }
-
+    /*returns the edited world when a user presses l or n*/
     public World loadedWorldFromInput() {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
             World oldWorld = Main.reload();
@@ -25,7 +24,7 @@ public class AutoGraderReader {
         }
         return null;
     }
-
+    /*returns the long needed to generate the new world*/
     private long getSeed() {
         StringBuilder seed = new StringBuilder();
         if (actions.get(0) == 'n' || actions.get(0) == 'N') {
@@ -38,6 +37,8 @@ public class AutoGraderReader {
         }
         return Long.parseLong(seed.toString());
     }
+    /*generates the newWorld status based off of old world. For example if in my old file I moved left twice, I move left
+    twice in this new world*/
 
     private World loadNewWorld(World oldWorld) {
         while (!actions.isEmpty()) {
@@ -62,15 +63,4 @@ public class AutoGraderReader {
         return oldWorld;
     }
 }
-//        for (int j = 0; j < actions.size(); j++) {
-//            if (actions.get(j) == ':' && j + 1 < actions.size()) {
-//                if (actions.get(j + 1) == 'q' || actions.get(j + 1) == 'Q') {
-//                    oldWorld.saveAndQuit(true);
-//                    return oldWorld;
-//                }
-//            }
-//            oldWorld.userInputHandler(actions.get(j));
-//        }
-//        return oldWorld;
-//    }
-//}
+
