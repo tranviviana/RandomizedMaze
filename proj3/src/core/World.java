@@ -46,23 +46,20 @@ public class World {
         fillWalls();
         character = new Avatar(projWorld, listofMiddle.get(0).get(0), listofMiddle.get(0).get(1));
         ghostSpawner();
-        tiles = worldState();
-        ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length + 5);
-        ter.renderFrame(tiles);
-        generateHUD();
-        spawnAvatar();
+//        tiles = worldState();
+//        ter = new TERenderer();
+//        ter.initialize(tiles.length, tiles[0].length + 5);
+//        ter.renderFrame(tiles);
+
+//        playGame();
     }
 
 
 
     /*style of the upper HUD shows how many ghosts busted*/
-    private void generateHUD() {
-        //StdDraw.setPenColor(Color.blue);
-        //StdDraw.filledRectangle(0,HEIGHT + 5, WIDTH ,5);
+    public void generateHUD() {
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description() );
-        //hard coded-location
         StdDraw.text(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.ghostsBusted);
         StdDraw.show();
     }
@@ -286,23 +283,23 @@ public class World {
             }
         }
     }
-    private void spawnAvatar() {
-        renderFrame();
+    public void playGame(TERenderer ter) {
+        renderFrame(ter);
         TETile currentTile = tileMoused();
         while (!isGameOver()) {
             if (tileMoused() != currentTile) {
                 currentTile = tileMoused();
-                renderFrame();
+                renderFrame(ter);
             }
             if (hasNextKeyTyped() ) {
                 char c = nextKeyTyped();
                 userInputHandler(character, c);
-                renderFrame();
+                renderFrame(ter);
             }
         }
     }
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
-    private void renderFrame() {
+    private void renderFrame(TERenderer ter) {
         ter.renderFrame(this.worldState());
         generateHUD();
     }

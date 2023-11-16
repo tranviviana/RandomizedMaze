@@ -1,5 +1,6 @@
 package core;
 
+import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
 
@@ -30,10 +31,13 @@ public class AutograderBuddy {
             i++;
         }
         World testingWorld = new World(Long.parseLong(seed.toString()));
-
         for (int j = 3; j < result.length; j++) {
             testingWorld.userInputHandler(testingWorld.character, result[j]);
         }
+        TETile[][] tiles = testingWorld.worldState();
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length + 5);
+        ter.renderFrame(tiles);
         return testingWorld.worldState();
 
         //throw new RuntimeException("Please fill out AutograderBuddy!");

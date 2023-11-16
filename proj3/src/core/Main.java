@@ -1,10 +1,11 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TERenderer;
+import tileengine.TETile;
 
 import java.awt.*;
 import java.io.*;
-import java.util.Objects;
 
 
 public class Main {
@@ -29,15 +30,21 @@ public class Main {
         StdDraw.text(CENTER, CENTER - 0.3, "Load Game (L)");
         StdDraw.text(CENTER, CENTER - 0.4, "Quit (Q)");
         StdDraw.picture(CENTER, CENTER + 0.05, "core/images/titleghost.png");
-        newGame();
+        World testingWorld = newGame();
+        TETile[][] tiles = testingWorld.worldState();
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length + 5);
+        ter.renderFrame(tiles);
+        testingWorld.generateHUD();
+        testingWorld.playGame(ter);
+
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
-    public static void newGame() throws Exception {
+    public static World newGame() throws Exception {
         do while (StdDraw.hasNextKeyTyped()) {
             char c = StdDraw.nextKeyTyped();
             if (c == 'N' || c == 'n') {
-                processingSeedStrokes();
-                break;
+                return processingSeedStrokes();
             }
             if (c == 'l' || c == 'L') {
                 System.out.println("l was pressed");
@@ -62,7 +69,7 @@ public class Main {
     //do we need to put backspace key????
     //assumesseed is all nums
     /*controls the input section, regenerating screen to show what has been typed in*/
-    public static void processingSeedStrokes() throws Exception {
+    public static World processingSeedStrokes() throws Exception {
         StdDraw.clear(Color.BLACK);
         StdDraw.text(CENTER, CENTER, "Enter Seed");
         StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
@@ -74,8 +81,7 @@ public class Main {
         do while (StdDraw.hasNextKeyTyped()) {
             c = StdDraw.nextKeyTyped();
             if (c == 's' || c == 'S') {
-                startGame(Long.parseLong(longDeveloping.toString()));
-                throw new Exception();
+                return startGame(Long.parseLong(longDeveloping.toString()));
 
             }
             //when game ends it escapes here
@@ -90,8 +96,8 @@ public class Main {
         while (true);
     }
     /*start the game in world*/
-    public static void startGame(long seed) {
-        World testingWorld = new World(seed);
+    public static World startGame(long seed) {
+        return new World(seed);
     }
 
 }
