@@ -38,6 +38,8 @@ public class AutograderBuddy {
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length + 5);
         ter.renderFrame(tiles);
+        testingWorld.generateHUD();
+        testingWorld.playGame(ter);
         return testingWorld.worldState();
 
         //throw new RuntimeException("Please fill out AutograderBuddy!");

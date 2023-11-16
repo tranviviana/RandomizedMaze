@@ -298,6 +298,7 @@ public class World {
             }
         }
     }
+
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     private void renderFrame(TERenderer ter) {
         ter.renderFrame(this.worldState());
