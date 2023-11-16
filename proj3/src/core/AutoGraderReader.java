@@ -1,8 +1,5 @@
 package core;
 
-import core.Main;
-import core.World;
-
 import java.util.ArrayList;
 import java.util.List;
 
