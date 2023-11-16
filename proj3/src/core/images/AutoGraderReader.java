@@ -1,59 +1,61 @@
 package core.images;
 
+import core.Main;
 import core.World;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AutoGraderReader {
+    private List<Character> actions;
 
-    public static World loadedWorldFromInput(String input) {
-        char[] result = input.toCharArray();
-        for (int i = 0; i < result.length; i++) {
-            if (result[i] == 'l' || result[i] == 'L') {
-                return reload();
-            }
-            if (result[i] == 'n' || result[i] == 'N') {
-               return loadNewWorld(input);
-            }
+    public AutoGraderReader(String input) {
+        actions = new ArrayList<>();
+        for (int c = 0; c < input.length(); c++) {
+            actions.add(input.charAt(c));
         }
+
+    }
+    public World loadedWorldFromInput() {
+            if (actions.get(0) == 'l' || actions.get(0) == 'L') {
+                World oldWorld = Main.reload();
+                actions.remove(0);
+                return loadNewWorld(oldWorld);
+            }
+            else if (actions.get(0) == 'n' || actions.get(0) == 'N') {
+                World newWorld = new World(getSeed());
+                return loadNewWorld(newWorld);
+            }
         return null;
 
     }
-    public static World reload() {
-        String filename = "proj3/src/core/save-file.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            return loadNewWorld(br.readLine());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    private static World loadNewWorld(String input) {
-        char[] result = input.toCharArray();
-        int i = 0;
+    private long getSeed() {
         StringBuilder seed = new StringBuilder();
-        if (result[i] == 'n' || result[i] == 'N' ) {
-            i++;
-            while (result[i] != 's' && result[i] != 'S') {
-                seed.append(result[i]);
-                i++;
+        if (actions.get(0) == 'n' || actions.get(0) == 'N' ) {
+            actions.remove(0);
+            while (actions.get(0) != 's' && actions.get(0) != 'S') {
+                seed.append(actions.get(0));
+                actions.remove(0);
             }
+            actions.remove(0);
         }
-        World testingWorld = new World(Long.parseLong(seed.toString()));
-        for (int j = i + 1; j < result.length; j++) {
-            if (result[j] == ':' && j + 1 < result.length) {
-                if (result[j + 1] == 'q' || result[j + 1] == 'Q') {
-                    testingWorld.saveAndQuit(true);
-                    return testingWorld;
+        return Long.parseLong(seed.toString());
+    }
+    private World loadNewWorld(World oldWorld) {
+        for (int j = 0; j < actions.size(); j++) {
+            if (actions.get(j) == ':' && j + 1 < actions.size()) {
+                if (actions.get(j + 1) == 'q' || actions.get(j + 1) == 'Q') {
+                    oldWorld.saveAndQuit(true);
+                    return oldWorld;
                 }
             }
-            testingWorld.userInputHandler(result[j]);
+            oldWorld.userInputHandler(actions.get(j));
         }
-        return testingWorld;
-
+        return oldWorld;
     }
 }

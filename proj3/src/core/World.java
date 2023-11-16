@@ -1,4 +1,5 @@
 package core;
+import core.images.AutoGraderReader;
 import tileengine.*;
 import edu.princeton.cs.algs4.StdDraw;
 import java.awt.*;
@@ -31,7 +32,7 @@ public class World {
     /*creates UI and spawns the avatar*/
     public World(Long seed) {
         stringInput = new StringBuilder();
-        stringInput.append("n" + seed + "s");
+        stringInput.append("n").append(seed).append("s");
         randomGenerator = new Random(seed);
         projWorld = new TETile[WIDTH][HEIGHT];
         //might need to change math class
@@ -100,7 +101,7 @@ public class World {
             }
         }
     }
-    /*goes through each of the tiles in the grid.. if its within the margin it checks all four directions
+    /*goes through each of the tiles in the grid. if its within the margin it checks all four directions
     if its one of the side ones it checks within the margins to avoid null error*/
     private void fillWalls() {
         for (int x = 0; x < WIDTH; x++) {
@@ -291,6 +292,7 @@ public class World {
         }
     }
 
+
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     private void renderFrame(TERenderer ter) {
         ter.renderFrame(this.worldState());
@@ -302,8 +304,8 @@ public class World {
     }
     /* converts the x and y location to the tile type */
     private TETile tileMoused() {
-        Double xLocation = StdDraw.mouseX();
-        Double yLocation = StdDraw.mouseY();
+        double xLocation = StdDraw.mouseX();
+        double yLocation = StdDraw.mouseY();
         if (xLocation >= WIDTH || yLocation >= HEIGHT) {
             return NOTHINGREP;
         }
@@ -331,6 +333,7 @@ public class World {
             case 'a' -> character.avatarMove(-1, 0);
             case 'd' -> character.avatarMove(1, 0);
             case 's' -> character.avatarMove(0, -1);
+
         }
     }
     // saves the current state of the game in a txt file to be loaded into later
@@ -376,4 +379,8 @@ public class World {
             }
         }
     }
+    /*
+     *@source readline generate by chatGPT*/
+    /*reads the line with all of the movements and the seed to create a world*/
+
 }

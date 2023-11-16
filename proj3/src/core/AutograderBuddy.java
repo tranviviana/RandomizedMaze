@@ -20,7 +20,8 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input)  {
-        return AutoGraderReader.loadedWorldFromInput(input).worldState();
+        AutoGraderReader autograder = new AutoGraderReader(input);
+        return autograder.loadedWorldFromInput().worldState();
     }
 
 

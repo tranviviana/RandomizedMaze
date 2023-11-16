@@ -1,5 +1,6 @@
 package core;
 
+import core.images.AutoGraderReader;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
@@ -50,46 +51,22 @@ public class Main {
                     //load the old game
                     return reload();
                 }
+
             }
         }
         while (true);
     }
-    /*
-    *@source readline generate by chatGPT*/
-    /*reads the line with all of the movements and the seed to create a world*/
     public static World reload() {
         String filename = "proj3/src/core/save-file.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            return loadedWorld(br.readLine());
+            AutoGraderReader autograder = new AutoGraderReader(br.readLine());
+            return autograder.loadedWorldFromInput();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-    /*loading the world based off of history for user input*/
-    public static World loadedWorld(String input) {
-        char[] result = input.toCharArray();
-        StringBuilder seed = new StringBuilder();
-        int i = 0;
-        if (result[i] == 'n' || result[i] == 'N' ) {
-            i++;
-            while (result[i] != 's' && result[i] != 'S') {
-                seed.append(result[i]);
-                i++;
-            }
-        }
-        World testingWorld = new World(Long.parseLong(seed.toString()));
-        for (int j = i + 1; j < result.length; j++) {
-            testingWorld.userInputHandler(result[j]);
-        }
-        return testingWorld;
-    }
-    /*loading the world from autograder input */
-
-
-
-
     //do we need to put backspace key????
     //assumesseed is all nums
     /*controls the input section, regenerating screen to show what has been typed in*/
