@@ -326,7 +326,7 @@ public class World {
         }
         stringInput.append(c);
         switch (c) {
-            default -> character.avatarMove(0,0);
+            default -> character.avatarMove(0, 0);
             case 'w' -> character.avatarMove(0, 1);
             case 'a' -> character.avatarMove(-1, 0);
             case 'd' -> character.avatarMove(1, 0);
