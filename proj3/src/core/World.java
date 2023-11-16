@@ -51,8 +51,8 @@ public class World {
     /*style of the upper HUD shows how many ghosts busted*/
     public void generateHUD() {
         StdDraw.setPenColor(Color.WHITE);
-        StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description() );
-        StdDraw.text(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
+        StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description());
+        StdDraw.text(WIDTH - 4, HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
         StdDraw.show();
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
@@ -285,7 +285,7 @@ public class World {
             }
             if (hasNextKeyTyped()) {
                 char c = nextKeyTyped();
-                userInputHandler(character, c);
+                userInputHandler(c);
                 renderFrame(ter);
             }
         }
@@ -310,7 +310,7 @@ public class World {
         return projWorld[(int) Math.floor(xLocation)][(int) Math.floor(yLocation)];
     }
     /*takes in the movement inputs*/
-    public void userInputHandler(Avatar character, char c) {
+    public void userInputHandler(char c) {
         if (c == ':') {
             int waitingForNextKey = 0;
             while (waitingForNextKey == 0) {

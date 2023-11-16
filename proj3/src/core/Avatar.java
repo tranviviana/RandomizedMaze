@@ -27,7 +27,7 @@ public class Avatar {
     private boolean canAvatarMove(int deltaX, int deltaY) {
         if (projWorld[xPos + deltaX][yPos + deltaY] == World.FLOORREP) {
             return true;
-        } else if (projWorld[xPos + deltaX][yPos + deltaY] == World.ghostTile) {
+        } else if (projWorld[xPos + deltaX][yPos + deltaY] == World.GHOSTTILE) {
             ghostsBusted++;
             return true;
         }

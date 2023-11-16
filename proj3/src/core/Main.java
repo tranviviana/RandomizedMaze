@@ -78,7 +78,7 @@ public class Main {
         }
         World testingWorld = new World(Long.parseLong(seed.toString()));
         for (int j = i + 1; j < result.length; j++) {
-            testingWorld.userInputHandler(testingWorld.character, result[j]);
+            testingWorld.userInputHandler(result[j]);
         }
         return testingWorld;
     }
