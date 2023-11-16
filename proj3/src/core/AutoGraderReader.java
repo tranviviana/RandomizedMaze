@@ -18,11 +18,10 @@ public class AutoGraderReader {
             World oldWorld = Main.reload();
             actions.remove(0);
             return loadNewWorld(oldWorld);
-        } else if (actions.get(0) == 'n' || actions.get(0) == 'N') {
+        } else {
             World newWorld = new World(getSeed());
             return loadNewWorld(newWorld);
         }
-        return null;
     }
     /*returns the long needed to generate the new world*/
     private long getSeed() {
