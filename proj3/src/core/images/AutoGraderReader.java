@@ -5,22 +5,21 @@ import core.World;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.PreparedStatement;
+
 
 public class AutoGraderReader {
 
     public static World loadedWorldFromInput(String input) {
         char[] result = input.toCharArray();
-        World resultingWorld = new World(Long.parseLong("1231421"));
         for (int i = 0; i < result.length; i++) {
             if (result[i] == 'l' || result[i] == 'L') {
-                resultingWorld = reload();
+                return reload();
             }
             if (result[i] == 'n' || result[i] == 'N') {
-               resultingWorld = loadedWorldFromInput(input);
+               return loadNewWorld(input);
             }
         }
-        return resultingWorld;
+        return null;
 
     }
     public static World reload() {
