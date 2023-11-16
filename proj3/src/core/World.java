@@ -60,7 +60,7 @@ public class World {
     public void generateHUD() {
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description() );
-        StdDraw.text(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.ghostsBusted);
+        StdDraw.text(WIDTH - 4,HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
         StdDraw.show();
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
@@ -306,7 +306,7 @@ public class World {
     }
     /*returns when a person can still play or not */
     private boolean isGameOver() {
-        return character.ghostsBusted == numberRooms;
+        return character.returnGhostBusted() == numberRooms;
     }
     /* converts the x and y location to the tile type */
     private TETile tileMoused() {

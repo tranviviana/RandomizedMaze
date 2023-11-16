@@ -9,14 +9,14 @@ public class Avatar {
     private TETile[][] projWorld;
     private int xPos;
     private int yPos;
-    public int ghostsBusted = 0;
+    private int ghostsBusted = 0;
 
 
     public Avatar(TETile[][] projWorld, int startX, int startY) {
         this.xPos = startX;
         this.yPos = startY;
         this.projWorld = projWorld;
-        projWorld[startX][startY] = TILE;
+        this.projWorld[startX][startY] = TILE;
     }
     // Does not check if canMove.
     // Have to change if avator is more than 1 pixel
@@ -32,6 +32,9 @@ public class Avatar {
             return true;
         }
         return false;
+    }
+    public int returnGhostBusted() {
+        return ghostsBusted;
     }
     public void avatarMove(int deltaX, int deltaY) {
         if (canAvatarMove(deltaX, deltaY)) {
