@@ -80,6 +80,7 @@ public class World {
                 }
             }
         }
+        numberRooms = placed;
     }
     /*goes through each of the rooms and connects the room to the next room over
      * at the end connects the first to the last*/
