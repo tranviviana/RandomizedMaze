@@ -10,21 +10,34 @@ public class WorldGenTests {
     public boolean isGameOver = true;
     @Test
     public void basicTest() throws Exception {
-        // put different seeds here to test different worlds
-        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123412swwwwwwwww");
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123412s");
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
-        StdDraw.pause(500000); // pause for 5 seconds so you can see the output
+        StdDraw.pause(1000);
+        // put different seeds here to test different worlds
+        // pause for 5 seconds so you can see the output
     }
 
     @Test
     public void basicInteractivityTest() {
         // TODO: write a test that uses an input like "n123swasdwasd"
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123412swwwwwwwww");
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length);
+        ter.renderFrame(tiles);
+        StdDraw.pause(800);
+
     }
 
     @Test
     public void basicSaveTest() {
         // TODO: write a test that calls getWorldFromInput twice, with "n123swasd:q" and with "lwasd"
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123412swwwwwwwww:q");
+        tiles = AutograderBuddy.getWorldFromInput("lddddddddddddd");
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length);
+        ter.renderFrame(tiles);
+        StdDraw.pause(1000);
     }
 }
