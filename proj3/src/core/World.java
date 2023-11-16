@@ -1,11 +1,8 @@
 package core;
-import tileengine.TERenderer;
-import tileengine.TETile;
-import tileengine.Tileset;
+import tileengine.*;
 import edu.princeton.cs.algs4.StdDraw;
 import java.awt.*;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 import java.util.List;
 
@@ -53,7 +50,13 @@ public class World {
         generateHUD();
         spawnAvatar();
     }
-    public World(Random seed, TETile oldWorld) {
+    public World(Random seed, TETile[][] oldWorld) {
+        randomGenerator = seed;
+        projWorld = oldWorld;
+        tiles = worldState();
+        ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length + 5);
+        ter.renderFrame(tiles);
 
     }
     /*style of the upper HUD shows how many ghosts busted*/

@@ -1,8 +1,11 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TETile;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 
 public class Main {
@@ -39,10 +42,13 @@ public class Main {
             }
             if (c == 'l' || c == 'L') {
                 //load the old game
+
+                return;
             }
         }
         while (true);
     }
+
 
     //do we need to put backspace key????
     //assumesseed is all nums
