@@ -34,7 +34,8 @@ public class WorldGenTests {
     public void basicSaveTest() {
         // TODO: write a test that calls getWorldFromInput twice, with "n123swasd:q" and with "lwasd"
         TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123swasd:q");
-        tiles = AutograderBuddy.getWorldFromInput("lwasdw");
+        //tiles = AutograderBuddy.getWorldFromInput("lwasw:qlddd");
+        //tiles = AutograderBuddy.getWorldFromInput("lwasds");
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);

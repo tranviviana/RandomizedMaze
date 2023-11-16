@@ -13,6 +13,7 @@ public class AutoGraderReader {
         }
 
     }
+
     public World loadedWorldFromInput() {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
             World oldWorld = Main.reload();
@@ -37,16 +38,39 @@ public class AutoGraderReader {
         }
         return Long.parseLong(seed.toString());
     }
+
     private World loadNewWorld(World oldWorld) {
-        for (int j = 0; j < actions.size(); j++) {
-            if (actions.get(j) == ':' && j + 1 < actions.size()) {
-                if (actions.get(j + 1) == 'q' || actions.get(j + 1) == 'Q') {
+        while (!actions.isEmpty()) {
+            if (actions.get(0) == ':' && actions.size() > 1) {
+                actions.remove(0);
+                if (actions.get(0) == 'q' || actions.get(0) == 'Q') {
                     oldWorld.saveAndQuit(true);
-                    return oldWorld;
+                    actions.remove(0);
                 }
             }
-            oldWorld.userInputHandler(actions.get(j));
+            if (!actions.isEmpty()) {
+                if (actions.get(0) == 'l' || actions.get(0) == 'L') {
+                    oldWorld = loadedWorldFromInput();
+                }
+            }
+            if (!actions.isEmpty()) {
+                oldWorld.userInputHandler(actions.get(0));
+                actions.remove(0);
+            }
+
         }
         return oldWorld;
     }
 }
+//        for (int j = 0; j < actions.size(); j++) {
+//            if (actions.get(j) == ':' && j + 1 < actions.size()) {
+//                if (actions.get(j + 1) == 'q' || actions.get(j + 1) == 'Q') {
+//                    oldWorld.saveAndQuit(true);
+//                    return oldWorld;
+//                }
+//            }
+//            oldWorld.userInputHandler(actions.get(j));
+//        }
+//        return oldWorld;
+//    }
+//}
