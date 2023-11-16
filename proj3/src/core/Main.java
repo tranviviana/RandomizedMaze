@@ -87,7 +87,7 @@ public class Main {
     //do we need to put backspace key????
     //assumesseed is all nums
     /*controls the input section, regenerating screen to show what has been typed in*/
-    public static World processingSeedStrokes() throws Exception {
+    public static World processingSeedStrokes() {
         StdDraw.clear(Color.BLACK);
         StdDraw.text(CENTER, CENTER, "Enter Seed");
         StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
