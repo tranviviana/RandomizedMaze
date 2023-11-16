@@ -27,7 +27,7 @@ public class AutograderBuddy {
             i++;
         }
         World testingWorld = new World(Long.parseLong(seed.toString()));
-        for (int j = 3; j < result.length; j++) {
+        for (int j = i; j < result.length; j++) {
             testingWorld.userInputHandler(testingWorld.character, result[j]);
         }
         return testingWorld.worldState();
