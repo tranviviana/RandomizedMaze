@@ -2,10 +2,6 @@ package core.images;
 
 import core.Main;
 import core.World;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,22 +17,21 @@ public class AutoGraderReader {
 
     }
     public World loadedWorldFromInput() {
-            if (actions.get(0) == 'l' || actions.get(0) == 'L') {
-                World oldWorld = Main.reload();
-                actions.remove(0);
-                return loadNewWorld(oldWorld);
-            }
-            else if (actions.get(0) == 'n' || actions.get(0) == 'N') {
-                World newWorld = new World(getSeed());
-                return loadNewWorld(newWorld);
-            }
+        if (actions.get(0) == 'l' || actions.get(0) == 'L') {
+            World oldWorld = Main.reload();
+            actions.remove(0);
+            return loadNewWorld(oldWorld);
+        }
+        else if (actions.get(0) == 'n' || actions.get(0) == 'N') {
+            World newWorld = new World(getSeed());
+            return loadNewWorld(newWorld);
+        }
         return null;
-
     }
 
     private long getSeed() {
         StringBuilder seed = new StringBuilder();
-        if (actions.get(0) == 'n' || actions.get(0) == 'N' ) {
+        if (actions.get(0) == 'n' || actions.get(0) == 'N') {
             actions.remove(0);
             while (actions.get(0) != 's' && actions.get(0) != 'S') {
                 seed.append(actions.get(0));
