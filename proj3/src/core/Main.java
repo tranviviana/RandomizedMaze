@@ -63,7 +63,6 @@ public class Main {
             System.exit(0);
         } else {
             AutoGraderReader autograder = new AutoGraderReader(fileName.readLine());
-            fileName.readLine();
             return autograder.loadedWorldFromInput();
         }
         return null;
