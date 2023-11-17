@@ -1,5 +1,6 @@
 package core;
 
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
@@ -57,16 +58,13 @@ public class Main {
     }
     /*reloads the game by parsing through the txt file and calling autograder to finish it*/
     public static World reload() {
-        String filename = "proj3/src/core/save-file.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            AutoGraderReader autograder = new AutoGraderReader(br.readLine());
-            if (autograder.actions.isEmpty()) {
-                System.exit(0);
-            }
+        In fileName = new In("proj3/src/core/save-file.txt");
+        if (fileName.isEmpty()) {
+            System.exit(0);
+        } else {
+            AutoGraderReader autograder = new AutoGraderReader(fileName.readLine());
+            fileName.readLine();
             return autograder.loadedWorldFromInput();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return null;
     }

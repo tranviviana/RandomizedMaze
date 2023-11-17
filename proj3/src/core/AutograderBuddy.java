@@ -21,6 +21,9 @@ public class AutograderBuddy {
      */
     public static TETile[][] getWorldFromInput(String input)  {
         AutoGraderReader autograder = new AutoGraderReader(input);
+        if (input.equals(":q") || input.equals(":Q")) {
+            return new TETile[World.WIDTH][World.HEIGHT];
+        }
         return autograder.loadedWorldFromInput().worldState();
     }
 
