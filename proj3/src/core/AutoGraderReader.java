@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGraderReader {
-    public List<Character> actions;
+    private List<Character> actions;
 
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
@@ -40,8 +40,9 @@ public class AutoGraderReader {
         }
         return Long.parseLong(seed.toString());
     }
-    /*generates the newWorld status based off of old world. For example if in my old file I moved left twice, I move left
-    twice in this new world*/
+    /*generates the newWorld status based off of old world. For example if in my old file I moved left twice,
+    *I move left
+    *twice in this new world*/
 
     private World loadNewWorld(World oldWorld) {
         while (!actions.isEmpty()) {
