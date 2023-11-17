@@ -41,8 +41,8 @@ public class AutoGraderReader {
         return Long.parseLong(seed.toString());
     }
     /*generates the newWorld status based off of old world. For example if in my old file I moved left twice,
-    *I move left
-    *twice in this new world*/
+     *I move left
+     *twice in this new world*/
 
     private World loadNewWorld(World oldWorld) {
         while (!actions.isEmpty()) {
@@ -67,4 +67,3 @@ public class AutoGraderReader {
         return oldWorld;
     }
 }
-
