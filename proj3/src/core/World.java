@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
-
+//testing
 import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
 import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 
@@ -378,8 +378,5 @@ public class World {
             }
         }
     }
-    /*
-     *@source readline generate by chatGPT*/
-    /*reads the line with all of the movements and the seed to create a world*/
 
 }
