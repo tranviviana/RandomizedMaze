@@ -60,6 +60,9 @@ public class Main {
         String filename = "proj3/src/core/save-file.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             AutoGraderReader autograder = new AutoGraderReader(br.readLine());
+            if (autograder.actions.isEmpty()) {
+                System.exit(0);
+            }
             return autograder.loadedWorldFromInput();
 
         } catch (IOException e) {
