@@ -337,7 +337,7 @@ public class World {
     }
     // saves the current state of the game in a txt file to be loaded into later
     public void saveAndQuit(boolean isAutograderTrue) {
-        String filePath =  "proj3/src/core/save-file.txt";
+        String filePath =  "save-file.txt";
         try (PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
             writer.println(stringInput);
         } catch (IOException e) {

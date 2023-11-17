@@ -58,7 +58,7 @@ public class Main {
     }
     /*reloads the game by parsing through the txt file and calling autograder to finish it*/
     public static World reload() {
-        In fileName = new In("proj3/src/core/save-file.txt");
+        In fileName = new In("save-file.txt");
         if (fileName.isEmpty()) {
             System.exit(0);
         } else {
