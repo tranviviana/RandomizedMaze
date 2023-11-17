@@ -17,6 +17,9 @@ public class AutoGraderReader {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
             World oldWorld = Main.reload();
             actions.remove(0);
+            if (oldWorld == null) {
+                return null;
+            }
             return loadNewWorld(oldWorld);
         } else {
             World newWorld = new World(getSeed());
