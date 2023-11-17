@@ -379,4 +379,25 @@ public class World {
         }
     }
 
+    public static void worldReplay() {
+
+        World newWorld = new World(AutoGraderReader.getSeed());
+        TETile[][] tiles = newWorld.worldState();
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length + 5);
+        newWorld.generateHUD();
+        ter.renderFrame(tiles);
+
+        while (!AutoGraderReader.actions.isEmpty()) {
+            newWorld.userInputHandler(AutoGraderReader.actions.get(0));
+            AutoGraderReader.actions.remove(0);
+            tiles = newWorld.worldState();
+            // NEED HELP HERE -- EDWIN!!!!
+            StdDraw.pause(500);
+            ter.renderFrame(tiles);
+
+
+        }
+    }
+
 }

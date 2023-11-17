@@ -53,7 +53,7 @@ public class Main {
                     return reload();
                 }
                 if (c == 'r' || c == 'R') {
-                    // replay
+                    AutoGraderReader.isReplay = true;
                     return replay();
                 }
 

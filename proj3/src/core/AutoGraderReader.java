@@ -1,5 +1,6 @@
 package core;
 
+import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
 
@@ -7,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGraderReader {
-    private List<Character> actions;
+    public static List<Character> actions;
+
+    public static boolean isReplay;
 
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
@@ -24,6 +27,7 @@ public class AutoGraderReader {
                 //short circuiting for autograder
                 AutograderBuddy.getWorldFromInput(":q");
             }
+            // actions.add('b');
             return loadNewWorld(oldWorld);
         } else {
             World newWorld = new World(getSeed());
@@ -31,7 +35,7 @@ public class AutoGraderReader {
         }
     }
     /*returns the long needed to generate the new world*/
-    private long getSeed() {
+    public static long getSeed() {
         StringBuilder seed = new StringBuilder();
         if (actions.get(0) == 'n' || actions.get(0) == 'N') {
             actions.remove(0);
@@ -75,19 +79,9 @@ public class AutoGraderReader {
             World oldWorld = Main.reload();
             actions.remove(0);
         } else {
-            World newWorld = new World(getSeed());
-            TETile[][] tiles = newWorld.worldState();
-            TERenderer ter = new TERenderer();
-            ter.initialize(tiles.length, tiles[0].length + 5);
-            ter.renderFrame(tiles);
-
-            while (!actions.isEmpty()) {
-                newWorld.userInputHandler(actions.get(0));
-                actions.remove(0);
-                tiles = newWorld.worldState();
-                // NEED HELP HERE -- EDWIN!!!!
-                ter.renderFrame(tiles);
-
+            if (isReplay) {
+                World.worldReplay();
+                isReplay = false;
             }
         }
 
