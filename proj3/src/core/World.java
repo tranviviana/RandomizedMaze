@@ -24,7 +24,7 @@ public class World {
     private List<List<Integer>> listofMiddle;
     private List<List<Integer>> sizeofRooms;
     private Avatar character;
-    public StringBuilder stringInput;
+    private StringBuilder stringInput;
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
@@ -343,7 +343,7 @@ public class World {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!isAutograderTrue){
+        if (!isAutograderTrue) {
             System.exit(0);
         }
     }
