@@ -61,9 +61,8 @@ public class Main {
         In fileName = new In("proj3/src/core/save-file.txt");
         if (fileName.isEmpty()) {
             System.exit(0);
-        }
-        else {
-            AutoGraderReader autograder = new AutoGraderReader( fileName.readLine());
+        } else {
+            AutoGraderReader autograder = new AutoGraderReader(fileName.readLine());
             fileName.readLine();
             return autograder.loadedWorldFromInput();
         }

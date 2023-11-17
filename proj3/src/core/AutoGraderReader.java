@@ -18,6 +18,7 @@ public class AutoGraderReader {
             World oldWorld = Main.reload();
             actions.remove(0);
             if (oldWorld == null) {
+                //short circuiting for autograder
                 AutograderBuddy.getWorldFromInput(":q");
             }
             return loadNewWorld(oldWorld);
