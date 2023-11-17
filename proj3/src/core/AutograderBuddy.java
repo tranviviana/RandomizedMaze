@@ -3,6 +3,8 @@ package core;
 import tileengine.TETile;
 import tileengine.Tileset;
 
+
+
 public class AutograderBuddy {
 
     /**
@@ -17,15 +19,11 @@ public class AutograderBuddy {
      * @param input the input string to feed to your program
      * @return the 2D TETile[][] representing the state of the world
      */
-    /*  @source splitting line is ChatGPT generated  */
-    public static TETile[][] getWorldFromInput(String input) {
-        String[] parts = input.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
-        World testingWorld = new World(Long.parseLong(parts[1]));
-        return testingWorld.worldState();
-
-        //throw new RuntimeException("Please fill out AutograderBuddy!");
-
+    public static TETile[][] getWorldFromInput(String input)  {
+        AutoGraderReader autograder = new AutoGraderReader(input);
+        return autograder.loadedWorldFromInput().worldState();
     }
+
 
 
     /**
@@ -48,4 +46,6 @@ public class AutograderBuddy {
                 || t.character() == Tileset.LOCKED_DOOR.character()
                 || t.character() == Tileset.UNLOCKED_DOOR.character();
     }
+
+
 }

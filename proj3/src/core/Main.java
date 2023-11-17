@@ -1,11 +1,11 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TERenderer;
 import tileengine.TETile;
 
 import java.awt.*;
 import java.io.*;
-import java.util.Random;
 
 
 public class Main {
@@ -15,7 +15,7 @@ public class Main {
     public static final int REGULARFONT = 30;
     public static final double CENTER = 0.5;
 
-    
+
     /*creates the initial new game screen */
     public static void main(String[] args) throws Exception {
         StdDraw.setCanvasSize(CANVASWIDTH, CANVASHEIGHT);
@@ -29,44 +29,48 @@ public class Main {
         StdDraw.text(CENTER, CENTER - 0.2, "New Game (N)");
         StdDraw.text(CENTER, CENTER - 0.3, "Load Game (L)");
         StdDraw.text(CENTER, CENTER - 0.4, "Quit (Q)");
-        StdDraw.picture(CENTER, CENTER + 0.05, "core/images/test.png");
-        newGame();
+        StdDraw.picture(CENTER, CENTER + 0.05, "core/images/titleghost.png");
+        World testingWorld = newGame();
+        TETile[][] tiles = testingWorld.worldState();
+        TERenderer ter = new TERenderer();
+        ter.initialize(tiles.length, tiles[0].length + 5);
+        ter.renderFrame(tiles);
+        testingWorld.generateHUD();
+        testingWorld.playGame(ter);
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
-    public static void newGame() throws Exception {
+    public static World newGame() {
+        do {
+            while (StdDraw.hasNextKeyTyped()) {
+                char c = StdDraw.nextKeyTyped();
+                if (c == 'N' || c == 'n') {
+                    return processingSeedStrokes();
+                }
+                if (c == 'l' || c == 'L') {
+                    //load the old game
+                    return reload();
+                }
 
-        do while (StdDraw.hasNextKeyTyped()) {
-            char c = StdDraw.nextKeyTyped();
-            if (c == 'N' || c == 'n') {
-                processingSeedStrokes();
-                break;
-            }
-            if (c == 'l' || c == 'L') {
-                System.out.println("l was pressed");
-                //load the old game
-                loadFromFile("proj3/src/core/save-file.txt");
-
-                break;
             }
         }
         while (true);
     }
-    // Deserialization method for loading the World object from a file
-    public static World loadFromFile(String filename) {
-        System.out.println("in load from file");
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            World oldGame = new World ((TETile[][]) ois.readObject(), (Random) ois.readObject());
-            return oldGame;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    /*reloads the game by parsing through the txt file and calling autograder to finish it*/
+    public static World reload() {
+        String filename = "proj3/src/core/save-file.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            AutoGraderReader autograder = new AutoGraderReader(br.readLine());
+            return autograder.loadedWorldFromInput();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     //do we need to put backspace key????
     //assumesseed is all nums
     /*controls the input section, regenerating screen to show what has been typed in*/
-    public static void processingSeedStrokes() throws Exception {
+    public static World processingSeedStrokes() {
         StdDraw.clear(Color.BLACK);
         StdDraw.text(CENTER, CENTER, "Enter Seed");
         StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
@@ -74,29 +78,29 @@ public class Main {
         StdDraw.setPenColor(Color.BLACK);
         StringBuilder longDeveloping = new StringBuilder();
 
+        char c = ' ';
+        do {
+            while (StdDraw.hasNextKeyTyped()) {
+                c = StdDraw.nextKeyTyped();
+                if (c == 's' || c == 'S') {
+                    return startGame(Long.parseLong(longDeveloping.toString()));
 
-        do while (StdDraw.hasNextKeyTyped()) {
-            char c = StdDraw.nextKeyTyped();
-            if (c == 's' || c == 'S') {
-                startGame(Long.parseLong(longDeveloping.toString()));
-                throw new Exception();
-
+                }
+                //when game ends it escapes here
+                longDeveloping.append(c);
+                StdDraw.setPenColor(Color.white);
+                StdDraw.text(CENTER, CENTER, "Enter Seed");
+                StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
+                StdDraw.setPenColor(Color.black);
+                StdDraw.text(CENTER, CENTER - 0.2, String.valueOf(longDeveloping));
+                StdDraw.show();
             }
-            longDeveloping.append(c);
-            StdDraw.setPenColor(Color.white);
-            StdDraw.text(CENTER, CENTER, "Enter Seed");
-            StdDraw.filledRectangle(CENTER, CENTER - 0.2, 0.2, 0.05);
-            StdDraw.setPenColor(Color.black);
-            StdDraw.text(CENTER, CENTER - 0.2, String.valueOf(longDeveloping));
-            StdDraw.show();
         }
         while (true);
     }
     /*start the game in world*/
-    public static void startGame(long seed) {
-        World testingWorld = new World(seed);
+    public static World startGame(long seed) {
+        return new World(seed);
     }
 
 }
-
-
