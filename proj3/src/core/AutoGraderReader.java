@@ -1,5 +1,8 @@
 package core;
 
+import tileengine.TERenderer;
+import tileengine.TETile;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +68,28 @@ public class AutoGraderReader {
 
         }
         return oldWorld;
+    }
+
+    public void loadReplayWorld() {
+        if (actions.get(0) == 'r' || actions.get(0) == 'R') {
+            World oldWorld = Main.reload();
+            actions.remove(0);
+        } else {
+            World newWorld = new World(getSeed());
+            TETile[][] tiles = newWorld.worldState();
+            TERenderer ter = new TERenderer();
+            ter.initialize(tiles.length, tiles[0].length + 5);
+            ter.renderFrame(tiles);
+
+            while (!actions.isEmpty()) {
+                newWorld.userInputHandler(actions.get(0));
+                actions.remove(0);
+                tiles = newWorld.worldState();
+                // NEED HELP HERE -- EDWIN!!!!
+                ter.renderFrame(tiles);
+
+            }
+        }
+
     }
 }
