@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGraderReader {
-    private List<Character> actions;
+    public List<Character> actions;
 
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
