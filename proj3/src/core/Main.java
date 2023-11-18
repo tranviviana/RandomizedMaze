@@ -63,11 +63,20 @@ public class Main {
         if (fileName.isEmpty()) {
             System.exit(0);
         } else {
-            AutoGraderReader autograder = new AutoGraderReader(fileName.readLine());
-            fileName.readLine();
+            String oldGame = fileName.readLine();
+            AutoGraderReader autograder = new AutoGraderReader(oldGame);
+            storeOldGame(oldGame);
             return autograder.loadedWorldFromInput();
         }
         return null;
+    }
+    private static void storeOldGame(String oldGame) {
+        String filePath =  "previousGame.txt";
+        try (PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
+            writer.println(oldGame);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     //do we need to put backspace key????
     //assumesseed is all nums
