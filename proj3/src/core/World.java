@@ -378,8 +378,4 @@ public class World {
             }
         }
     }
-    /*
-     *@source readline generate by chatGPT*/
-    /*reads the line with all of the movements and the seed to create a world*/
-
 }
