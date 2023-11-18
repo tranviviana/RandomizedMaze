@@ -1,10 +1,16 @@
 package core;
 
+import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TERenderer;
+import tileengine.TETile;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGraderReader {
-    private List<Character> actions;
+    public static List<Character> actions;
+
+    public static boolean isReplay;
 
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
@@ -21,6 +27,7 @@ public class AutoGraderReader {
                 //short circuiting for autograder
                 AutograderBuddy.getWorldFromInput(":q");
             }
+            // actions.add('b');
             return loadNewWorld(oldWorld);
         } else {
             World newWorld = new World(getSeed());
@@ -28,7 +35,7 @@ public class AutoGraderReader {
         }
     }
     /*returns the long needed to generate the new world*/
-    private long getSeed() {
+    public static long getSeed() {
         StringBuilder seed = new StringBuilder();
         if (actions.get(0) == 'n' || actions.get(0) == 'N') {
             actions.remove(0);
@@ -66,4 +73,5 @@ public class AutoGraderReader {
         }
         return oldWorld;
     }
+
 }
