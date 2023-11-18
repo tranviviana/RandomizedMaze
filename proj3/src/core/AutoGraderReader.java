@@ -1,9 +1,11 @@
 package core;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGraderReader {
-    private static List<Character> actions;
+    private List<Character> actions;
+
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
         for (int c = 0; c < input.length(); c++) {
@@ -19,7 +21,6 @@ public class AutoGraderReader {
                 //short circuiting for autograder
                 AutograderBuddy.getWorldFromInput(":q");
             }
-            // actions.add('b');
             return loadNewWorld(oldWorld);
         } else {
             World newWorld = new World(getSeed());
@@ -27,7 +28,7 @@ public class AutoGraderReader {
         }
     }
     /*returns the long needed to generate the new world*/
-    public static long getSeed() {
+    private long getSeed() {
         StringBuilder seed = new StringBuilder();
         if (actions.get(0) == 'n' || actions.get(0) == 'N') {
             actions.remove(0);
@@ -66,3 +67,4 @@ public class AutoGraderReader {
         return oldWorld;
     }
 }
+

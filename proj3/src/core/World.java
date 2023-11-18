@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
-//testing
+
 import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
 import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 
@@ -337,7 +337,7 @@ public class World {
     }
     // saves the current state of the game in a txt file to be loaded into later
     public void saveAndQuit(boolean isAutograderTrue) {
-        String filePath =  "oldGame.txt";
+        String filePath =  "save-file.txt";
         try (PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
             writer.println(stringInput);
         } catch (IOException e) {
@@ -378,4 +378,8 @@ public class World {
             }
         }
     }
+    /*
+     *@source readline generate by chatGPT*/
+    /*reads the line with all of the movements and the seed to create a world*/
+
 }
