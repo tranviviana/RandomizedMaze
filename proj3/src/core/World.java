@@ -337,7 +337,7 @@ public class World {
     }
     // saves the current state of the game in a txt file to be loaded into later
     public void saveAndQuit(boolean isAutograderTrue) {
-        String filePath =  "save-files.txt";
+        String filePath =  "oldGame.txt";
         try (PrintWriter writer = new PrintWriter(filePath, "UTF-8")) {
             writer.println(stringInput);
         } catch (IOException e) {
@@ -376,27 +376,6 @@ public class World {
             if (projWorld[spawnX][spawnY] == FLOORREP) {
                 projWorld[spawnX][spawnY] = GHOSTTILE;
             }
-        }
-    }
-
-    public static void worldReplay() {
-
-        World newWorld = new World(AutoGraderReader.getSeed());
-        TETile[][] tiles = newWorld.worldState();
-        TERenderer ter = new TERenderer();
-        ter.initialize(tiles.length, tiles[0].length + 5);
-        newWorld.generateHUD();
-        ter.renderFrame(tiles);
-
-        while (!AutoGraderReader.actions.isEmpty()) {
-            newWorld.userInputHandler(AutoGraderReader.actions.get(0));
-            AutoGraderReader.actions.remove(0);
-            tiles = newWorld.worldState();
-            // NEED HELP HERE -- EDWIN!!!!
-            StdDraw.pause(500);
-            ter.renderFrame(tiles);
-
-
         }
     }
 

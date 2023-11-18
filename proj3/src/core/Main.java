@@ -28,8 +28,7 @@ public class Main {
         font = new Font("Poppins", Font.BOLD, REGULARFONT);
         StdDraw.setFont(font);
         StdDraw.text(CENTER, CENTER - 0.2, "New Game (N)");
-        StdDraw.text(CENTER, CENTER - 0.25, "Load Game (L)");
-        StdDraw.text(CENTER, CENTER - 0.3, "Replay Game (R)");
+        StdDraw.text(CENTER, CENTER - 0.3, "Load Game (L)");
         StdDraw.text(CENTER, CENTER - 0.4, "Quit (Q)");
         StdDraw.picture(CENTER, CENTER + 0.05, "core/images/titleghost.png");
         World testingWorld = newGame();
@@ -52,10 +51,6 @@ public class Main {
                     //load the old game
                     return reload();
                 }
-                if (c == 'r' || c == 'R') {
-                    AutoGraderReader.isReplay = true;
-                    return replay();
-                }
 
             }
         }
@@ -63,7 +58,7 @@ public class Main {
     }
     /*reloads the game by parsing through the txt file and calling autograder to finish it*/
     public static World reload() {
-        In fileName = new In("save-file.txt");
+        In fileName = new In("oldGame.txt");
         if (fileName.isEmpty()) {
             System.exit(0);
         } else {
@@ -72,19 +67,6 @@ public class Main {
         }
         return null;
     }
-
-    public static World replay() {
-        In fileName = new In("save-files.txt");
-        if (fileName.isEmpty()) {
-            System.exit(0);
-        } else {
-            AutoGraderReader autograder = new AutoGraderReader(fileName.readLine());
-            autograder.loadReplayWorld();
-        }
-        return null;
-    }
-
-
     //do we need to put backspace key????
     //assumesseed is all nums
     /*controls the input section, regenerating screen to show what has been typed in*/
