@@ -41,24 +41,31 @@ public class Main {
         testingWorld.playGame(ter);
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
-    public static World newGame() {
+    public static World newGame() throws FileNotFoundException {
         do {
             while (StdDraw.hasNextKeyTyped()) {
                 char c = StdDraw.nextKeyTyped();
                 if (c == 'N' || c == 'n') {
+                    //resets previousGame so it is only storing the current game info
+                    String filePath =  "previousGame.txt";
+                    new PrintWriter(new FileOutputStream(filePath), true);
                     return processingSeedStrokes();
                 }
                 if (c == 'l' || c == 'L') {
                     //load the old game
-                    return reload();
+                    return reload(false);
+                }
+                if (c == 'r' || c == 'R') {
+                    return reload(true);
                 }
 
             }
         }
         while (true);
     }
+
     /*reloads the game by parsing through the txt file and calling autograder to finish it*/
-    public static World reload() {
+    public static World reload(boolean isReplay) {
         In fileName = new In("save-file.txt");
         if (fileName.isEmpty()) {
             System.exit(0);
@@ -66,7 +73,7 @@ public class Main {
             String oldGame = fileName.readLine();
             AutoGraderReader autograder = new AutoGraderReader(oldGame);
             storeOldGame(oldGame);
-            return autograder.loadedWorldFromInput();
+            return autograder.loadedWorldFromInput(isReplay);
         }
         return null;
     }

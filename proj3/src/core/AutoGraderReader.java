@@ -13,18 +13,19 @@ public class AutoGraderReader {
         }
     }
     /*returns the edited world when a user presses l or n*/
-    public World loadedWorldFromInput() {
+    public World loadedWorldFromInput(boolean isReplay) {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
-            World oldWorld = Main.reload();
+            isReplay = false;
+            World oldWorld = Main.reload(isReplay);
             actions.remove(0);
             if (oldWorld == null) {
                 //short circuiting for autograder
                 AutograderBuddy.getWorldFromInput(":q");
             }
-            return loadNewWorld(oldWorld);
+            return loadNewWorld(oldWorld, isReplay);
         } else {
             World newWorld = new World(getSeed());
-            return loadNewWorld(newWorld);
+            return loadNewWorld(newWorld, isReplay);
         }
     }
     /*returns the long needed to generate the new world*/
@@ -44,7 +45,7 @@ public class AutoGraderReader {
      *I move left
      *twice in this new world*/
 
-    private World loadNewWorld(World oldWorld) {
+    private World loadNewWorld(World oldWorld, boolean isReplay) {
         while (!actions.isEmpty()) {
             if (actions.get(0) == ':' && actions.size() > 1) {
                 actions.remove(0);
@@ -55,7 +56,7 @@ public class AutoGraderReader {
             }
             if (!actions.isEmpty()) {
                 if (actions.get(0) == 'l' || actions.get(0) == 'L') {
-                    oldWorld = loadedWorldFromInput();
+                    oldWorld = loadedWorldFromInput(isReplay);
                 }
             }
             if (!actions.isEmpty()) {

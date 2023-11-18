@@ -24,7 +24,7 @@ public class AutograderBuddy {
         if (input.equals(":q") || input.equals(":Q")) {
             return new TETile[World.WIDTH][World.HEIGHT];
         }
-        return autograder.loadedWorldFromInput().worldState();
+        return autograder.loadedWorldFromInput(false).worldState();
     }
 
 
