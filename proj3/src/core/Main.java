@@ -24,13 +24,14 @@ public class Main {
         StdDraw.setPenColor(Color.white);
         Font font = new Font("Poppins", Font.BOLD, TITLEFONT);
         StdDraw.setFont(font);
-        StdDraw.text(CENTER, CENTER + 0.3, "CS 61B Ghost Busters");
+        StdDraw.text(CENTER, CENTER + 0.4, "CS 61B Ghost Busters");
         font = new Font("Poppins", Font.BOLD, REGULARFONT);
         StdDraw.setFont(font);
-        StdDraw.text(CENTER, CENTER - 0.2, "New Game (N)");
-        StdDraw.text(CENTER, CENTER - 0.3, "Load Game (L)");
+        StdDraw.text(CENTER, CENTER - 0.1, "New Game (N)");
+        StdDraw.text(CENTER, CENTER - 0.2, "Load Game (L)");
+        StdDraw.text(CENTER, CENTER - 0.3, "Replay (R)");
         StdDraw.text(CENTER, CENTER - 0.4, "Quit (Q)");
-        StdDraw.picture(CENTER, CENTER + 0.05, "core/images/titleghost.png");
+        StdDraw.picture(CENTER, CENTER + 0.15, "core/images/titleghost.png");
         World testingWorld = newGame();
         TETile[][] tiles = testingWorld.worldState();
         TERenderer ter = new TERenderer();
