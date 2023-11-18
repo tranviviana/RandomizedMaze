@@ -18,7 +18,7 @@ public class Main {
 
 
     /*creates the initial new game screen */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         StdDraw.setCanvasSize(CANVASWIDTH, CANVASHEIGHT);
         StdDraw.clear(Color.black);
         StdDraw.setPenColor(Color.white);
