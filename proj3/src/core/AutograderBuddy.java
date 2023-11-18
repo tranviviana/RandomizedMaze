@@ -49,6 +49,4 @@ public class AutograderBuddy {
                 || t.character() == Tileset.LOCKED_DOOR.character()
                 || t.character() == Tileset.UNLOCKED_DOOR.character();
     }
-
-
 }

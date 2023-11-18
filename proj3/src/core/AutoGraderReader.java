@@ -1,17 +1,9 @@
 package core;
-
-import edu.princeton.cs.algs4.StdDraw;
-import tileengine.TERenderer;
-import tileengine.TETile;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGraderReader {
-    public static List<Character> actions;
-
-    public static boolean isReplay;
-
+    private static List<Character> actions;
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
         for (int c = 0; c < input.length(); c++) {
@@ -73,5 +65,4 @@ public class AutoGraderReader {
         }
         return oldWorld;
     }
-
 }
