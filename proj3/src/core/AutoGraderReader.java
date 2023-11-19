@@ -3,7 +3,6 @@ package core;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
-import tileengine.TETile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
 public class AutoGraderReader {
     private List<Character> actions;
     private int leftoverIndex;
+    private static final int TIMEFORREPLAY = 500;
 
 
     public AutoGraderReader(String input) {
@@ -86,7 +86,7 @@ public class AutoGraderReader {
                 if (isReplay && actions.size() <= leftoverIndex || isReplay && leftoverIndex == 0) {
                     ter.renderFrame(oldWorld.worldState());
                     oldWorld.generateHUD();
-                    StdDraw.pause(500);
+                    StdDraw.pause(TIMEFORREPLAY);
                 }
                 oldWorld.userInputHandler(actions.get(0));
                 actions.remove(0);

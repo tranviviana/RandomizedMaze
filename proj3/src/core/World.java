@@ -25,7 +25,7 @@ public class World {
     private List<List<Integer>> sizeofRooms;
     private Avatar character;
     private StringBuilder stringInput;
-    public TERenderer ter;
+    private TERenderer ter;
 
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
@@ -279,25 +279,25 @@ public class World {
             }
         }
     }
-    public void playGame(TERenderer ter) {
-        renderFrame(ter);
+    public void playGame() {
+        renderFrame();
         TETile currentTile = tileMoused();
         while (!isGameOver()) {
             if (tileMoused() != currentTile) {
                 currentTile = tileMoused();
-                renderFrame(ter);
+                renderFrame();
             }
             if (hasNextKeyTyped()) {
                 char c = nextKeyTyped();
                 userInputHandler(c);
-                renderFrame(ter);
+                renderFrame();
             }
         }
     }
 
 
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
-    public void renderFrame(TERenderer ter) {
+    public void renderFrame() {
         ter.renderFrame(this.worldState());
         generateHUD();
     }
