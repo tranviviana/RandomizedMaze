@@ -64,6 +64,8 @@ public class AutoGraderReader {
     }
 
     private World loadNewWorld(World oldWorld, boolean isReplay) {
+        TERenderer ter = new TERenderer();
+        ter.initialize(oldWorld.worldState().length, oldWorld.worldState()[0].length + 5);
         while (!actions.isEmpty()) {
             if (actions.get(0) == ':' && actions.size() > 1) {
                 actions.remove(0);
@@ -78,13 +80,12 @@ public class AutoGraderReader {
                 }
             }
             if (!actions.isEmpty()) {
-                if (isReplay && actions.size() == leftoverIndex) {
-                    TERenderer ter = new TERenderer();
-                    ter.initialize(oldWorld.worldState().length, oldWorld.worldState()[0].length + 5);
+                System.out.println(actions.size());
+                if (isReplay && actions.size() <= leftoverIndex) {
                     ter.renderFrame(oldWorld.worldState());
                     oldWorld.generateHUD();
                     //oldWorld.renderFrame();
-                    StdDraw.pause(1000);
+                    StdDraw.pause(500);
                 }
                 oldWorld.userInputHandler(actions.get(0));
                 actions.remove(0);
