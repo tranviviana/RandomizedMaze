@@ -8,7 +8,7 @@ import java.io.*;
 
 
 
-public class gameUI {
+public class GameUI {
     public static final int CANVASWIDTH = 1200;
     public static final int CANVASHEIGHT = 800;
     public static final int TITLEFONT = 60;
@@ -16,7 +16,7 @@ public class gameUI {
     public static final double CENTER = 0.5;
 
 
-    public gameUI() throws FileNotFoundException {
+    public GameUI() throws FileNotFoundException {
         StdDraw.setCanvasSize(CANVASWIDTH, CANVASHEIGHT);
         StdDraw.clear(Color.black);
         StdDraw.setPenColor(Color.white);

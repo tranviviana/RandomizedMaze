@@ -1,6 +1,5 @@
 package core;
 
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 
@@ -24,7 +23,7 @@ public class AutoGraderReader {
     public World loadedWorldFromInput(boolean isReplay) {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
             isReplay = false;
-            World oldWorld = gameUI.reload(isReplay);
+            World oldWorld = GameUI.reload(isReplay);
             actions.remove(0);
             if (oldWorld == null) {
                 //short circuiting for autograder
