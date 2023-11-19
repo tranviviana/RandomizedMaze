@@ -24,7 +24,7 @@ public class AutoGraderReader {
     public World loadedWorldFromInput(boolean isReplay) {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
             isReplay = false;
-            World oldWorld = GameUI.reload(isReplay);
+            World oldWorld = Main.reload(isReplay);
             actions.remove(0);
             if (oldWorld == null) {
                 //short circuiting for autograder
@@ -56,6 +56,7 @@ public class AutoGraderReader {
 
 
     private World loadNewWorld(World oldWorld, boolean isReplay) {
+        //condition for replay since the autograder doesn't work with tile rendering
         if (isReplay) {
             TERenderer ter = new TERenderer();
             ter.initialize(oldWorld.worldState().length, oldWorld.worldState()[0].length + 5);
@@ -84,6 +85,7 @@ public class AutoGraderReader {
             }
             oldWorld.playGame(ter);
         } else {
+            //for autograder and regular loading
             while (!actions.isEmpty()) {
                 if (actions.get(0) == ':' && actions.size() > 1) {
                     actions.remove(0);
