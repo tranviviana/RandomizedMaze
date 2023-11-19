@@ -25,15 +25,19 @@ public class World {
     private List<List<Integer>> sizeofRooms;
     private Avatar character;
     private StringBuilder stringInput;
+    public TERenderer ter;
+
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
     /*creates UI and spawns the avatar*/
     public World(Long seed) {
+        ter = new TERenderer();
         stringInput = new StringBuilder();
         stringInput.append("n").append(seed).append("s");
         randomGenerator = new Random(seed);
         projWorld = new TETile[WIDTH][HEIGHT];
+        ter.initialize(WIDTH, HEIGHT + 5);
         //might need to change math class
         numberRooms = randomGenerator.nextInt(3, WIDTH);
         fillRooms(0, 0, WIDTH, HEIGHT, NOTHINGREP);

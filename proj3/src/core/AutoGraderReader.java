@@ -12,6 +12,7 @@ public class AutoGraderReader {
     private List<Character> actions;
     private int leftoverIndex;
 
+
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
 
@@ -25,7 +26,7 @@ public class AutoGraderReader {
     public World loadedWorldFromInput(boolean isReplay) {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
             isReplay = false;
-            World oldWorld = Main.reload(isReplay);
+            World oldWorld = gameUI.reload(isReplay);
             actions.remove(0);
             if (oldWorld == null) {
                 //short circuiting for autograder
@@ -62,6 +63,7 @@ public class AutoGraderReader {
         }
         return localStartIndex;
     }
+
 
     private World loadNewWorld(World oldWorld, boolean isReplay) {
         TERenderer ter = new TERenderer();
