@@ -41,9 +41,6 @@ public class Main {
             while (StdDraw.hasNextKeyTyped()) {
                 char c = StdDraw.nextKeyTyped();
                 if (c == 'N' || c == 'n') {
-                    //resets previousGame so it is only storing the current game info
-                    String filePath = "previousGame.txt";
-                    new PrintWriter(new FileOutputStream(filePath), true);
                     World newWorld = processingSeedStrokes();
                     TERenderer ter = new TERenderer();
                     TETile[][] tiles = newWorld.worldState();
