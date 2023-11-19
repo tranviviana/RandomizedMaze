@@ -25,6 +25,7 @@ public class World {
     private List<List<Integer>> sizeofRooms;
     private Avatar character;
     private StringBuilder stringInput;
+    public TERenderer ter;
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
      @param Long seed to generate the same world when the same seed is passed through */
@@ -293,7 +294,7 @@ public class World {
 
 
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
-    private void renderFrame(TERenderer ter) {
+    public void renderFrame(TERenderer ter) {
         ter.renderFrame(this.worldState());
         generateHUD();
     }

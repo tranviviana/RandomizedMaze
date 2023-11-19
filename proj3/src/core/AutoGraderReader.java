@@ -1,16 +1,25 @@
 package core;
 
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TERenderer;
+import tileengine.TETile;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGraderReader {
     private List<Character> actions;
+    private int leftoverIndex;
 
     public AutoGraderReader(String input) {
         actions = new ArrayList<>();
+
         for (int c = 0; c < input.length(); c++) {
             actions.add(input.charAt(c));
         }
+        leftoverIndex = startIndextoShow();
+        System.out.println(leftoverIndex);
     }
     /*returns the edited world when a user presses l or n*/
     public World loadedWorldFromInput(boolean isReplay) {
@@ -44,6 +53,15 @@ public class AutoGraderReader {
     /*generates the newWorld status based off of old world. For example if in my old file I moved left twice,
      *I move left
      *twice in this new world*/
+    private int startIndextoShow() {
+        In fileName = new In("previousGame.txt");
+        String previousGameActions = fileName.readLine();
+        int localStartIndex = 0;
+        if (previousGameActions != null) {
+            localStartIndex = actions.size() - previousGameActions.length();
+        }
+        return localStartIndex;
+    }
 
     private World loadNewWorld(World oldWorld, boolean isReplay) {
         while (!actions.isEmpty()) {
@@ -60,6 +78,14 @@ public class AutoGraderReader {
                 }
             }
             if (!actions.isEmpty()) {
+                if (isReplay && actions.size() == leftoverIndex) {
+                    TERenderer ter = new TERenderer();
+                    ter.initialize(oldWorld.worldState().length, oldWorld.worldState()[0].length + 5);
+                    ter.renderFrame(oldWorld.worldState());
+                    oldWorld.generateHUD();
+                    //oldWorld.renderFrame();
+                    StdDraw.pause(1000);
+                }
                 oldWorld.userInputHandler(actions.get(0));
                 actions.remove(0);
             }
