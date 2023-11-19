@@ -81,10 +81,9 @@ public class AutoGraderReader {
             }
             if (!actions.isEmpty()) {
                 System.out.println(actions.size());
-                if (isReplay && actions.size() <= leftoverIndex) {
+                if (isReplay && actions.size() <= leftoverIndex || isReplay && leftoverIndex == 0) {
                     ter.renderFrame(oldWorld.worldState());
                     oldWorld.generateHUD();
-                    //oldWorld.renderFrame();
                     StdDraw.pause(500);
                 }
                 oldWorld.userInputHandler(actions.get(0));
