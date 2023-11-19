@@ -19,6 +19,7 @@ public class AutoGraderReader {
             actions.add(input.charAt(c));
         }
     }
+
     /*returns the edited world when a user presses l or n*/
     public World loadedWorldFromInput(boolean isReplay) {
         if (actions.get(0) == 'l' || actions.get(0) == 'L') {
@@ -35,6 +36,7 @@ public class AutoGraderReader {
             return loadNewWorld(newWorld, isReplay);
         }
     }
+
     /*returns the long needed to generate the new world*/
     private long getSeed() {
         StringBuilder seed = new StringBuilder();
@@ -53,36 +55,56 @@ public class AutoGraderReader {
      *twice in this new world*/
 
 
-
     private World loadNewWorld(World oldWorld, boolean isReplay) {
-        TERenderer ter = new TERenderer();
-        ter.initialize(oldWorld.worldState().length, oldWorld.worldState()[0].length + 5);
-        while (!actions.isEmpty()) {
-            if (actions.get(0) == ':' && actions.size() > 1) {
-                actions.remove(0);
-                if (actions.get(0) == 'q' || actions.get(0) == 'Q') {
-                    oldWorld.saveAndQuit(true);
+        if (isReplay) {
+            TERenderer ter = new TERenderer();
+            ter.initialize(oldWorld.worldState().length, oldWorld.worldState()[0].length + 5);
+            while (!actions.isEmpty()) {
+                if (actions.get(0) == ':' && actions.size() > 1) {
+                    actions.remove(0);
+                    if (actions.get(0) == 'q' || actions.get(0) == 'Q') {
+                        oldWorld.saveAndQuit(true);
+                        actions.remove(0);
+                    }
+                }
+                if (!actions.isEmpty()) {
+                    if (actions.get(0) == 'l' || actions.get(0) == 'L') {
+                        oldWorld = loadedWorldFromInput(isReplay);
+                    }
+                }
+                if (!actions.isEmpty()) {
+                    if (isReplay) {
+                        ter.renderFrame(oldWorld.worldState());
+                        oldWorld.generateHUD();
+                        StdDraw.pause(TIMEFORREPLAY);
+                    }
+                    oldWorld.userInputHandler(actions.get(0));
                     actions.remove(0);
                 }
             }
-            if (!actions.isEmpty()) {
-                if (actions.get(0) == 'l' || actions.get(0) == 'L') {
-                    oldWorld = loadedWorldFromInput(isReplay);
+            oldWorld.playGame(ter);
+        } else {
+            while (!actions.isEmpty()) {
+                if (actions.get(0) == ':' && actions.size() > 1) {
+                    actions.remove(0);
+                    if (actions.get(0) == 'q' || actions.get(0) == 'Q') {
+                        oldWorld.saveAndQuit(true);
+                        actions.remove(0);
+                    }
+                }
+                if (!actions.isEmpty()) {
+                    if (actions.get(0) == 'l' || actions.get(0) == 'L') {
+                        oldWorld = loadedWorldFromInput(false);
+                    }
+                }
+                if (!actions.isEmpty()) {
+                    oldWorld.userInputHandler(actions.get(0));
+                    actions.remove(0);
                 }
             }
-            if (!actions.isEmpty()) {
-                if (isReplay) {
-                    ter.renderFrame(oldWorld.worldState());
-                    oldWorld.generateHUD();
-                    StdDraw.pause(TIMEFORREPLAY);
-                }
-                oldWorld.userInputHandler(actions.get(0));
-                actions.remove(0);
-            }
-
         }
-        oldWorld.playGame(ter);
         return oldWorld;
     }
 }
+
 

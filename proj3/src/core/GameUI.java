@@ -55,7 +55,13 @@ public class GameUI {
                 }
                 if (c == 'l' || c == 'L') {
                     //load the old game
-                    reload(false);
+                    World newWorld = reload(false);
+                    TERenderer ter = new TERenderer();
+                    TETile[][] tiles = newWorld.worldState();
+                    ter.initialize(tiles.length, tiles[1].length + 5);
+                    newWorld.renderFrame(ter);
+                    newWorld.generateHUD();
+                    newWorld.playGame(ter);
                 }
                 if (c == 'r' || c == 'R') {
                     reload(true);
