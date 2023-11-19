@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AutoGraderReader {
     private List<Character> actions;
-    private int leftoverIndex;
+
     private static final int TIMEFORREPLAY = 500;
 
 
@@ -19,8 +19,6 @@ public class AutoGraderReader {
         for (int c = 0; c < input.length(); c++) {
             actions.add(input.charAt(c));
         }
-        leftoverIndex = startIndextoShow();
-        System.out.println(leftoverIndex);
     }
     /*returns the edited world when a user presses l or n*/
     public World loadedWorldFromInput(boolean isReplay) {
@@ -54,15 +52,7 @@ public class AutoGraderReader {
     /*generates the newWorld status based off of old world. For example if in my old file I moved left twice,
      *I move left
      *twice in this new world*/
-    private int startIndextoShow() {
-        In fileName = new In("previousGame.txt");
-        String previousGameActions = fileName.readLine();
-        int localStartIndex = 0;
-        if (previousGameActions != null) {
-            localStartIndex = actions.size() - previousGameActions.length();
-        }
-        return localStartIndex;
-    }
+
 
 
     private World loadNewWorld(World oldWorld, boolean isReplay) {
@@ -82,8 +72,7 @@ public class AutoGraderReader {
                 }
             }
             if (!actions.isEmpty()) {
-                System.out.println(actions.size());
-                if (isReplay && actions.size() <= leftoverIndex || isReplay && leftoverIndex == 0) {
+                if (isReplay) {
                     ter.renderFrame(oldWorld.worldState());
                     oldWorld.generateHUD();
                     StdDraw.pause(TIMEFORREPLAY);
