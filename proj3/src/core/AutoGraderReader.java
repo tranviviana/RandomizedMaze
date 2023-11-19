@@ -9,7 +9,7 @@ import java.util.List;
 public class AutoGraderReader {
     private List<Character> actions;
 
-    private static final int TIMEFORREPLAY = 500;
+    private static final int TIMEFORREPLAY = 300;
 
 
     public AutoGraderReader(String input) {
