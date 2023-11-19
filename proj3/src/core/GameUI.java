@@ -43,7 +43,6 @@ public class GameUI {
                     String filePath = "previousGame.txt";
                     new PrintWriter(new FileOutputStream(filePath), true);
                     World newWorld = processingSeedStrokes();
-
                     newWorld.renderFrame();
                     newWorld.generateHUD();
                     newWorld.playGame();
@@ -57,9 +56,10 @@ public class GameUI {
                 if (c == 'r' || c == 'R') {
                     World oldWorld = reload(true);
                     oldWorld.playGame();
-
                 }
-
+                if (c == 'q' || c == 'Q') {
+                    System.exit(0);
+                }
             }
         }
         while (true);
