@@ -54,7 +54,7 @@ public class AutoGraderReader {
      *I move left
      *twice in this new world*/
 
-
+    /*goes through each of the user inputs in the file and lets it run*/
     private World loadNewWorld(World oldWorld, boolean isReplay) {
         //condition for replay since the autograder doesn't work with tile rendering
         if (isReplay) {
