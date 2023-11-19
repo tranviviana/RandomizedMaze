@@ -81,6 +81,7 @@ public class AutoGraderReader {
             }
 
         }
+        oldWorld.playGame(ter);
         return oldWorld;
     }
 }

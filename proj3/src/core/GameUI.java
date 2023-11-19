@@ -2,6 +2,8 @@ package core;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TERenderer;
+import tileengine.TETile;
 
 import java.awt.*;
 import java.io.*;
@@ -43,19 +45,20 @@ public class GameUI {
                     String filePath = "previousGame.txt";
                     new PrintWriter(new FileOutputStream(filePath), true);
                     World newWorld = processingSeedStrokes();
-                    newWorld.renderFrame();
+                    TERenderer ter = new TERenderer();
+                    TETile[][] tiles = newWorld.worldState();
+                    ter.initialize(tiles.length, tiles[1].length + 5);
+                    newWorld.renderFrame(ter);
                     newWorld.generateHUD();
-                    newWorld.playGame();
+                    newWorld.playGame(ter);
 
                 }
                 if (c == 'l' || c == 'L') {
                     //load the old game
-                    World oldWorld = reload(false);
-                    oldWorld.playGame();
+                    reload(false);
                 }
                 if (c == 'r' || c == 'R') {
-                    World oldWorld = reload(true);
-                    oldWorld.playGame();
+                    reload(true);
                 }
                 if (c == 'q' || c == 'Q') {
                     System.exit(0);
