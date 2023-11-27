@@ -7,8 +7,6 @@ import tileengine.TETile;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 
 public class Main {
     public static final int CANVASWIDTH = 1200;
