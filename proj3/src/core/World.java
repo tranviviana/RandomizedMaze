@@ -13,7 +13,7 @@ import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
-    public static final TETile FLOORREP = new TETile('F', Color.gray, Color.black, "Floor", "core/images/blackfloor.jpg");
+    public static final TETile FLOORREP = new TETile('F', Color.gray, Color.black, "Fr", "core/images/blackfloor.jpg");
     public static final TETile WALLREP = new TETile('W', Color.gray, Color.black, "Wall", "core/images/walltile.jpg");
     public static final TETile NOTHINGREP = Tileset.NOTHING;
     public static final TETile GHOSTTILE = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
