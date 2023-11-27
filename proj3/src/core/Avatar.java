@@ -1,5 +1,6 @@
 package core;
 import tileengine.TETile;
+import edu.princeton.cs.algs4.StdAudio;
 
 import java.awt.*;
 
@@ -9,6 +10,9 @@ public class Avatar {
     private int xPos;
     private int yPos;
     private int ghostsBusted = 0;
+
+
+
 
 
     public Avatar(TETile[][] projWorld, int startX, int startY) {
@@ -27,6 +31,7 @@ public class Avatar {
         if (projWorld[xPos + deltaX][yPos + deltaY] == World.FLOORREP) {
             return true;
         } else if (projWorld[xPos + deltaX][yPos + deltaY] == World.GHOSTTILE) {
+            // StdAudio.play("");
             ghostsBusted++;
             return true;
         }

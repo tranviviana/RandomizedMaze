@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import java.time.*;
 
 import static edu.princeton.cs.algs4.StdDraw.hasNextKeyTyped;
 import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
@@ -12,8 +13,8 @@ import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
-    public static final TETile FLOORREP = Tileset.FLOOR;
-    public static final TETile WALLREP = Tileset.WALL;
+    public static final TETile FLOORREP = new TETile('F', Color.gray, Color.black, "Floor", "core/images/blackfloor.jpg");
+    public static final TETile WALLREP = new TETile('W', Color.gray, Color.black, "Wall", "core/images/walltile.jpg");
     public static final TETile NOTHINGREP = Tileset.NOTHING;
     public static final TETile GHOSTTILE = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
     public static final int WIDTH = 80;
@@ -25,6 +26,8 @@ public class World {
     private List<List<Integer>> sizeofRooms;
     private Avatar character;
     private StringBuilder stringInput;
+
+    private final String date = LocalDate.now().toString();
 
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
@@ -54,6 +57,7 @@ public class World {
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description());
         StdDraw.text(WIDTH - 4, HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
+        StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
         StdDraw.show();
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
@@ -280,6 +284,7 @@ public class World {
         renderFrame(ter);
         TETile currentTile = tileMoused();
         while (!isGameOver()) {
+            StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
             if (tileMoused() != currentTile) {
                 currentTile = tileMoused();
                 renderFrame(ter);
