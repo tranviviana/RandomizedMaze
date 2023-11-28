@@ -15,7 +15,7 @@ import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
-    public static final TETile FLOORREP = new TETile('F', Color.gray, Color.black, "Flr", "core/images/blackfloor.jpg");
+    public static final TETile FLOORREP = new TETile('F', Color.gray, Color.black, "Floor", "core/images/floor.jpg");
     public static final TETile WALLREP = new TETile('W', Color.gray, Color.black, "Wall", "core/images/walltile.jpg");
     public static final TETile NOTHINGREP = Tileset.NOTHING;
     public static final TETile GHOSTTILE = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
@@ -62,7 +62,6 @@ public class World {
         StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description());
         StdDraw.text(WIDTH - 4, HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
         StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
-        StdDraw.show();
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
      * stores the location of the rooms*/
@@ -293,9 +292,7 @@ public class World {
             if (currentTime != LocalTime.now()) {
                 String formattedTime = currentTime.format(formatter);
                 StdDraw.text((double) WIDTH / 2, HEIGHT + 3, "Time: " + formattedTime);
-                StdDraw.show();
                 currentTime = LocalTime.now();
-
             }
 
 
@@ -315,6 +312,7 @@ public class World {
 
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame(TERenderer ter) {
+        StdDraw.show();
         ter.renderFrame(this.worldState());
         generateHUD();
     }
