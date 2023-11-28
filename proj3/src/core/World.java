@@ -13,7 +13,7 @@ import static edu.princeton.cs.algs4.StdDraw.nextKeyTyped;
 public class World {
     TETile[][] projWorld;
     Random randomGenerator;
-    public static final TETile FLOORREP = new TETile('F', Color.gray, Color.black, "Fr", "core/images/blackfloor.jpg");
+    public static final TETile FLOORREP = new TETile('F', Color.gray, Color.black, "Flr", "core/images/blackfloor.jpg");
     public static final TETile WALLREP = new TETile('W', Color.gray, Color.black, "Wall", "core/images/walltile.jpg");
     public static final TETile NOTHINGREP = Tileset.NOTHING;
     public static final TETile GHOSTTILE = new TETile('G', Color.gray, Color.black, "Ghost", "core/images/ghosts.jpg");
@@ -28,6 +28,7 @@ public class World {
     private StringBuilder stringInput;
 
     private final String date = LocalDate.now().toString();
+    private String time = LocalTime.now().toString();
 
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
@@ -284,7 +285,6 @@ public class World {
         renderFrame(ter);
         TETile currentTile = tileMoused();
         while (!isGameOver()) {
-            StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
             if (tileMoused() != currentTile) {
                 currentTile = tileMoused();
                 renderFrame(ter);
