@@ -34,7 +34,7 @@ public class Main {
         newGame();
     }
     /*if the n is pressed the user is prompted to add a seed, this runs until the n is pressed*/
-    public static void newGame() throws FileNotFoundException {
+    public static void newGame() {
         do {
             while (StdDraw.hasNextKeyTyped()) {
                 char c = StdDraw.nextKeyTyped();
