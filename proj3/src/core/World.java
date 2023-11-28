@@ -3,6 +3,8 @@ import tileengine.*;
 import edu.princeton.cs.algs4.StdDraw;
 import java.awt.*;
 import java.io.*;
+
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.time.*;
@@ -29,6 +31,7 @@ public class World {
 
     private final String date = LocalDate.now().toString();
     private String time = LocalTime.now().toString();
+
 
     //private PriorityQueue<List<Integer>> roomLocations;
     /*fills the world starting from the start position to wherever it will end
@@ -58,7 +61,6 @@ public class World {
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description());
         StdDraw.text(WIDTH - 4, HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
-        StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
         StdDraw.show();
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
@@ -284,16 +286,29 @@ public class World {
     public void playGame(TERenderer ter) {
         renderFrame(ter);
         TETile currentTile = tileMoused();
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         while (!isGameOver()) {
+            if (currentTime != LocalTime.now()) {
+                String formattedTime = currentTime.format(formatter);
+                StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
+                StdDraw.text((double) WIDTH / 2, HEIGHT + 3, "Time: " + formattedTime);
+                StdDraw.show();
+                currentTime = LocalTime.now();
+
+            }
+
+
             if (tileMoused() != currentTile) {
                 currentTile = tileMoused();
-                renderFrame(ter);
+
             }
             if (hasNextKeyTyped()) {
                 char c = nextKeyTyped();
                 userInputHandler(c);
-                renderFrame(ter);
+
             }
+            renderFrame(ter);
         }
     }
 
