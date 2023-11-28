@@ -60,6 +60,7 @@ public class World {
         StdDraw.setPenColor(Color.WHITE);
         StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description());
         StdDraw.text(WIDTH - 4, HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
+        StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
         StdDraw.show();
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
@@ -290,7 +291,6 @@ public class World {
         while (!isGameOver()) {
             if (currentTime != LocalTime.now()) {
                 String formattedTime = currentTime.format(formatter);
-                StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
                 StdDraw.text((double) WIDTH / 2, HEIGHT + 3, "Time: " + formattedTime);
                 StdDraw.show();
                 currentTime = LocalTime.now();
