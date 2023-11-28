@@ -61,7 +61,6 @@ public class World {
         StdDraw.textLeft(1, HEIGHT + 4, "Tile: " + tileMoused().description());
         StdDraw.text(WIDTH - 4, HEIGHT + 4, "Ghost Busted: " + character.returnGhostBusted());
         StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
-        StdDraw.show();
     }
     /*creates a random room of different sizes, generating random locations, and places them on grid if possible
      * stores the location of the rooms*/
@@ -292,9 +291,7 @@ public class World {
             if (currentTime != LocalTime.now()) {
                 String formattedTime = currentTime.format(formatter);
                 StdDraw.text((double) WIDTH / 2, HEIGHT + 3, "Time: " + formattedTime);
-                StdDraw.show();
                 currentTime = LocalTime.now();
-
             }
 
 
@@ -314,6 +311,7 @@ public class World {
 
     /*new worldstate everytime the avatar moves so this gets that and renders the screen for it*/
     public void renderFrame(TERenderer ter) {
+        StdDraw.show();
         ter.renderFrame(this.worldState());
         generateHUD();
     }
