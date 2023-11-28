@@ -288,7 +288,7 @@ public class World {
         LocalTime currentTime = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         while (!isGameOver()) {
-            if (currentTime!= LocalTime.now()) {
+            if (currentTime != LocalTime.now()) {
                 String formattedTime = currentTime.format(formatter);
                 StdDraw.text((double) WIDTH / 2, HEIGHT + 4, "Date: " + date);
                 StdDraw.text((double) WIDTH / 2, HEIGHT + 3, "Time: " + formattedTime);
